@@ -1,5 +1,5 @@
 /* ============================================================================
-   ZENQUIZ HUB - COMPLETE OFFLINE ENGINE FOR ALL 41 MODES & 32 CATEGORIES
+   ZENQUIZ PRO - NON-REPEATING DECK ENGINE & UPGRADED 41 MINI-GAMES
    ============================================================================ */
 
 const State = {
@@ -10,6 +10,7 @@ const State = {
   streak: parseInt(localStorage.getItem("zq_streak") || "0", 10),
   favorites: JSON.parse(localStorage.getItem("zq_favs") || "[]"),
   highScores: JSON.parse(localStorage.getItem("zq_scores") || "{}"),
+  seenIds: JSON.parse(localStorage.getItem("zq_seen") || "[]"),
   hubFilter: "all",
   searchQuery: "",
   diff: "easy",
@@ -19,7 +20,6 @@ const State = {
   timerId: null
 };
 
-/* GENTLE WEB AUDIO SYNTHESIZER (NO EXTERNAL MP3 REQUIRED) */
 function playCalmTone(type) {
   if (!State.sound) return;
   try {
@@ -35,8 +35,8 @@ function playCalmTone(type) {
     } else if (type === "tap") {
       osc.frequency.setValueAtTime(440, now);
     } else {
-      osc.frequency.setValueAtTime(330, now);
-      osc.frequency.exponentialRampToValueAtTime(290, now + 0.2);
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(270, now + 0.2);
     }
     gain.gain.setValueAtTime(0.08, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
@@ -55,6 +55,7 @@ function saveState() {
   localStorage.setItem("zq_streak", String(State.streak));
   localStorage.setItem("zq_favs", JSON.stringify(State.favorites));
   localStorage.setItem("zq_scores", JSON.stringify(State.highScores));
+  localStorage.setItem("zq_seen", JSON.stringify(State.seenIds));
   updateHeaderStats();
 }
 
@@ -86,6 +87,34 @@ function updateHeaderStats() {
   document.getElementById("statLevel").textContent = `Lv ${lv}`;
   document.getElementById("statXP").textContent = State.xp;
   document.getElementById("statStreak").textContent = State.streak;
+}
+
+/* ============================================================================
+   SMART NON-REPEATING DECK DRAW (Tracks seenIds across all 1,500+ questions)
+   ============================================================================ */
+function drawUniqueQuestion(catId, diff) {
+  const seenSet = new Set(State.seenIds);
+  let pool = window.QUESTION_BANK.filter(q =>
+    (!catId || q.cat === catId) &&
+    (!diff || q.diff === diff) &&
+    !seenSet.has(q.id)
+  );
+  if (pool.length === 0) {
+    pool = window.QUESTION_BANK.filter(q => (!catId || q.cat === catId) && !seenSet.has(q.id));
+  }
+  if (pool.length === 0) {
+    pool = window.QUESTION_BANK.filter(q => !seenSet.has(q.id));
+  }
+  if (pool.length === 0) {
+    // Player has finished all 1,500+ questions! Reset deck cleanly.
+    State.seenIds = [];
+    pool = window.QUESTION_BANK;
+  }
+  const chosen = pool[Math.floor(Math.random() * pool.length)];
+  State.seenIds.push(chosen.id);
+  if (State.seenIds.length > 2000) State.seenIds.shift();
+  saveState();
+  return chosen;
 }
 
 function applyLanguageAndTheme() {
@@ -121,7 +150,6 @@ function applyLanguageAndTheme() {
   renderStats();
 }
 
-/* RENDER 41 MODES HUB WITH FAVORITES SORT/FILTER */
 function renderModesHub() {
   const grid = document.getElementById("modesGrid");
   if (!grid) return;
@@ -171,22 +199,22 @@ function renderModesHub() {
   });
 }
 
-/* RENDER 32 CATEGORIES */
 function renderCategories() {
   const grid = document.getElementById("categoriesGrid");
   if (!grid) return;
   grid.innerHTML = "";
   window.CATEGORIES.forEach(cat => {
+    const count = window.QUESTION_BANK.filter(q => q.cat === cat.id).length;
     const card = document.createElement("div");
     card.className = "game-card";
     card.innerHTML = `
       <div class="card-top">
         <div class="card-icon">${cat.icon}</div>
-        <span class="card-badge">${t(State.diff)}</span>
+        <span class="card-badge">${count}+ Qs</span>
       </div>
       <div>
         <h3>${tr(cat.name)}</h3>
-        <p>${t("qt" + State.qtype.charAt(0).toUpperCase() + State.qtype.slice(1)) || ""}</p>
+        <p>${t(State.diff)}</p>
       </div>
     `;
     card.addEventListener("click", () => startCategoryQuiz(cat.id, tr(cat.name)));
@@ -194,16 +222,17 @@ function renderCategories() {
   });
 }
 
-/* RENDER PROGRESS & HIGH SCORES */
 function renderStats() {
   const ov = document.getElementById("statsOverview");
   const list = document.getElementById("highScoresList");
   if (!ov || !list) return;
   const lv = Math.floor(State.xp / 100) + 1;
   ov.innerHTML = `
-    <div class="score-row"><strong>⭐ Level</strong><span>${lv} (${State.xp} XP)</span></div>
-    <div class="score-row"><strong>🔥 Answer Streak</strong><span>${State.streak}</span></div>
-    <div class="score-row"><strong>❤️ Favorite Games</strong><span>${State.favorites.length}</span></div>
+    <div class="score-row"><strong>📚 Total Question Bank</strong><span>${window.QUESTION_BANK.length} Unique Qs</span></div>
+    <div class="score-row"><strong>✅ Unique Questions Seen</strong><span>${State.seenIds.length} / ${window.QUESTION_BANK.length}</span></div>
+    <div class="score-row"><strong>⭐ Player Level</strong><span>Lv ${lv} (${State.xp} XP)</span></div>
+    <div class="score-row"><strong>🔥 Current Streak</strong><span>${State.streak}</span></div>
+    <div class="score-row"><strong>❤️ Favorite Modes</strong><span>${State.favorites.length}</span></div>
   `;
   list.innerHTML = "";
   window.GAME_MODES.forEach(m => {
@@ -250,15 +279,8 @@ function openStage(id, titleText) {
   playCalmTone("tap");
 }
 
-function pickQuestionsForCategory(catId, diff) {
-  let pool = window.QUESTION_BANK.filter(q => (!catId || q.cat === catId) && (!diff || q.diff === diff));
-  if (pool.length === 0) pool = window.QUESTION_BANK.filter(q => !catId || q.cat === catId);
-  if (pool.length === 0) pool = window.QUESTION_BANK.slice();
-  return pool[Math.floor(Math.random() * pool.length)];
-}
-
 /* ============================================================================
-   7 QUESTION TYPES ENGINE (MCQ, TF, BLANK, TYPED, MATCH, ORDER, ODD ONE OUT)
+   7 QUESTION TYPES ENGINE (NO REPEATS)
    ============================================================================ */
 function startCategoryQuiz(catId, catName) {
   openStage("cat_" + catId, catName);
@@ -267,7 +289,7 @@ function startCategoryQuiz(catId, catName) {
 
 function renderNextCategoryQuestion(catId) {
   const stage = document.getElementById("stageBody");
-  const item = pickQuestionsForCategory(catId, State.diff);
+  const item = drawUniqueQuestion(catId, State.diff);
   const types = ["mcq", "tf", "blank", "typed", "match", "order", "odd"];
   const chosenType = State.qtype === "mix" ? types[Math.floor(Math.random() * types.length)] : State.qtype;
 
@@ -278,7 +300,7 @@ function renderNextCategoryQuestion(catId) {
   if (chosenType === "mcq") {
     const shuffled = opts.slice().sort(() => Math.random() - 0.5);
     stage.innerHTML = `
-      <div class="q-sub">${t("qtMcq")} · ${t(State.diff)}</div>
+      <div class="q-sub">#${item.id.replace("q_","")} · ${t("qtMcq")} · ${t(item.diff)}</div>
       <div class="q-prompt">${qText}</div>
       <div class="options-list" id="optBox"></div>
       <div id="fbBox"></div>
@@ -293,9 +315,9 @@ function renderNextCategoryQuestion(catId) {
     });
   } else if (chosenType === "tf") {
     const showTrue = Math.random() > 0.5;
-    const shownAns = showTrue ? ansText : opts.find(o => o !== ansText) || opts[1];
+    const shownAns = showTrue ? ansText : (opts.find(o => o !== ansText) || opts[1]);
     stage.innerHTML = `
-      <div class="q-sub">${t("qtTf")}</div>
+      <div class="q-sub">#${item.id.replace("q_","")} · ${t("qtTf")}</div>
       <div class="q-prompt">${qText}<br/><span style="color:var(--primary)">“${shownAns}”</span></div>
       <div class="options-list">
         <button class="opt-btn" id="btnT">✅ ${t("trueWord")}</button>
@@ -306,11 +328,11 @@ function renderNextCategoryQuestion(catId) {
     document.getElementById("btnT").onclick = (e) => handleAnswerResult(showTrue === true, ansText, () => renderNextCategoryQuestion(catId), e.target);
     document.getElementById("btnF").onclick = (e) => handleAnswerResult(showTrue === false, ansText, () => renderNextCategoryQuestion(catId), e.target);
   } else if (chosenType === "blank") {
-    const masked = ansText.split("").map((ch, i) => (i === 0 || ch === " " ? ch : "_")).join(" ");
+    const masked = ansText.split("").map((ch, i) => (i === 0 || i === ansText.length - 1 || ch === " " ? ch : "_")).join(" ");
     stage.innerHTML = `
-      <div class="q-sub">${t("qtBlank")}</div>
+      <div class="q-sub">#${item.id.replace("q_","")} · ${t("qtBlank")}</div>
       <div class="q-prompt">${qText}</div>
-      <div class="q-Prompt" style="letter-spacing:3px;text-align:center;font-size:22px;margin-bottom:14px;">${masked}</div>
+      <div style="letter-spacing:3px;text-align:center;font-size:21px;font-weight:700;margin-bottom:14px;color:var(--primary)">${masked}</div>
       <div class="options-list" id="optBox"></div>
       <div id="fbBox"></div>
     `;
@@ -324,7 +346,7 @@ function renderNextCategoryQuestion(catId) {
     });
   } else if (chosenType === "typed") {
     stage.innerHTML = `
-      <div class="q-sub">${t("qtTyped")} (${ansText.charAt(0)}...)</div>
+      <div class="q-sub">#${item.id.replace("q_","")} · ${t("qtTyped")} (Hint: ${ansText.slice(0, 2)}...)</div>
       <div class="q-prompt">${qText}</div>
       <input type="text" id="typedIn" class="search-input" placeholder="..." />
       <button class="btn-primary" id="btnSubTyped" style="width:100%">${t("checkBtn")}</button>
@@ -367,7 +389,7 @@ function handleAnswerResult(isCorrect, correctText, nextCallback, btnEl) {
 }
 
 /* ============================================================================
-   ALL 41 GAME MODES DISPATCHER & INTERACTIVE HANDLERS
+   ALL 41 GAME MODES DISPATCHER (RANDOMIZED & HARDER)
    ============================================================================ */
 function startMode(modeId, titleText) {
   openStage(modeId, titleText);
@@ -401,8 +423,8 @@ function startMode(modeId, titleText) {
     case "capital_match": return renderCapitalMatchMode(stage, () => startMode(modeId, titleText));
     case "geo_higher_lower": return runHigherLower(stage, true);
     case "distance_guess": return runDistanceGuess(stage);
-    case "stat_higher_lower": return runHigherLower(stage, false);
-    case "compare_two": return runHigherLower(stage, false);
+    case "stat_higher_lower": return runHistoryHigherLower(stage);
+    case "compare_two": return runElementCompare(stage);
     case "odd_one_out": return renderOddOneOutMode(stage, () => startMode(modeId, titleText));
     case "timeline_sort": return renderTimelineSortMode(stage, () => startMode(modeId, titleText));
     case "match_pairs": return runMatchPairs(stage);
@@ -415,26 +437,26 @@ function startMode(modeId, titleText) {
     case "millionaire": return runMillionaire(stage);
     case "jeopardy": return runJeopardy(stage);
     case "true_or_fake": return runTrueOrFake(stage);
-    default: return renderNextCategoryQuestion("general");
+    default: return renderNextCategoryQuestion(null);
   }
 }
 
 /* 1. TIMED BLITZ (60s) */
 function runTimedBlitz(stage) {
   startCountdown(60, () => {
-    stage.innerHTML = `<div class="q-prompt">⏱️ Time Up!</div><div class="feedback-banner">${t("score")}: ${State.score}</div>`;
+    stage.innerHTML = `<div class="q-prompt">⏱️ 60s Blitz Complete!</div><div class="feedback-banner">${t("score")}: ${State.score}</div>`;
   });
   const nextQ = () => {
-    const item = pickQuestionsForCategory(null, null);
+    const item = drawUniqueQuestion(null, null);
     const ans = tr(item.a);
     const opts = (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5);
-    stage.innerHTML = `<div class="q-prompt">${tr(item.q)}</div><div class="options-list" id="blitzOpts"></div>`;
+    stage.innerHTML = `<div class="q-sub">#${item.id.replace("q_","")} · ${t(item.diff)}</div><div class="q-prompt">${tr(item.q)}</div><div class="options-list" id="blitzOpts"></div>`;
     opts.forEach(o => {
       const b = document.createElement("button");
       b.className = "opt-btn";
       b.textContent = o;
       b.onclick = () => {
-        if (o === ans) { playCalmTone("good"); addPoints(15); } else playCalmTone("miss");
+        if (o === ans) { playCalmTone("good"); addPoints(20); } else playCalmTone("miss");
         nextQ();
       };
       document.getElementById("blitzOpts").appendChild(b);
@@ -443,20 +465,18 @@ function runTimedBlitz(stage) {
   nextQ();
 }
 
-/* 2 & 7. UNSCRAMBLE (10s GEO OR WORDS) */
+/* 2 & 7. UNSCRAMBLE (60+ PLACES & HARD SCIENTIFIC WORDS) */
 function runUnscramble(stage, isTimedGeo) {
-  const words = isTimedGeo
-    ? ["ALGIERS", "PARIS", "CAIRO", "TOKYO", "BRAZIL", "CANADA", "ORAN"]
-    : ["DOLPHIN", "JASMINE", "COUSCOUS", "EMERALD", "PLANET", "GUITAR"];
-  const target = words[Math.floor(Math.random() * words.length)];
+  const pool = isTimedGeo ? window.SPECIAL_DATA.unscrambleGeoPool : window.SPECIAL_DATA.unscrambleWordsPool;
+  const target = pool[Math.floor(Math.random() * pool.length)];
   const scrambled = target.split("").sort(() => Math.random() - 0.5);
   let picked = [];
   if (isTimedGeo) startCountdown(10, () => runUnscramble(stage, true));
 
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">${isTimedGeo ? "10s City/Country Unscramble" : "Tap letters in order"}</div>
-      <div class="q-prompt">${picked.join(" ") || "_ ".repeat(target.length)}</div>
+      <div class="q-sub">${isTimedGeo ? "⏱️ 10s Geo Unscramble" : "🔤 Scientific & Master Word Unscramble"} (${target.length} letters)</div>
+      <div class="q-prompt" style="letter-spacing:3px">${picked.join("") || "_ ".repeat(target.length)}</div>
       <div class="tile-row" id="scrTiles"></div>
       <div id="fbBox"></div>
     `;
@@ -482,20 +502,20 @@ function runUnscramble(stage, isTimedGeo) {
   render();
 }
 
-/* 3. TRUE OR FALSE RUSH (SWIPE / TAP) */
+/* 3. TRUE OR FALSE RUSH */
 function runTfRush(stage) {
   startCountdown(45, () => {
     stage.innerHTML = `<div class="q-prompt">⚖️ Rush Complete! ${State.score} pts</div>`;
   });
   const nextCard = () => {
-    const item = pickQuestionsForCategory(null, null);
+    const item = drawUniqueQuestion(null, null);
     const ans = tr(item.a);
     const opts = item.opts[State.lang] || item.opts.en;
     const isTrue = Math.random() > 0.5;
     const shown = isTrue ? ans : (opts.find(x => x !== ans) || opts[1]);
     stage.innerHTML = `
       <div class="q-sub">Swipe Left (${t("falseWord")}) or Right (${t("trueWord")})</div>
-      <div class="q-prompt" id="swipeCard" style="padding:26px;background:var(--surface-alt);border-radius:18px;">
+      <div class="q-prompt" id="swipeCard" style="padding:24px;background:var(--surface-alt);border-radius:18px;">
         ${tr(item.q)}<br/><strong style="color:var(--primary)">${shown}</strong>
       </div>
       <div style="display:flex;gap:10px;margin-top:14px;">
@@ -520,34 +540,39 @@ function runTfRush(stage) {
   nextCard();
 }
 
-/* 4. SPEED TAP FALLING BUBBLES */
+/* 4. SPEED TAP BUBBLES (DYNAMIC CHALLENGES) */
 function runSpeedTap(stage) {
+  const modes = [
+    { prompt: "Tap ONLY World Capitals! Avoid Country Names!", good: window.SPECIAL_DATA.rawCountries.slice(0, 15).map(c => c[4]), bad: window.SPECIAL_DATA.rawCountries.slice(15, 30).map(c => c[1]) },
+    { prompt: "Tap ONLY Chemical Elements! Avoid Planets/Cities!", good: window.SPECIAL_DATA.rawElements.slice(0, 15).map(e => e[2]), bad: ["Jupiter","Saturn","Algiers","Paris","Tokyo","Madrid","Oslo","Cairo"] }
+  ];
+  const m = modes[Math.floor(Math.random() * modes.length)];
   stage.innerHTML = `
-    <div class="q-sub">Tap ONLY Countries! Avoid Animals!</div>
+    <div class="q-sub">${m.prompt}</div>
     <div class="falling-arena" id="arena"></div>
-    <button class="btn-primary" id="btnRestartFall" style="width:100%">🔄 New Wave</button>
+    <button class="btn-primary" id="btnRestartFall" style="width:100%">🔄 Next Wave</button>
   `;
   const arena = document.getElementById("arena");
-  const goods = ["Algeria 🌍", "France 🌍", "Japan 🌍", "Brazil 🌍", "Egypt 🌍"];
-  const bads = ["Dolphin 🐬", "Tiger 🐅", "Falcon 🦅", "Koala 🐨"];
-  [...goods, ...bads].sort(() => Math.random() - 0.5).slice(0, 6).forEach((label, i) => {
+  const gPick = m.good.sort(() => Math.random() - 0.5).slice(0, 4);
+  const bPick = m.bad.sort(() => Math.random() - 0.5).slice(0, 4);
+  [...gPick, ...bPick].sort(() => Math.random() - 0.5).forEach((label, i) => {
     const el = document.createElement("div");
     el.className = "falling-item";
     el.textContent = label;
-    el.style.left = `${10 + (i * 14)}%`;
-    let top = -10 - (i * 25);
+    el.style.left = `${6 + (i % 4) * 23}%`;
+    let top = -15 - (i * 28);
     el.style.top = `${top}px`;
     const iv = setInterval(() => {
-      top += 3;
+      top += 3.5;
       el.style.top = `${top}px`;
-      if (top > 240) clearInterval(iv);
-    }, 80);
+      if (top > 245) clearInterval(iv);
+    }, 70);
     el.onclick = () => {
       clearInterval(iv);
-      const ok = goods.includes(label);
+      const ok = m.good.includes(label);
       if (ok) { playCalmTone("good"); addPoints(15); el.style.background = "var(--accent-mint)"; }
       else { playCalmTone("miss"); el.style.background = "var(--accent-peach)"; }
-      setTimeout(() => el.remove(), 200);
+      setTimeout(() => el.remove(), 180);
     };
     arena.appendChild(el);
   });
@@ -559,36 +584,44 @@ function runCategoryBlitz(stage) {
   startCountdown(30, () => {
     stage.innerHTML = `<div class="q-prompt">🗂️ 30s Complete! ${State.score} pts</div>`;
   });
-  const valid = ["Algeria", "Argentina", "Australia", "Austria", "Angola", "Albania", "Armenia", "Azerbaijan"];
-  const decoys = ["Brazil", "Canada", "France", "Japan", "Egypt", "Spain", "Norway", "Kenya"];
-  const all = [...valid, ...decoys].sort(() => Math.random() - 0.5);
+  const tasks = [
+    { title: "Tap all Countries that use the EURO (€)", check: c => c[7] === "Euro" },
+    { title: "Tap all Countries with Population over 50 Million", check: c => c[10] >= 50 },
+    { title: "Tap all Countries with Area over 1,000,000 km²", check: c => c[11] >= 1000 }
+  ];
+  const task = tasks[Math.floor(Math.random() * tasks.length)];
+  const sample = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5).slice(0, 16);
   stage.innerHTML = `
-    <div class="q-prompt">Tap all Countries starting with letter “A”</div>
+    <div class="q-prompt">${task.title}</div>
     <div class="grid-4x4" id="catBlitzGrid"></div>
   `;
   const g = document.getElementById("catBlitzGrid");
-  all.forEach(w => {
+  sample.forEach(c => {
     const b = document.createElement("button");
     b.className = "grid-cell-btn";
-    b.textContent = w;
+    b.textContent = State.lang === "ar" ? c[3] : State.lang === "fr" ? c[2] : c[1];
     b.onclick = () => {
-      if (w.startsWith("A")) { b.classList.add("solved"); playCalmTone("good"); addPoints(10); }
-      else { playCalmTone("miss"); b.style.opacity = "0.4"; }
+      if (task.check(c)) { b.classList.add("solved"); playCalmTone("good"); addPoints(15); }
+      else { playCalmTone("miss"); b.style.opacity = "0.35"; }
     };
     g.appendChild(b);
   });
 }
 
-/* 6. SPELLING BEE */
+/* 6. MASTER SPELLING BEE */
 function runSpellingBee(stage) {
   const sets = [
     { good: "Mediterranean", opts: ["Mediterranean", "Mediteranean", "Meditterranean", "Mediteranian"] },
-    { good: "Architecture", opts: ["Architecture", "Architechture", "Arcitecture", "Architeture"] },
     { good: "Photosynthesis", opts: ["Photosynthesis", "Fotosynthesis", "Photosinthesis", "Photosyntesis"] },
-    { good: "Chrysanthemum", opts: ["Chrysanthemum", "Crysanthemum", "Chrysanthamum", "Chrisanthemum"] }
+    { good: "Chrysanthemum", opts: ["Chrysanthemum", "Crysanthemum", "Chrysanthamum", "Chrisanthemum"] },
+    { good: "Archaeology", opts: ["Archaeology", "Archeaology", "Archaelogy", "Arceology"] },
+    { good: "Conscientious", opts: ["Conscientious", "Concientious", "Consciencious", "Consientious"] },
+    { good: "Onomatopoeia", opts: ["Onomatopoeia", "Onomatopeia", "Onomotopoeia", "Onomatopoia"] },
+    { good: "Kyrgyzstan", opts: ["Kyrgyzstan", "Kyrgystan", "Kirgizstan", "Kyrgyzistan"] },
+    { good: "Entrepreneurship", opts: ["Entrepreneurship", "Enterpreneurship", "Entreprenurship", "Entrepreneurhip"] }
   ];
   const s = sets[Math.floor(Math.random() * sets.length)];
-  stage.innerHTML = `<div class="q-prompt">🐝 Pick the correct spelling:</div><div class="options-list" id="beeOpts"></div><div id="fbBox"></div>`;
+  stage.innerHTML = `<div class="q-prompt">🐝 Pick the exact spelling:</div><div class="options-list" id="beeOpts"></div><div id="fbBox"></div>`;
   s.opts.slice().sort(() => Math.random() - 0.5).forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
@@ -598,7 +631,7 @@ function runSpellingBee(stage) {
   });
 }
 
-/* 8. THEMED WORDLE (6 TRIES) */
+/* 8. THEMED WORDLE (28+ WORDS) */
 function runWordle(stage) {
   const entry = window.SPECIAL_DATA.words5[Math.floor(Math.random() * window.SPECIAL_DATA.words5.length)];
   const target = entry.word;
@@ -640,24 +673,26 @@ function runWordle(stage) {
   render();
 }
 
-/* 9. HANGMAN WITH CALM SVG DRAWING */
+/* 9. HANGMAN (50+ WORDS) */
 function runHangman(stage) {
-  const words = ["ALGERIA", "PYRAMID", "JASMINE", "HORIZON", "COMPASS"];
-  const target = words[Math.floor(Math.random() * words.length)];
+  const pool = [...window.SPECIAL_DATA.unscrambleGeoPool, ...window.SPECIAL_DATA.unscrambleWordsPool];
+  const target = pool[Math.floor(Math.random() * pool.length)];
   let used = [];
   let misses = 0;
   const render = () => {
     const masked = target.split("").map(c => (used.includes(c) ? c : "_")).join(" ");
     stage.innerHTML = `
-      <svg viewBox="0 0 200 120" class="svg-stage" style="height:130px">
+      <svg viewBox="0 0 200 120" class="svg-stage" style="height:125px">
         <line x1="20" y1="110" x2="180" y2="110" stroke="var(--primary)" stroke-width="4"/>
         ${misses >= 1 ? '<line x1="60" y1="110" x2="60" y2="20" stroke="var(--primary)" stroke-width="4"/>' : ''}
         ${misses >= 2 ? '<line x1="60" y1="20" x2="120" y2="20" stroke="var(--primary)" stroke-width="4"/>' : ''}
         ${misses >= 3 ? '<circle cx="120" cy="40" r="12" fill="none" stroke="var(--primary)" stroke-width="3"/>' : ''}
         ${misses >= 4 ? '<line x1="120" y1="52" x2="120" y2="82" stroke="var(--primary)" stroke-width="3"/>' : ''}
         ${misses >= 5 ? '<line x1="100" y1="65" x2="140" y2="65" stroke="var(--primary)" stroke-width="3"/>' : ''}
+        ${misses >= 6 ? '<line x1="105" y1="98" x2="120" y2="82" stroke="var(--primary)" stroke-width="3"/>' : ''}
       </svg>
-      <div class="q-prompt" style="letter-spacing:4px">${masked}</div>
+      <div class="q-sub">Misses: ${misses} / 6</div>
+      <div class="q-prompt" style="letter-spacing:3px">${masked}</div>
       <div class="tile-row" id="hmKeys"></div>
       <div id="fbBox"></div>
     `;
@@ -667,7 +702,7 @@ function runHangman(stage) {
       b.className = "letter-tile";
       b.textContent = ch;
       b.disabled = used.includes(ch);
-      if (used.includes(ch)) b.style.opacity = "0.35";
+      if (used.includes(ch)) b.style.opacity = "0.3";
       b.onclick = () => {
         used.push(ch);
         if (!target.includes(ch)) misses++;
@@ -675,7 +710,7 @@ function runHangman(stage) {
         render();
         if (!target.split("").some(c => !used.includes(c))) {
           handleAnswerResult(true, target, () => runHangman(stage));
-        } else if (misses >= 5) {
+        } else if (misses >= 6) {
           handleAnswerResult(false, target, () => runHangman(stage));
         }
       };
@@ -685,56 +720,58 @@ function runHangman(stage) {
   render();
 }
 
-/* 10. MISSING LETTERS ("P_R_S" -> PARIS) */
+/* 10. MISSING LETTERS (DYNAMICALLY BUILT FROM 65 CAPITALS) */
 function runMissingLetters(stage) {
-  const list = [
-    { mask: "P _ R _ S", ans: "PARIS", opts: ["PARIS", "PORTO", "PERTH", "PRAGUE"] },
-    { mask: "A L G _ _ R S", ans: "ALGIERS", opts: ["ALGIERS", "ANTWERP", "ATHENS", "AMMAN"] },
-    { mask: "C _ I R _", ans: "CAIRO", opts: ["CAIRO", "CUSCO", "CORFU", "CHILE"] }
-  ];
-  const it = list[Math.floor(Math.random() * list.length)];
+  const c = window.SPECIAL_DATA.rawCountries[Math.floor(Math.random() * window.SPECIAL_DATA.rawCountries.length)];
+  const ans = c[4].toUpperCase();
+  const masked = ans.split("").map((ch, i) => ("AEIOU".includes(ch) && i > 0 ? "_" : ch)).join(" ");
+  const decoys = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5).slice(0, 3).map(x => x[4].toUpperCase());
+  const opts = Array.from(new Set([ans, ...decoys])).slice(0, 4).sort(() => Math.random() - 0.5);
   stage.innerHTML = `
-    <div class="q-sub">Complete the missing letters</div>
-    <div class="q-prompt" style="letter-spacing:4px">${it.mask}</div>
+    <div class="q-sub">Fill the missing vowels (${c[1]})</div>
+    <div class="q-prompt" style="letter-spacing:4px">${masked}</div>
     <div class="options-list" id="mlOpts"></div>
     <div id="fbBox"></div>
   `;
-  it.opts.forEach(o => {
+  opts.forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === it.ans, it.ans, () => runMissingLetters(stage), b);
+    b.onclick = () => handleAnswerResult(o === ans, ans, () => runMissingLetters(stage), b);
     document.getElementById("mlOpts").appendChild(b);
   });
 }
 
 /* 11. THEMED WORD SEARCH */
 function runWordSearch(stage) {
-  const rows = ["ALGERIA", "NILEXOP", "PARISab", "MARSdef", "OAKghij"];
-  const targets = ["ALGERIA", "NILE", "PARIS", "MARS", "OAK"];
+  const packs = [
+    { theme: "Algerian Cities", words: ["ORAN", "ALGIERS", "BLIDA", "ANNABA", "SETIF"] },
+    { theme: "Planets", words: ["MARS", "VENUS", "EARTH", "SATURN", "PLUTO"] },
+    { theme: "Precious Elements", words: ["GOLD", "SILVER", "NEON", "IRON", "ZINC"] }
+  ];
+  const p = packs[Math.floor(Math.random() * packs.length)];
   let found = [];
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">Tap rows containing hidden words: ${targets.map(w => found.includes(w) ? `<s>${w}</s>` : w).join(" · ")}</div>
+      <div class="q-sub">Theme: ${p.theme} — Tap each hidden word row (${found.length}/${p.words.length})</div>
       <div class="options-list" id="wsGrid"></div>
       <div id="fbBox"></div>
     `;
     const g = document.getElementById("wsGrid");
-    targets.forEach((word, i) => {
+    p.words.forEach(word => {
+      const pad = "XZQWKJBV".slice(0, 9 - word.length);
       const b = document.createElement("button");
       b.className = "opt-btn " + (found.includes(word) ? "correct" : "");
       b.style.letterSpacing = "6px";
       b.style.textAlign = "center";
-      b.textContent = rows[i].toUpperCase();
+      b.textContent = pad.slice(0, 2) + word + pad.slice(2);
       b.onclick = () => {
         if (!found.includes(word)) {
           found.push(word);
           playCalmTone("good");
-          addPoints(10);
+          addPoints(15);
           render();
-          if (found.length === targets.length) {
-            handleAnswerResult(true, "All 5 Words Found!", () => runWordSearch(stage));
-          }
+          if (found.length === p.words.length) handleAnswerResult(true, p.words.join(", "), () => runWordSearch(stage));
         }
       };
       g.appendChild(b);
@@ -743,44 +780,49 @@ function runWordSearch(stage) {
   render();
 }
 
-/* 12. MINI THEMED CROSSWORD */
+/* 12. MULTI-PACK MINI CROSSWORD */
 function runMiniCrossword(stage) {
+  const packs = [
+    { c1: "1-Across: Capital of Algeria (7 letters)", a1: "ALGIERS", c2: "2-Across: Chemical symbol for Gold (2 letters)", a2: "AU" },
+    { c1: "1-Across: Author of Muqaddimah: Ibn ___ (7 letters)", a1: "KHALDUN", c2: "2-Across: Longest river in Africa (4 letters)", a2: "NILE" },
+    { c1: "1-Across: Largest planet in solar system (7 letters)", a1: "JUPITER", c2: "2-Across: Unit of frequency (5 letters)", a2: "HERTZ" }
+  ];
+  const p = packs[Math.floor(Math.random() * packs.length)];
   stage.innerHTML = `
-    <div class="q-sub">Mini Crossword: 1-Across (Red Planet, 4 letters) &amp; 2-Across (French Capital, 5 letters)</div>
-    <input id="cw1" class="search-input" placeholder="1-Across (4 letters): M _ _ _" />
-    <input id="cw2" class="search-input" placeholder="2-Across (5 letters): P _ _ _ _" />
+    <div class="q-sub">${p.c1}<br/>${p.c2}</div>
+    <input id="cw1" class="search-input" placeholder="1-Across (${p.a1.length} letters)" />
+    <input id="cw2" class="search-input" placeholder="2-Across (${p.a2.length} letters)" />
     <button class="btn-primary" id="cwCheck" style="width:100%">${t("checkBtn")}</button>
     <div id="fbBox"></div>
   `;
   document.getElementById("cwCheck").onclick = () => {
     const v1 = document.getElementById("cw1").value.trim().toUpperCase();
     const v2 = document.getElementById("cw2").value.trim().toUpperCase();
-    handleAnswerResult(v1 === "MARS" && v2 === "PARIS", "MARS & PARIS", () => runMiniCrossword(stage));
+    handleAnswerResult(v1 === p.a1 && v2 === p.a2, `${p.a1} & ${p.a2}`, () => runMiniCrossword(stage));
   };
 }
 
-/* 13. ANAGRAM CHAIN (Last letter starts next word) */
+/* 13. ANAGRAM LETTER CHAIN */
 function runAnagramChain(stage) {
-  const chain = [
-    { start: "PARIS", hint: "Starts with S — Yellow star in our sky (3 letters)", ans: "SUN" },
-    { start: "SUN", hint: "Starts with N — Longest African river (4 letters)", ans: "NILE" },
-    { start: "NILE", hint: "Starts with E — Our home planet (5 letters)", ans: "EARTH" }
-  ];
-  const step = chain[Math.floor(Math.random() * chain.length)];
+  const c = window.SPECIAL_DATA.rawCountries[Math.floor(Math.random() * 20)];
+  const prev = c[1].toUpperCase();
+  const lastChar = prev.slice(-1);
+  const nextCountry = window.SPECIAL_DATA.rawCountries.find(x => x[1].toUpperCase().startsWith(lastChar)) || window.SPECIAL_DATA.rawCountries[0];
+  const ans = nextCountry[1].toUpperCase();
   stage.innerHTML = `
-    <div class="q-sub">Previous Word: <strong>${step.start}</strong> (ends with ${step.start.slice(-1)})</div>
-    <div class="q-prompt">${step.hint}</div>
-    <input id="acIn" class="search-input" placeholder="Type next word..." />
+    <div class="q-sub">Previous Word: <strong>${prev}</strong> (Ends with <strong>${lastChar}</strong>)</div>
+    <div class="q-prompt">Name the Country starting with "${lastChar}" whose capital is ${nextCountry[4]}:</div>
+    <input id="acIn" class="search-input" placeholder="Starts with ${lastChar}..." />
     <button class="btn-primary" id="acSub" style="width:100%">${t("checkBtn")}</button>
     <div id="fbBox"></div>
   `;
   document.getElementById("acSub").onclick = () => {
     const val = document.getElementById("acIn").value.trim().toUpperCase();
-    handleAnswerResult(val === step.ans, step.ans, () => runAnagramChain(stage));
+    handleAnswerResult(val === ans, ans, () => runAnagramChain(stage));
   };
 }
 
-/* 14 & 15. GUESS THE PERSON (PROGRESSIVE CLUES & VS BOT) */
+/* 14 & 15. GUESS THE HISTORICAL ICON (PROGRESSIVE CLUES & VS BOT) */
 function runGuessPerson(stage, vsBot) {
   const p = window.SPECIAL_DATA.peopleClues[Math.floor(Math.random() * window.SPECIAL_DATA.peopleClues.length)];
   const clues = p.clues[State.lang] || p.clues.en;
@@ -790,7 +832,7 @@ function runGuessPerson(stage, vsBot) {
 
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">${vsBot ? "🤖 CalmBot is thinking... Guess before Clue 4!" : `Points available: ${(5 - shown) * 100}`}</div>
+      <div class="q-sub">${vsBot ? `🤖 SmartBot guesses at Clue 3! (Current Clue: ${shown}/4)` : `Multiplier: ${(5 - shown) * 25} pts`}</div>
       <div class="options-list" style="margin-bottom:12px">
         ${clues.slice(0, shown).map((c, i) => `<div class="pill" style="border-radius:12px">Clue ${i + 1}: ${c}</div>`).join("")}
       </div>
@@ -815,18 +857,19 @@ function runGuessPerson(stage, vsBot) {
 /* 16. GUESS ZOOM / BLUR REVEAL */
 function runGuessZoom(stage) {
   const items = [
-    { icon: "🕌", ans: "Mosque / Masjid", opts: ["Mosque / Masjid", "Lighthouse", "Windmill", "Castle"] },
-    { icon: "🦊", ans: "Red Fox", opts: ["Red Fox", "Polar Bear", "Dolphin", "Eagle"] },
-    { icon: "🗼", ans: "Tower Landmark", opts: ["Tower Landmark", "Suspension Bridge", "Colosseum", "Pyramid"] }
+    { icon: "🕌", ans: "Sacred Mosque / Architecture", opts: ["Sacred Mosque / Architecture", "Observatory", "Suspension Bridge", "Windmill"] },
+    { icon: "🪐", ans: "Ringed Gas Giant (Saturn)", opts: ["Ringed Gas Giant (Saturn)", "Red Planet (Mars)", "Comet Nucleus", "Asteroid Belt"] },
+    { icon: "🧭", ans: "Magnetic Navigation Compass", opts: ["Magnetic Navigation Compass", "Aneroid Barometer", "Astrolabe", "Seismograph"] },
+    { icon: "🧬", ans: "DNA Double Helix", opts: ["DNA Double Helix", "Mitochondria", "Neuron Synapse", "Chloroplast"] }
   ];
   const it = items[Math.floor(Math.random() * items.length)];
-  let blur = 12;
+  let blur = 14;
   const render = () => {
     stage.innerHTML = `
       <div style="height:120px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--surface-alt);border-radius:16px;margin-bottom:10px">
-        <span style="font-size:74px;filter:blur(${blur}px);transform:scale(${1 + blur / 6});transition:all 0.3s ease">${it.icon}</span>
+        <span style="font-size:76px;filter:blur(${blur}px);transform:scale(${1 + blur / 5});transition:all 0.25s ease">${it.icon}</span>
       </div>
-      <button class="btn-secondary" id="btnSharpen" style="width:100%;margin-bottom:10px">🔍 Sharpen Image</button>
+      <button class="btn-secondary" id="btnSharpen" style="width:100%;margin-bottom:10px">🔍 Reduce Blur</button>
       <div class="options-list" id="gzOpts"></div>
       <div id="fbBox"></div>
     `;
@@ -848,7 +891,7 @@ function runMovieEmoji(stage) {
   const ans = tr(m.ans);
   const opts = m.opts[State.lang] || m.opts.en;
   stage.innerHTML = `
-    <div class="q-prompt" style="font-size:44px">${m.emojis}</div>
+    <div class="q-prompt" style="font-size:42px">${m.emojis}</div>
     <div class="options-list" id="meOpts"></div>
     <div id="fbBox"></div>
   `;
@@ -863,31 +906,38 @@ function runMovieEmoji(stage) {
 
 /* 18. GUESS THE SILHOUETTE */
 function runSilhouette(stage) {
+  const sils = [
+    { icon: "🐪", ans: "Arabian Dromedary", opts: ["Arabian Dromedary", "African Elephant", "Giraffe", "Moose"] },
+    { icon: "🦅", ans: "Golden Eagle / Falcon", opts: ["Golden Eagle / Falcon", "Ostrich", "Pelican", "Albatross"] },
+    { icon: "🐋", ans: "Humpback / Blue Whale", opts: ["Humpback / Blue Whale", "Great White Shark", "Manta Ray", "Narwhal"] },
+    { icon: "🦂", ans: "Sahara Scorpion", opts: ["Sahara Scorpion", "Stag Beetle", "Tarantula", "Hermit Crab"] }
+  ];
+  const s = sils[Math.floor(Math.random() * sils.length)];
   stage.innerHTML = `
-    <div class="q-sub">Identify this silhouette</div>
-    <div style="text-align:center;font-size:78px;filter:brightness(0);margin:10px 0">🐪</div>
+    <div class="q-sub">Identify this dark silhouette</div>
+    <div style="text-align:center;font-size:78px;filter:brightness(0);margin:10px 0">${s.icon}</div>
     <div class="options-list" id="silOpts"></div>
     <div id="fbBox"></div>
   `;
-  ["Dromedary Camel", "Kangaroo", "Giraffe", "Rhinoceros"].forEach(o => {
+  s.opts.forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === "Dromedary Camel", "Dromedary Camel", () => runSilhouette(stage), b);
+    b.onclick = () => handleAnswerResult(o === s.ans, s.ans, () => runSilhouette(stage), b);
     document.getElementById("silOpts").appendChild(b);
   });
 }
 
-/* 19. GUESS THE FOOTBALLER */
+/* 19. GUESS THE FOOTBALLER (12+ LEGENDS) */
 function runFootballer(stage) {
   const f = window.SPECIAL_DATA.footballTransfers[Math.floor(Math.random() * window.SPECIAL_DATA.footballTransfers.length)];
   stage.innerHTML = `
-    <div class="q-sub">Club Transfer Path:</div>
+    <div class="q-sub">⚽ Club Transfer Career Path:</div>
     <div class="q-prompt">${f.career}</div>
     <div class="options-list" id="fbOpts"></div>
     <div id="fbBox"></div>
   `;
-  f.opts.forEach(o => {
+  f.opts.slice().sort(() => Math.random() - 0.5).forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
@@ -896,182 +946,206 @@ function runFootballer(stage) {
   });
 }
 
-/* 20. PIXELATED IMAGE REVEAL */
+/* 20. PIXELATED MONUMENT REVEAL */
 function runPixelClear(stage) {
+  const mons = [
+    { svg: '<polygon points="40,12 12,62 68,62" fill="#e9c46a"/>', ans: "Pyramids of Giza (Egypt)", opts: ["Pyramids of Giza (Egypt)", "Colosseum (Rome)", "Parthenon (Athens)", "Petra (Jordan)"] },
+    { svg: '<polygon points="40,8 33,65 47,65" fill="#729ea1"/><rect x="24" y="60" width="32" height="8" fill="#729ea1"/>', ans: "Maqam Echahid / Eiffel Tower", opts: ["Maqam Echahid / Eiffel Tower", "Taj Mahal", "Brandenburg Gate", "Sydney Opera"] }
+  ];
+  const m = mons[Math.floor(Math.random() * mons.length)];
   stage.innerHTML = `
-    <div class="q-sub">Pixelated Icon — Tap Clearer or Guess Now</div>
-    <svg viewBox="0 0 80 80" class="svg-stage" style="height:130px">
-      <rect x="10" y="50" width="60" height="15" fill="#d4a373"/>
-      <polygon points="40,12 12,55 68,55" fill="#e9c46a"/>
-    </svg>
+    <div class="q-sub">Identify the geometric monument silhouette</div>
+    <svg viewBox="0 0 80 80" class="svg-stage" style="height:130px">${m.svg}</svg>
     <div class="options-list" id="pxOpts"></div>
     <div id="fbBox"></div>
   `;
-  ["Great Pyramid", "Colosseum", "Big Ben", "Taj Mahal"].forEach(o => {
+  m.opts.forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === "Great Pyramid", "Great Pyramid", () => runPixelClear(stage), b);
+    b.onclick = () => handleAnswerResult(o === m.ans, m.ans, () => runPixelClear(stage), b);
     document.getElementById("pxOpts").appendChild(b);
   });
 }
 
-/* 21. COLOR PALETTE GUESS */
+/* 21. FLAG PALETTE GUESS (MULTI-FLAG) */
 function runColorGuess(stage) {
+  const flags = [
+    { colors: ["#006233","#ffffff","#d21034"], ans: "Algeria 🇩🇿", opts: ["Algeria 🇩🇿","France 🇫🇷","Brazil 🇧🇷","Sweden 🇸🇪"] },
+    { colors: ["#002395","#ffffff","#ed2939"], ans: "France 🇫🇷", opts: ["France 🇫🇷","Germany 🇩🇪","Algeria 🇩🇿","Brazil 🇧🇷"] },
+    { colors: ["#000000","#dd0000","#ffce00"], ans: "Germany 🇩🇪", opts: ["Germany 🇩🇪","Italy 🇮🇹","Japan 🇯🇵","Argentina 🇦🇷"] },
+    { colors: ["#009c3b","#ffdf00","#002776"], ans: "Brazil 🇧🇷", opts: ["Brazil 🇧🇷","Spain 🇪🇸","Canada 🇨🇦","Morocco 🇲🇦"] },
+    { colors: ["#c1272d","#006233","#c1272d"], ans: "Morocco 🇲🇦", opts: ["Morocco 🇲🇦","Japan 🇯🇵","Sweden 🇸🇪","Greece 🇬🇷"] }
+  ];
+  const f = flags[Math.floor(Math.random() * flags.length)];
   stage.innerHTML = `
-    <div class="q-sub">Which country flag uses this exact color palette?</div>
+    <div class="q-sub">Identify the nation from its exact color palette:</div>
     <div style="display:flex;height:70px;border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-bottom:14px">
-      <div style="flex:1;background:#006233"></div>
-      <div style="flex:1;background:#ffffff"></div>
-      <div style="flex:1;background:#d21034"></div>
+      ${f.colors.map(c => `<div style="flex:1;background:${c}"></div>`).join("")}
     </div>
     <div class="options-list" id="cgOpts"></div>
     <div id="fbBox"></div>
   `;
-  ["Algeria 🇩🇿", "Sweden 🇸🇪", "Argentina 🇦🇷", "Greece 🇬🇷"].forEach(o => {
+  f.opts.forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o.startsWith("Algeria"), "Algeria 🇩🇿", () => runColorGuess(stage), b);
+    b.onclick = () => handleAnswerResult(o === f.ans, f.ans, () => runColorGuess(stage), b);
     document.getElementById("cgOpts").appendChild(b);
   });
 }
 
-/* 22. WHO AM I? (20 QUESTIONS YES/NO DEDUCTION) */
+/* 22. WHO AM I? (DEDUCTION) */
 function runWhoAmI(stage) {
-  const qs = [
-    "Q1: Is it a living animal? ➔ YES",
-    "Q2: Does it live in the ocean? ➔ YES",
-    "Q3: Is it the largest mammal on Earth? ➔ YES"
-  ];
+  const el = window.SPECIAL_DATA.rawElements[Math.floor(Math.random() * window.SPECIAL_DATA.rawElements.length)];
+  const decoys = window.SPECIAL_DATA.rawElements.slice().sort(() => Math.random() - 0.5).slice(0, 3).map(x => x[2]);
+  const opts = Array.from(new Set([el[2], ...decoys])).slice(0, 4).sort(() => Math.random() - 0.5);
   stage.innerHTML = `
-    <div class="q-sub">20-Questions Yes/No Log:</div>
+    <div class="q-sub">20-Questions Deduction Log:</div>
     <div class="options-list" style="margin-bottom:12px">
-      ${qs.map(q => `<div class="pill">${q}</div>`).join("")}
+      <div class="pill">Q1: Is it a pure chemical element? ➔ YES</div>
+      <div class="pill">Q2: Is its atomic number exactly ${el[1]}? ➔ YES</div>
+      <div class="pill">Q3: Is its periodic symbol "${el[0]}"? ➔ YES</div>
     </div>
     <div class="options-list" id="waiOpts"></div>
     <div id="fbBox"></div>
   `;
-  ["Blue Whale", "Falcon", "Desert Fox", "Cheetah"].forEach(o => {
+  opts.forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === "Blue Whale", "Blue Whale", () => runWhoAmI(stage), b);
+    b.onclick = () => handleAnswerResult(o === el[2], el[2], () => runWhoAmI(stage), b);
     document.getElementById("waiOpts").appendChild(b);
   });
 }
 
-/* 23. OFFLINE SVG MAP CLICK */
+/* 23. WORLD ATLAS MAP TAP (65 COUNTRIES) */
 function runMapClick(stage) {
-  const locs = window.SPECIAL_DATA.geoLocations;
-  const target = locs[Math.floor(Math.random() * locs.length)];
+  const locs = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5).slice(0, 10);
+  const target = locs[0];
+  const tName = State.lang === "ar" ? target[3] : State.lang === "fr" ? target[2] : target[1];
   stage.innerHTML = `
-    <div class="q-prompt">🗺️ Tap <strong>${tr(target.name)}</strong> on the World Map</div>
-    <svg viewBox="0 0 1000 500" class="svg-stage" id="worldSvg">
+    <div class="q-prompt">🗺️ Tap the circle located at <strong>${tName} (${target[4]})</strong></div>
+    <svg viewBox="0 0 1000 500" class="svg-stage">
       <rect width="1000" height="500" fill="var(--surface-alt)"/>
-      <!-- Simplified Continent Shapes -->
       <path d="M150,80 L320,90 L360,220 L260,240 Z" fill="var(--primary-soft)"/>
       <path d="M270,250 L370,270 L340,430 L280,410 Z" fill="var(--primary-soft)"/>
       <path d="M440,70 L600,70 L590,155 L440,155 Z" fill="var(--primary-soft)"/>
       <path d="M430,165 L610,165 L580,380 L470,360 Z" fill="var(--primary-soft)"/>
       <path d="M610,75 L890,85 L860,260 L620,240 Z" fill="var(--primary-soft)"/>
       <path d="M760,310 L890,310 L880,410 L760,410 Z" fill="var(--primary-soft)"/>
-      ${locs.map(l => `<circle cx="${l.x}" cy="${l.y}" r="22" fill="var(--primary)" stroke="#fff" stroke-width="3" data-id="${l.id}" style="cursor:pointer"/>`).join("")}
+      ${locs.map(l => `<circle cx="${l[12]}" cy="${l[13]}" r="18" fill="var(--primary)" stroke="#fff" stroke-width="3" data-id="${l[0]}" style="cursor:pointer"/>`).join("")}
     </svg>
     <div id="fbBox"></div>
   `;
   stage.querySelectorAll("circle").forEach(c => {
     c.onclick = () => {
-      const hit = c.getAttribute("data-id") === target.id;
-      handleAnswerResult(hit, tr(target.name), () => runMapClick(stage));
+      const hit = c.getAttribute("data-id") === target[0];
+      handleAnswerResult(hit, tName, () => runMapClick(stage));
     };
   });
 }
 
 /* 24. COUNTRY BORDER OUTLINE */
 function runBorderGuess(stage) {
+  const shapes = [
+    { pts: "75,25 135,25 165,85 110,175 45,120 55,55", ans: "Algeria", opts: ["Algeria","Italy","Chile","Japan"] },
+    { pts: "90,20 115,30 140,140 155,165 130,180 105,90", ans: "Italy", opts: ["Italy","Algeria","Brazil","Egypt"] },
+    { pts: "45,45 155,45 155,155 45,155", ans: "Egypt", opts: ["Egypt","Norway","Cuba","Vietnam"] }
+  ];
+  const s = shapes[Math.floor(Math.random() * shapes.length)];
   stage.innerHTML = `
-    <div class="q-sub">Identify this Country Outline</div>
+    <div class="q-sub">Identify this Sovereign Border Polygon</div>
     <svg viewBox="0 0 200 200" class="svg-stage" style="height:150px">
-      <polygon points="75,25 135,25 165,85 110,175 45,120 55,55" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="4"/>
+      <polygon points="${s.pts}" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="4"/>
     </svg>
     <div class="options-list" id="bgOpts"></div>
     <div id="fbBox"></div>
   `;
-  ["Algeria", "Italy", "Japan", "Chile"].forEach(o => {
+  s.opts.forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === "Algeria", "Algeria", () => runBorderGuess(stage), b);
+    b.onclick = () => handleAnswerResult(o === s.ans, s.ans, () => runBorderGuess(stage), b);
     document.getElementById("bgOpts").appendChild(b);
   });
 }
 
-/* 25. CAPITAL MATCH */
+/* 25. 65-NATION CAPITAL MATCH (ENDLESS RANDOM PAIRS) */
 function renderCapitalMatchMode(stage, nextFn) {
-  const pairs = window.SPECIAL_DATA.geoLocations.slice(0, 4);
+  const pairs = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5).slice(0, 5);
+  const shuffledCaps = pairs.slice().sort(() => Math.random() - 0.5);
   let selCountry = null;
   let matched = [];
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">Tap a Country, then tap its matching Capital</div>
+      <div class="q-sub">Tap a Country on the left, then tap its matching Capital on the right</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="cmGrid"></div>
       <div id="fbBox"></div>
     `;
     const g = document.getElementById("cmGrid");
-    pairs.forEach(p => {
-      const done = matched.includes(p.id);
+    for (let i = 0; i < pairs.length; i++) {
+      const p = pairs[i];
+      const cp = shuffledCaps[i];
+      const doneL = matched.includes(p[0]);
+      const doneR = matched.includes(cp[0]);
+
       const cBtn = document.createElement("button");
-      cBtn.className = "grid-cell-btn " + (done ? "solved" : selCountry === p.id ? "selected" : "");
-      cBtn.textContent = tr(p.name);
-      cBtn.onclick = () => { selCountry = p.id; render(); };
+      cBtn.className = "grid-cell-btn " + (doneL ? "solved" : selCountry === p[0] ? "selected" : "");
+      cBtn.textContent = State.lang === "ar" ? p[3] : State.lang === "fr" ? p[2] : p[1];
+      cBtn.onclick = () => { selCountry = p[0]; render(); };
 
       const capBtn = document.createElement("button");
-      capBtn.className = "grid-cell-btn " + (done ? "solved" : "");
-      capBtn.textContent = tr(p.capital);
+      capBtn.className = "grid-cell-btn " + (doneR ? "solved" : "");
+      capBtn.textContent = State.lang === "ar" ? cp[6] : State.lang === "fr" ? cp[5] : cp[4];
       capBtn.onclick = () => {
-        if (selCountry === p.id) {
-          matched.push(p.id);
+        if (selCountry === cp[0]) {
+          matched.push(cp[0]);
           selCountry = null;
           playCalmTone("good");
           addPoints(15);
           render();
-          if (matched.length === pairs.length) handleAnswerResult(true, "All Capitals Matched!", nextFn);
+          if (matched.length === pairs.length) handleAnswerResult(true, "5/5 Capitals Matched!", nextFn);
         } else playCalmTone("miss");
       };
       g.appendChild(cBtn);
       g.appendChild(capBtn);
-    });
+    }
   };
   render();
 }
 
-/* 26, 28, 29. HIGHER OR LOWER (GEO & STATS & COMPARE) */
-function runHigherLower(stage, isGeo) {
-  const locs = window.SPECIAL_DATA.geoLocations;
+/* 26. GEO HIGHER OR LOWER (4,000+ COMBINATIONS) */
+function runHigherLower(stage) {
+  const locs = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5);
   const a = locs[0];
-  const b = locs[Math.floor(Math.random() * (locs.length - 1)) + 1];
+  const b = locs[1];
+  const byArea = Math.random() > 0.5;
+  const valA = byArea ? a[11] : a[10];
+  const valB = byArea ? b[11] : b[10];
+  const nA = State.lang === "ar" ? a[3] : State.lang === "fr" ? a[2] : a[1];
+  const nB = State.lang === "ar" ? b[3] : State.lang === "fr" ? b[2] : b[1];
+
   stage.innerHTML = `
-    <div class="q-sub">${isGeo ? "Land Area Comparison (1,000 km²)" : "Population Comparison (Millions)"}</div>
-    <div class="q-prompt">${tr(a.name)}: <strong>${isGeo ? a.area : a.pop}</strong><br/>vs<br/>${tr(b.name)}: <strong>?</strong></div>
+    <div class="q-sub">${byArea ? "🌍 Land Area (in 1,000 km²)" : "👥 Population (in Millions)"}</div>
+    <div class="q-prompt">${nA}: <strong>${valA.toLocaleString()}</strong><br/>vs<br/>${nB}: <strong>?</strong></div>
     <div class="options-list">
       <button class="opt-btn" id="hlHigh">${t("higherWord")}</button>
       <button class="opt-btn" id="hlLow">${t("lowerWord")}</button>
     </div>
     <div id="fbBox"></div>
   `;
-  const valA = isGeo ? a.area : a.pop;
-  const valB = isGeo ? b.area : b.pop;
-  document.getElementById("hlHigh").onclick = (e) => handleAnswerResult(valB >= valA, `${tr(b.name)} = ${valB}`, () => runHigherLower(stage, isGeo), e.target);
-  document.getElementById("hlLow").onclick = (e) => handleAnswerResult(valB <= valA, `${tr(b.name)} = ${valB}`, () => runHigherLower(stage, isGeo), e.target);
+  document.getElementById("hlHigh").onclick = (e) => handleAnswerResult(valB >= valA, `${nB} = ${valB.toLocaleString()}`, () => runHigherLower(stage), e.target);
+  document.getElementById("hlLow").onclick = (e) => handleAnswerResult(valB <= valA, `${nB} = ${valB.toLocaleString()}`, () => runHigherLower(stage), e.target);
 }
 
-/* 27. DISTANCE GUESS (PIN DROP ON SVG MAP) */
+/* 27. DISTANCE GUESS (PIN DROP ON 65 CAPITALS) */
 function runDistanceGuess(stage) {
-  const locs = window.SPECIAL_DATA.geoLocations;
+  const locs = window.SPECIAL_DATA.rawCountries;
   const target = locs[Math.floor(Math.random() * locs.length)];
+  const tName = State.lang === "ar" ? `${target[6]} (${target[3]})` : `${target[4]} (${target[1]})`;
   stage.innerHTML = `
-    <div class="q-prompt">📍 Tap anywhere on the map to drop your pin near <strong>${tr(target.capital)}, ${tr(target.name)}</strong></div>
+    <div class="q-prompt">📍 Drop your pin within 950 km of <strong>${tName}</strong></div>
     <svg viewBox="0 0 1000 500" class="svg-stage" id="pinMap" style="cursor:crosshair">
       <rect width="1000" height="500" fill="var(--surface-alt)"/>
       <path d="M150,80 L350,100 L350,410 L200,390 Z" fill="var(--primary-soft)"/>
@@ -1084,22 +1158,62 @@ function runDistanceGuess(stage) {
     const rect = svg.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 1000;
     const y = ((e.clientY - rect.top) / rect.height) * 500;
-    const dist = Math.round(Math.hypot(x - target.x, y - target.y) * 12);
+    const dist = Math.round(Math.hypot(x - target[12], y - target[13]) * 11);
     svg.innerHTML += `
-      <line x1="${x}" y1="${y}" x2="${target.x}" y2="${target.y}" stroke="var(--primary)" stroke-width="4" stroke-dasharray="8,8"/>
+      <line x1="${x}" y1="${y}" x2="${target[12]}" y2="${target[13]}" stroke="var(--primary)" stroke-width="4" stroke-dasharray="8,8"/>
       <circle cx="${x}" cy="${y}" r="14" fill="#e76f51"/>
-      <circle cx="${target.x}" cy="${target.y}" r="14" fill="#2a9d8f"/>
+      <circle cx="${target[12]}" cy="${target[13]}" r="14" fill="#2a9d8f"/>
     `;
-    handleAnswerResult(dist < 1800, `Distance: ~${dist} km`, () => runDistanceGuess(stage));
+    handleAnswerResult(dist <= 950, `Distance error: ~${dist} km`, () => runDistanceGuess(stage));
   };
 }
 
-/* 30. ODD ONE OUT */
+/* 28. HISTORY YEAR HIGHER OR LOWER */
+function runHistoryHigherLower(stage) {
+  const h = window.SPECIAL_DATA.rawHistory.slice().sort(() => Math.random() - 0.5);
+  const a = h[0];
+  const b = h[1];
+  const evA = State.lang === "ar" ? a[3] : State.lang === "fr" ? a[2] : a[1];
+  const evB = State.lang === "ar" ? b[3] : State.lang === "fr" ? b[2] : b[1];
+  stage.innerHTML = `
+    <div class="q-sub">⏳ Historical Year Comparison</div>
+    <div class="q-prompt">${evA}: <strong>Year ${a[0]}</strong><br/>vs<br/>${evB}: <strong>Later (Higher) or Earlier (Lower)?</strong></div>
+    <div class="options-list">
+      <button class="opt-btn" id="hhHigh">${t("higherWord")} (Later Year)</button>
+      <button class="opt-btn" id="hhLow">${t("lowerWord")} (Earlier Year)</button>
+    </div>
+    <div id="fbBox"></div>
+  `;
+  document.getElementById("hhHigh").onclick = (e) => handleAnswerResult(b[0] >= a[0], `Year ${b[0]}`, () => runHistoryHigherLower(stage), e.target);
+  document.getElementById("hhLow").onclick = (e) => handleAnswerResult(b[0] <= a[0], `Year ${b[0]}`, () => runHistoryHigherLower(stage), e.target);
+}
+
+/* 29. ELEMENT ATOMIC NUMBER DUEL */
+function runElementCompare(stage) {
+  const els = window.SPECIAL_DATA.rawElements.slice().sort(() => Math.random() - 0.5);
+  const a = els[0];
+  const b = els[1];
+  stage.innerHTML = `
+    <div class="q-sub">⚔️ Which Chemical Element has the HIGHER Atomic Number?</div>
+    <div class="options-list">
+      <button class="opt-btn" id="elA">${a[2]} (${a[0]})</button>
+      <button class="opt-btn" id="elB">${b[2]} (${b[0]})</button>
+    </div>
+    <div id="fbBox"></div>
+  `;
+  document.getElementById("elA").onclick = (e) => handleAnswerResult(a[1] > b[1], `${a[2]}=${a[1]}, ${b[2]}=${b[1]}`, () => runElementCompare(stage), e.target);
+  document.getElementById("elB").onclick = (e) => handleAnswerResult(b[1] > a[1], `${a[2]}=${a[1]}, ${b[2]}=${b[1]}`, () => runElementCompare(stage), e.target);
+}
+
+/* 30. EXPERT ODD ONE OUT */
 function renderOddOneOutMode(stage, nextFn) {
   const sets = [
-    { opts: ["Mars", "Venus", "Saturn", "Moon"], odd: "Moon", why: "The Moon is a natural satellite, not a planet." },
-    { opts: ["Algiers", "Cairo", "Tunis", "Tokyo"], odd: "Tokyo", why: "Tokyo is in Asia; the others are North African capitals." },
-    { opts: ["Dolphin", "Whale", "Seal", "Shark"], odd: "Shark", why: "Sharks are fish; the other three are marine mammals." }
+    { opts: ["Algiers", "Tunis", "Rabat", "Casablanca"], odd: "Casablanca", why: "Casablanca is not a national capital." },
+    { opts: ["Helium", "Neon", "Argon", "Nitrogen"], odd: "Nitrogen", why: "Nitrogen is not a Noble Gas." },
+    { opts: ["Ibn Sina", "Al-Razi", "Ibn al-Nafis", "Vasco da Gama"], odd: "Vasco da Gama", why: "Vasco da Gama was a Portuguese navigator, not a Golden Age physician." },
+    { opts: ["Femur", "Tibia", "Fibula", "Cerebellum"], odd: "Cerebellum", why: "Cerebellum is part of the brain, not a leg bone." },
+    { opts: ["Joule", "Watt", "Pascal", "Kelvin"], odd: "Kelvin", why: "Kelvin is a base SI unit; the others are derived units named after European physicists." },
+    { opts: ["Oran", "Constantine", "Annaba", "Marrakech"], odd: "Marrakech", why: "Marrakech is in Morocco; the others are Algerian wilayas." }
   ];
   const s = sets[Math.floor(Math.random() * sets.length)];
   stage.innerHTML = `<div class="q-prompt">🧐 Tap the Odd One Out:</div><div class="options-list" id="oddOpts"></div><div id="fbBox"></div>`;
@@ -1107,41 +1221,37 @@ function renderOddOneOutMode(stage, nextFn) {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === s.odd, `${s.odd} (${s.why})`, nextFn, b);
+    b.onclick = () => handleAnswerResult(o === s.odd, `${s.odd} — ${s.why}`, nextFn, b);
     document.getElementById("oddOpts").appendChild(b);
   });
 }
 
-/* 31. TIMELINE SORT */
+/* 31. DYNAMIC TIMELINE SORT (PULLS 4 RANDOM MILESTONES FROM 55 EVENTS) */
 function renderTimelineSortMode(stage, nextFn) {
-  const events = [
-    { yr: 750, label: "Golden Age of Baghdad House of Wisdom (8th C.)" },
-    { yr: 1324, label: "Mansa Musa's Famous Pilgrimage (1324)" },
-    { yr: 1450, label: "Gutenberg Printing Press (1450)" },
-    { yr: 1969, label: "Apollo 11 Moon Landing (1969)" }
-  ];
-  let shuffled = events.slice().sort(() => Math.random() - 0.5);
+  const sample = window.SPECIAL_DATA.rawHistory.slice().sort(() => Math.random() - 0.5).slice(0, 4);
   let picked = [];
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">Tap events from EARLIEST to LATEST</div>
+      <div class="q-sub">⏳ Tap historical milestones from EARLIEST to LATEST</div>
       <div class="options-list" id="tlList"></div>
       <div id="fbBox"></div>
     `;
     const box = document.getElementById("tlList");
-    shuffled.forEach(ev => {
+    sample.forEach(ev => {
       const doneIdx = picked.indexOf(ev);
+      const label = State.lang === "ar" ? ev[3] : State.lang === "fr" ? ev[2] : ev[1];
       const b = document.createElement("button");
       b.className = "opt-btn " + (doneIdx >= 0 ? "correct" : "");
-      b.textContent = (doneIdx >= 0 ? `#${doneIdx + 1} ` : "") + ev.label;
+      b.textContent = (doneIdx >= 0 ? `#${doneIdx + 1} (${ev[0]}) — ` : "") + label;
       b.onclick = () => {
         if (doneIdx >= 0) return;
         picked.push(ev);
         playCalmTone("tap");
         render();
-        if (picked.length === events.length) {
-          const ok = picked.every((x, i) => i === 0 || x.yr >= picked[i - 1].yr);
-          handleAnswerResult(ok, "750 ➔ 1324 ➔ 1450 ➔ 1969", nextFn);
+        if (picked.length === 4) {
+          const ok = picked.every((x, i) => i === 0 || x[0] >= picked[i - 1][0]);
+          const correctOrder = sample.slice().sort((a, b) => a[0] - b[0]).map(x => x[0]).join(" ➔ ");
+          handleAnswerResult(ok, correctOrder, nextFn);
         }
       };
       box.appendChild(b);
@@ -1150,35 +1260,39 @@ function renderTimelineSortMode(stage, nextFn) {
   render();
 }
 
-/* 32. MEMORY MATCH PAIRS */
+/* 32. ELEMENT & SYMBOL MEMORY MATCH */
 function runMatchPairs(stage) {
-  const items = ["🇩🇿", "🇩🇿", "🌙", "🌙", "🦊", "🦊", "🌿", "🌿"];
-  const deck = items.slice().sort(() => Math.random() - 0.5);
+  const els = window.SPECIAL_DATA.rawElements.slice().sort(() => Math.random() - 0.5).slice(0, 4);
+  const cards = [];
+  els.forEach(e => {
+    cards.push({ id: e[0], label: e[0] });
+    cards.push({ id: e[0], label: e[2] });
+  });
+  const deck = cards.sort(() => Math.random() - 0.5);
   let open = [];
   let solved = [];
   const render = () => {
-    stage.innerHTML = `<div class="q-sub">Flip matching pairs</div><div class="grid-4x4" id="memGrid"></div><div id="fbBox"></div>`;
+    stage.innerHTML = `<div class="q-sub">🃏 Match each Element with its Chemical Symbol</div><div class="grid-4x4" id="memGrid"></div><div id="fbBox"></div>`;
     const g = document.getElementById("memGrid");
-    deck.forEach((icon, idx) => {
+    deck.forEach((card, idx) => {
       const isUp = open.includes(idx) || solved.includes(idx);
       const b = document.createElement("button");
       b.className = "grid-cell-btn " + (solved.includes(idx) ? "solved" : "");
-      b.style.fontSize = "24px";
-      b.textContent = isUp ? icon : "❓";
+      b.textContent = isUp ? card.label : "❓";
       b.onclick = () => {
         if (isUp || open.length >= 2) return;
         open.push(idx);
         playCalmTone("tap");
         render();
         if (open.length === 2) {
-          if (deck[open[0]] === deck[open[1]]) {
+          if (deck[open[0]].id === deck[open[1]].id) {
             solved.push(open[0], open[1]);
             open = [];
-            addPoints(15);
+            addPoints(20);
             render();
-            if (solved.length === deck.length) handleAnswerResult(true, "All Pairs Matched!", () => runMatchPairs(stage));
+            if (solved.length === deck.length) handleAnswerResult(true, "All Elements Paired!", () => runMatchPairs(stage));
           } else {
-            setTimeout(() => { open = []; render(); }, 600);
+            setTimeout(() => { open = []; render(); }, 650);
           }
         }
       };
@@ -1188,21 +1302,16 @@ function runMatchPairs(stage) {
   render();
 }
 
-/* 33. CONNECTIONS (16 WORDS -> 4 GROUPS) */
+/* 33. CONNECTIONS (MULTI-BOARD) */
 function runConnections(stage) {
-  const groups = {
-    "Planets": ["Mars", "Venus", "Saturn", "Jupiter"],
-    "Capitals": ["Algiers", "Paris", "Cairo", "Tokyo"],
-    "Oceans": ["Pacific", "Atlantic", "Indian", "Arctic"],
-    "Metals": ["Gold", "Silver", "Copper", "Iron"]
-  };
+  const groups = window.SPECIAL_DATA.connectionsPacks[Math.floor(Math.random() * window.SPECIAL_DATA.connectionsPacks.length)];
   let all = Object.values(groups).flat().sort(() => Math.random() - 0.5);
   let sel = [];
   let solvedGroups = [];
 
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">Select 4 words sharing a hidden group (${solvedGroups.length}/4 solved)</div>
+      <div class="q-sub">🕸️ Group 16 words into 4 categories (${solvedGroups.length}/4 solved)</div>
       <div class="grid-4x4" id="connGrid"></div>
       <div id="fbBox"></div>
     `;
@@ -1225,7 +1334,7 @@ function runConnections(stage) {
             playCalmTone("good");
             addPoints(25);
             render();
-            if (solvedGroups.length === 4) handleAnswerResult(true, "All 4 Groups Connected!", () => runConnections(stage));
+            if (solvedGroups.length === 4) handleAnswerResult(true, Object.keys(groups).join(" · "), () => runConnections(stage));
           } else {
             playCalmTone("miss");
             sel = [];
@@ -1239,43 +1348,40 @@ function runConnections(stage) {
   render();
 }
 
-/* 34. NUMBER PUZZLES */
+/* 34. HARD NUMBER PUZZLES */
 function runNumberPuzzles(stage) {
-  const seqs = [
-    { q: "2, 6, 18, 54, ?", ans: "162", opts: ["162", "108", "216", "144"] },
-    { q: "1, 1, 2, 3, 5, 8, 13, ?", ans: "21", opts: ["21", "19", "24", "26"] },
-    { q: "100, 91, 82, 73, ?", ans: "64", opts: ["64", "62", "65", "54"] }
-  ];
-  const s = seqs[Math.floor(Math.random() * seqs.length)];
-  stage.innerHTML = `<div class="q-prompt">🔢 ${s.q}</div><div class="options-list" id="numOpts"></div><div id="fbBox"></div>`;
-  s.opts.forEach(o => {
+  const item = drawUniqueQuestion("math", "hard");
+  const ans = tr(item.a);
+  const opts = (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5);
+  stage.innerHTML = `<div class="q-prompt">🔢 ${tr(item.q)}</div><div class="options-list" id="numOpts"></div><div id="fbBox"></div>`;
+  opts.forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === s.ans, s.ans, () => runNumberPuzzles(stage), b);
+    b.onclick = () => handleAnswerResult(o === ans, ans, () => runNumberPuzzles(stage), b);
     document.getElementById("numOpts").appendChild(b);
   });
 }
 
-/* 35. TIME TRAVEL ADVENTURE */
+/* 35. TIME TRAVEL ODYSSEY */
 function runTimeTravel(stage) {
-  const eras = ["Ancient Egypt (2500 BCE)", "Golden Age of Islam (900 CE)", "Renaissance (1500 CE)", "Modern Space Age (1969 CE)"];
-  let idx = 0;
+  let eraIdx = 1;
   const step = () => {
-    const item = pickQuestionsForCategory("history", null);
+    const item = drawUniqueQuestion("history", null);
+    const ans = tr(item.a);
     stage.innerHTML = `
-      <div class="pill" style="margin-bottom:10px">🕰️ Era ${idx + 1}/4: ${eras[idx]}</div>
+      <div class="pill" style="margin-bottom:10px">🕰️ Time Portal #${eraIdx} · ${t(item.diff)}</div>
       <div class="q-prompt">${tr(item.q)}</div>
       <div class="options-list" id="ttOpts"></div>
       <div id="fbBox"></div>
     `;
-    (item.opts[State.lang] || item.opts.en).forEach(o => {
+    (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5).forEach(o => {
       const b = document.createElement("button");
       b.className = "opt-btn";
       b.textContent = o;
       b.onclick = () => {
-        idx = (idx + 1) % eras.length;
-        handleAnswerResult(o === tr(item.a), tr(item.a), step, b);
+        eraIdx++;
+        handleAnswerResult(o === ans, ans, step, b);
       };
       document.getElementById("ttOpts").appendChild(b);
     });
@@ -1283,30 +1389,28 @@ function runTimeTravel(stage) {
   step();
 }
 
-/* 36. ESCAPE ROOM (LINKED PUZZLES) */
+/* 36. 5-LOCK VAULT ESCAPE ROOM */
 function runEscapeRoom(stage) {
-  const locks = [
-    { title: "Lock 1/3: Keypad Code", q: "Number of continents on Earth × 100 =", ans: "700", opts: ["700", "500", "800", "600"] },
-    { title: "Lock 2/3: Sun Mirror", q: "Which direction does the Sun rise from?", ans: "East", opts: ["East", "West", "North", "South"] },
-    { title: "Lock 3/3: Vault Symbol", q: "Chemical symbol for Gold:", ans: "Au", opts: ["Au", "Ag", "Fe", "Cu"] }
-  ];
-  let stepIdx = 0;
+  let lock = 1;
   const render = () => {
-    const l = locks[stepIdx];
+    const diff = lock <= 2 ? "easy" : lock <= 4 ? "medium" : "hard";
+    const item = drawUniqueQuestion(null, diff);
+    const ans = tr(item.a);
     stage.innerHTML = `
-      <div class="q-sub">🔐 ${l.title}</div>
-      <div class="q-prompt">${l.q}</div>
+      <div class="q-sub">🔐 Vault Lock ${lock} of 5 (${t(diff)}) — Wrong answer resets to Lock 1!</div>
+      <div class="q-prompt">${tr(item.q)}</div>
       <div class="options-list" id="erOpts"></div>
       <div id="fbBox"></div>
     `;
-    l.opts.forEach(o => {
+    (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5).forEach(o => {
       const b = document.createElement("button");
       b.className = "opt-btn";
       b.textContent = o;
       b.onclick = () => {
-        const ok = o === l.ans;
-        if (ok && stepIdx < 2) { stepIdx++; playCalmTone("good"); addPoints(25); render(); }
-        else handleAnswerResult(ok, "Door Unlocked! 🎉", () => runEscapeRoom(stage), b);
+        const ok = o === ans;
+        if (ok && lock < 5) { lock++; playCalmTone("good"); addPoints(25); render(); }
+        else if (ok && lock === 5) { handleAnswerResult(true, "All 5 Vault Locks Cracked! 🏆", () => runEscapeRoom(stage), b); }
+        else { lock = 1; handleAnswerResult(false, ans, render, b); }
       };
       document.getElementById("erOpts").appendChild(b);
     });
@@ -1314,27 +1418,28 @@ function runEscapeRoom(stage) {
   render();
 }
 
-/* 37. TREASURE HUNT MAP PIECES */
+/* 37. 9-TILE TREASURE HUNT */
 function runTreasureHunt(stage) {
   let revealed = 0;
   const render = () => {
-    const item = pickQuestionsForCategory(null, null);
+    const item = drawUniqueQuestion(null, revealed < 3 ? "easy" : revealed < 6 ? "medium" : "hard");
+    const ans = tr(item.a);
     stage.innerHTML = `
-      <div class="q-sub">🏝️ Map Tiles Revealed: ${revealed}/4</div>
+      <div class="q-sub">🏝️ Treasure Map Sectors Unlocked: ${revealed} / 8</div>
       <div class="grid-4x4" style="margin-bottom:12px">
-        ${[0, 1, 2, 3].map(i => `<div class="grid-cell-btn ${i < revealed ? 'solved' : ''}">${i < revealed ? '🗺️💎' : '🌫️ Fog'}</div>`).join("")}
+        ${[0,1,2,3,4,5,6,7].map(i => `<div class="grid-cell-btn ${i < revealed ? 'solved' : ''}">${i < revealed ? '🗺️💎' : '🌫️'}</div>`).join("")}
       </div>
       <div class="q-prompt">${tr(item.q)}</div>
       <div class="options-list" id="thOpts"></div>
       <div id="fbBox"></div>
     `;
-    (item.opts[State.lang] || item.opts.en).forEach(o => {
+    (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5).forEach(o => {
       const b = document.createElement("button");
       b.className = "opt-btn";
       b.textContent = o;
       b.onclick = () => {
-        if (o === tr(item.a)) revealed = Math.min(4, revealed + 1);
-        handleAnswerResult(o === tr(item.a), tr(item.a), render, b);
+        if (o === ans) revealed = Math.min(8, revealed + 1);
+        handleAnswerResult(o === ans, ans, render, b);
       };
       document.getElementById("thOpts").appendChild(b);
     });
@@ -1342,21 +1447,25 @@ function runTreasureHunt(stage) {
   render();
 }
 
-/* 38. SPOT THE DIFFERENCE (INTERACTIVE SVG) */
+/* 38. 5-POINT SPOT THE DIFFERENCE */
 function runSpotDifference(stage) {
   let found = [];
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">Tap the 3 differences on the lower scene (${found.length}/3 found)</div>
-      <svg viewBox="0 0 300 100" class="svg-stage">
-        <circle cx="50" cy="40" r="16" fill="#e9c46a"/>
-        <rect x="130" y="35" width="40" height="45" fill="#729ea1"/>
-        <circle cx="240" cy="50" r="20" fill="#8ab8bc"/>
+      <div class="q-sub">Tap all 5 differences on the lower canvas (${found.length}/5 found)</div>
+      <svg viewBox="0 0 320 100" class="svg-stage">
+        <circle cx="40" cy="35" r="14" fill="#e9c46a"/>
+        <rect x="95" y="30" width="32" height="45" fill="#729ea1"/>
+        <polygon points="175,20 155,75 195,75" fill="#2a9d8f"/>
+        <circle cx="240" cy="50" r="18" fill="#8ab8bc"/>
+        <rect x="280" y="25" width="22" height="50" fill="#d4a373"/>
       </svg>
-      <svg viewBox="0 0 300 100" class="svg-stage" id="diffSvg">
-        <circle cx="50" cy="40" r="24" fill="#e76f51" data-d="1" style="cursor:pointer"/>
-        <rect x="130" y="20" width="40" height="60" fill="#2a9d8f" data-d="2" style="cursor:pointer"/>
-        <circle cx="240" cy="50" r="20" fill="#e63946" data-d="3" style="cursor:pointer"/>
+      <svg viewBox="0 0 320 100" class="svg-stage" id="diffSvg">
+        <circle cx="40" cy="35" r="22" fill="#e76f51" data-d="1" style="cursor:pointer"/>
+        <rect x="95" y="15" width="32" height="60" fill="#264653" data-d="2" style="cursor:pointer"/>
+        <polygon points="175,35 155,75 195,75" fill="#e9c46a" data-d="3" style="cursor:pointer"/>
+        <circle cx="240" cy="50" r="18" fill="#e63946" data-d="4" style="cursor:pointer"/>
+        <rect x="280" y="45" width="22" height="30" fill="#68b684" data-d="5" style="cursor:pointer"/>
       </svg>
       <div id="fbBox"></div>
     `;
@@ -1367,7 +1476,7 @@ function runSpotDifference(stage) {
           found.push(id);
           playCalmTone("good");
           addPoints(15);
-          if (found.length === 3) handleAnswerResult(true, "All 3 Differences Found!", () => runSpotDifference(stage));
+          if (found.length === 5) handleAnswerResult(true, "5/5 Differences Spotted!", () => runSpotDifference(stage));
           else render();
         }
       };
@@ -1376,16 +1485,17 @@ function runSpotDifference(stage) {
   render();
 }
 
-/* 39. MILLIONAIRE 15 LADDER */
+/* 39. MILLIONAIRE 15 LADDER (SCALES EASY -> MEDIUM -> HARD) */
 function runMillionaire(stage) {
   let step = 1;
   const render = () => {
-    const item = pickQuestionsForCategory(null, null);
+    const tier = step <= 5 ? "easy" : step <= 10 ? "medium" : "hard";
+    const item = drawUniqueQuestion(null, tier);
     const ans = tr(item.a);
-    const opts = (item.opts[State.lang] || item.opts.en).slice();
+    const opts = (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5);
     stage.innerHTML = `
       <div class="stage-topbar">
-        <span class="pill">💎 Step ${step} / 15</span>
+        <span class="pill">💎 Step ${step}/15 · ${t(tier)}</span>
         <button class="btn-secondary" id="btn5050">50:50 Lifeline</button>
       </div>
       <div class="q-prompt">${tr(item.q)}</div>
@@ -1400,7 +1510,7 @@ function runMillionaire(stage) {
       b.onclick = () => {
         const ok = o === ans;
         if (ok) step = Math.min(15, step + 1);
-        else step = step >= 10 ? 10 : step >= 5 ? 5 : 1;
+        else step = step > 10 ? 10 : step > 5 ? 5 : 1;
         handleAnswerResult(ok, ans, render, b);
       };
       box.appendChild(b);
@@ -1418,12 +1528,12 @@ function runMillionaire(stage) {
   render();
 }
 
-/* 40. JEOPARDY BOARD */
+/* 40. PRO JEOPARDY BOARD (100=EASY, 300=MEDIUM, 500=HARD) */
 function runJeopardy(stage) {
-  const cats = ["science", "history", "geography", "sports"];
+  const cats = ["science", "history", "geography", "math"];
   let used = [];
   const renderBoard = () => {
-    stage.innerHTML = `<div class="q-sub">Tap a Point Tile</div><div class="grid-4x4" id="jpBoard"></div><div id="fbBox"></div>`;
+    stage.innerHTML = `<div class="q-sub">🎛️ Pick Category &amp; Difficulty Value</div><div class="grid-4x4" id="jpBoard"></div><div id="fbBox"></div>`;
     const g = document.getElementById("jpBoard");
     cats.forEach(c => {
       const h = document.createElement("div");
@@ -1431,7 +1541,8 @@ function runJeopardy(stage) {
       h.textContent = c.toUpperCase();
       g.appendChild(h);
     });
-    [100, 200, 300].forEach(pts => {
+    [100, 300, 500].forEach(pts => {
+      const tier = pts === 100 ? "easy" : pts === 300 ? "medium" : "hard";
       cats.forEach(c => {
         const key = `${c}_${pts}`;
         const b = document.createElement("button");
@@ -1440,13 +1551,14 @@ function runJeopardy(stage) {
         b.onclick = () => {
           if (used.includes(key)) return;
           used.push(key);
-          const item = pickQuestionsForCategory(c, null);
-          stage.innerHTML = `<div class="q-prompt">${tr(item.q)}</div><div class="options-list" id="jpOpts"></div><div id="fbBox"></div>`;
-          (item.opts[State.lang] || item.opts.en).forEach(o => {
+          const item = drawUniqueQuestion(c, tier);
+          const ans = tr(item.a);
+          stage.innerHTML = `<div class="q-sub">${c.toUpperCase()} · ${pts} pts (${t(tier)})</div><div class="q-prompt">${tr(item.q)}</div><div class="options-list" id="jpOpts"></div><div id="fbBox"></div>`;
+          (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5).forEach(o => {
             const ob = document.createElement("button");
             ob.className = "opt-btn";
             ob.textContent = o;
-            ob.onclick = () => handleAnswerResult(o === tr(item.a), tr(item.a), renderBoard, ob);
+            ob.onclick = () => handleAnswerResult(o === ans, ans, renderBoard, ob);
             document.getElementById("jpOpts").appendChild(ob);
           });
         };
@@ -1457,29 +1569,32 @@ function runJeopardy(stage) {
   renderBoard();
 }
 
-/* 41. TRUE FACT OR FAKE (SPOT THE 1 FAKE FACT AMONG 3) */
+/* 41. SPOT THE FAKE FACT (DYNAMICALLY GENERATED FROM REAL + ALTERED ENCYCLOPEDIA FACTS) */
 function runTrueOrFake(stage) {
+  const c1 = window.SPECIAL_DATA.rawCountries[Math.floor(Math.random() * 30)];
+  const c2 = window.SPECIAL_DATA.rawCountries[Math.floor(Math.random() * 30) + 30];
+  const fakeCap = window.SPECIAL_DATA.rawCountries[10][4];
   const statements = [
-    { text: "Honey found in ancient Egyptian tombs is still edible.", fake: false },
-    { text: "Octopuses have three hearts.", fake: false },
-    { text: "The Great Wall of China is the only human structure glowing neon from the Moon.", fake: true }
-  ];
-  stage.innerHTML = `<div class="q-prompt">🕵️‍♀️ Tap the ONE Fake Statement among these three:</div><div class="options-list" id="tfkOpts"></div><div id="fbBox"></div>`;
+    { text: `The official capital city of ${c1[1]} is ${c1[4]}.`, fake: false },
+    { text: `The official currency of ${c2[1]} is the ${c2[7]}.`, fake: false },
+    { text: `The official capital city of ${c2[1]} is ${fakeCap} and its currency is the Yen.`, fake: true }
+  ].sort(() => Math.random() - 0.5);
+
+  stage.innerHTML = `<div class="q-prompt">🕵️‍♀️ Spot the ONE Fake Statement among these three:</div><div class="options-list" id="tfkOpts"></div><div id="fbBox"></div>`;
   statements.forEach(s => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = s.text;
-    b.onclick = () => handleAnswerResult(s.fake === true, statements[2].text, () => runTrueOrFake(stage), b);
+    b.onclick = () => handleAnswerResult(s.fake === true, `${c2[1]}'s capital is ${c2[4]}`, () => runTrueOrFake(stage), b);
     document.getElementById("tfkOpts").appendChild(b);
   });
 }
 
-/* INITIALIZATION & EVENT LISTENERS */
+/* INITIALIZATION */
 window.addEventListener("DOMContentLoaded", () => {
   updateHeaderStats();
   applyLanguageAndTheme();
 
-  // Bottom Navigation
   document.querySelectorAll(".nav-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       clearStageTimer();
@@ -1493,7 +1608,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Hub Filter Chips
   document.querySelectorAll("#hubFilterBar .chip").forEach(chip => {
     chip.addEventListener("click", () => {
       document.querySelectorAll("#hubFilterBar .chip").forEach(c => c.classList.remove("active"));
@@ -1503,13 +1617,11 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Search Input
   document.getElementById("searchModes").addEventListener("input", (e) => {
     State.searchQuery = e.target.value;
     renderModesHub();
   });
 
-  // Difficulty Selector
   document.querySelectorAll("#diffSelector .seg-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll("#diffSelector .seg-btn").forEach(b => b.classList.remove("active"));
@@ -1519,7 +1631,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Question Type Selector
   document.querySelectorAll("#qTypeSelector .chip").forEach(chip => {
     chip.addEventListener("click", () => {
       document.querySelectorAll("#qTypeSelector .chip").forEach(c => c.classList.remove("active"));
@@ -1529,7 +1640,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Settings Language
   document.querySelectorAll("[data-lang]").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll("[data-lang]").forEach(b => b.classList.remove("active"));
@@ -1540,7 +1650,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Settings Theme & Sound & Reset
   document.getElementById("btnToggleTheme").onclick = () => {
     State.theme = State.theme === "dark" ? "light" : "dark";
     saveState();
@@ -1552,14 +1661,13 @@ window.addEventListener("DOMContentLoaded", () => {
     applyLanguageAndTheme();
   };
   document.getElementById("btnResetData").onclick = () => {
-    State.xp = 0; State.streak = 0; State.favorites = []; State.highScores = {};
+    State.xp = 0; State.streak = 0; State.favorites = []; State.highScores = {}; State.seenIds = [];
     saveState();
     renderModesHub();
     renderStats();
   };
 
-  // Quick Play & Exit Stage
-  document.getElementById("btnQuickPlay").onclick = () => startCategoryQuiz("general", t("appTitle"));
+  document.getElementById("btnQuickPlay").onclick = () => startCategoryQuiz(null, t("appTitle"));
   document.getElementById("btnExitStage").onclick = () => {
     clearStageTimer();
     document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
