@@ -1,0 +1,6 @@
+{
+  "appId": "com.zenquiz.relaxhub",
+  "appName": "ZenQuiz Hub",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
