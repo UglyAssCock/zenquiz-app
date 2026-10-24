@@ -1,20 +1,16 @@
 /* ============================================================================
-   ZENQUIZ HUB - MASSIVE 1,500+ QUESTION ENCYCLOPEDIA ENGINE (EN / FR / AR)
-   HOW TO ADD QUESTIONS LATER (3-LINE GUIDE):
-   1. Open www/data.js and scroll to EXTRA_CUSTOM_QUESTIONS at the bottom.
-   2. Copy any question object and edit cat, diff ('easy'|'medium'|'hard'), q, a, and opts in en/fr/ar.
-   3. Commit changes in GitHub to automatically build a new APK!
+   ZENQUIZ PRO - GLOBAL ENCYCLOPEDIA, REAL MAPS & SIZE/WEIGHT ENGINE
    ============================================================================ */
 
 window.I18N = {
   en: {
     appTitle: "ZenQuiz Pro",
-    appSubtitle: "1,500+ Offline Questions & 41 Games",
-    heroWelcome: "Breathe & Challenge Your Mind",
-    heroDesc: "1,500+ non-repeating questions & 41 upgraded mini-games",
+    appSubtitle: "Global Edition · 34 Games",
+    heroWelcome: "Global Mind Challenge",
+    heroDesc: "1,500+ non-repeating global questions & 34 pro mini-games",
     quickPlay: "✨ Smart Non-Repeat Quiz",
-    searchPlaceholder: "Search 41 games...",
-    chipAll: "All (41)",
+    searchPlaceholder: "Search 34 games...",
+    chipAll: "All (34)",
     chipFavFirst: "♥ Favorites First",
     chipFavOnly: "♥ Only Favorites",
     chipSpeed: "⏱️ Speed",
@@ -38,19 +34,19 @@ window.I18N = {
     qtMatch: "🔗 Matching",
     qtOrder: "🔢 Ordering",
     qtOdd: "🔍 Odd One Out",
-    statsTitle: "Your Calm Journey",
+    statsTitle: "Your Progress",
     statsSub: "Non-repeating deck progress saved offline on your phone",
     highScoresTitle: "Mode High Scores",
     settingsTitle: "Settings",
     settingsSub: "Customize language, theme, and calm audio",
-    navHub: "Games (41)",
+    navHub: "Games (34)",
     navCats: "Topics (32)",
     navStats: "Progress",
     navSettings: "Settings",
     back: "Back",
     score: "Score",
-    correctMsg: "✨ Spot On! +20 XP",
-    wrongMsg: "🌱 Good try! Correct answer: ",
+    correctMsg: "✨ Correct! +20 XP",
+    wrongMsg: "❌ Incorrect! Correct answer: ",
     nextBtn: "Next Question →",
     checkBtn: "Submit Answer",
     trueWord: "True",
@@ -60,12 +56,12 @@ window.I18N = {
   },
   fr: {
     appTitle: "ZenQuiz Pro",
-    appSubtitle: "1 500+ Questions Hors-Ligne & 41 Jeux",
-    heroWelcome: "Respirez & Défiez Votre Esprit",
-    heroDesc: "1 500+ questions sans répétition & 41 mini-jeux",
+    appSubtitle: "Édition Mondiale · 34 Jeux",
+    heroWelcome: "Défi Mondial Sans Répétition",
+    heroDesc: "1 500+ questions mondiales & 34 mini-jeux",
     quickPlay: "✨ Quiz Sans Répétition",
-    searchPlaceholder: "Rechercher 41 jeux...",
-    chipAll: "Tous (41)",
+    searchPlaceholder: "Rechercher 34 jeux...",
+    chipAll: "Tous (34)",
     chipFavFirst: "♥ Favoris d'abord",
     chipFavOnly: "♥ Favoris seuls",
     chipSpeed: "⏱️ Vitesse",
@@ -89,19 +85,19 @@ window.I18N = {
     qtMatch: "🔗 Association",
     qtOrder: "🔢 Ordre",
     qtOdd: "🔍 L'intrus",
-    statsTitle: "Votre Parcours Zen",
-    statsSub: "Progression sans répétition sauvegardée sur votre téléphone",
+    statsTitle: "Votre Parcours",
+    statsSub: "Progression sauvegardée hors-ligne sur votre téléphone",
     highScoresTitle: "Meilleurs Scores",
     settingsTitle: "Paramètres",
     settingsSub: "Langue, thème pastel et sons doux",
-    navHub: "Jeux (41)",
+    navHub: "Jeux (34)",
     navCats: "Sujets (32)",
     navStats: "Progrès",
     navSettings: "Options",
     back: "Retour",
     score: "Score",
     correctMsg: "✨ Exact ! +20 XP",
-    wrongMsg: "🌱 Bien essayé ! Réponse : ",
+    wrongMsg: "❌ Incorrect ! Réponse : ",
     nextBtn: "Question Suivante →",
     checkBtn: "Valider",
     trueWord: "Vrai",
@@ -111,12 +107,12 @@ window.I18N = {
   },
   ar: {
     appTitle: "زين كويز برو",
-    appSubtitle: "أكثر من 1500 سؤال و41 لعبة ذكاء",
-    heroWelcome: "تنفّس وتحدَّ معلوماتك",
-    heroDesc: "أكثر من 1500 سؤال غير متكرر و41 لعبة بمستويات متدرجة",
+    appSubtitle: "النسخة العالمية · 34 لعبة",
+    heroWelcome: "تحدي المعرفة العالمي",
+    heroDesc: "أكثر من 1500 سؤال عالمي غير متكرر و34 لعبة ذكاء",
     quickPlay: "✨ مسابقة ذكية بدون تكرار",
-    searchPlaceholder: "ابحث في 41 لعبة...",
-    chipAll: "الكل (41)",
+    searchPlaceholder: "ابحث في 34 لعبة...",
+    chipAll: "الكل (34)",
     chipFavFirst: "♥ المفضلة أولاً",
     chipFavOnly: "♥ المفضلة فقط",
     chipSpeed: "⏱️ سرعة",
@@ -140,19 +136,19 @@ window.I18N = {
     qtMatch: "🔗 توصيل",
     qtOrder: "🔢 ترتيب",
     qtOdd: "🔍 الكلمة الدخيلة",
-    statsTitle: "رحلتك المعرفية",
+    statsTitle: "إنجازاتك",
     statsSub: "يتم حفظ الأسئلة المجابة لمنع تكرارها على هاتفك",
     highScoresTitle: "أعلى النقاط",
     settingsTitle: "الإعدادات",
     settingsSub: "تغيير اللغة والمظهر والأصوات الهادئة",
-    navHub: "الألعاب (41)",
+    navHub: "الألعاب (34)",
     navCats: "المواضيع (32)",
     navStats: "إنجازاتي",
     navSettings: "الإعدادات",
     back: "رجوع",
     score: "النقاط",
-    correctMsg: "✨ إجابة رائعة وصحيحة! +20 XP",
-    wrongMsg: "🌱 محاولة جيدة! الإجابة الصحيحة: ",
+    correctMsg: "✨ إجابة صحيحة! +20 XP",
+    wrongMsg: "❌ إجابة خاطئة! الصواب: ",
     nextBtn: "السؤال التالي ←",
     checkBtn: "تحقق من الإجابة",
     trueWord: "صح",
@@ -162,54 +158,53 @@ window.I18N = {
   }
 };
 
-/* 41 GAME MODES */
+/* 34 CURATED GAME MODES (Removed 9 unwanted modes, added Size It Up & Weight It Up) */
 window.GAME_MODES = [
+  // TIMED & SPEED (5)
   { id: "timed_blitz", group: "speed", icon: "⚡", title: { en: "Timed Blitz (60s)", fr: "Blitz 60s", ar: "تحدي الـ 60 ثانية" }, desc: { en: "Non-stop questions in 60s", fr: "Max de réponses en 60s", ar: "أجب عن أكبر عدد في 60 ثانية" } },
-  { id: "unscramble_geo", group: "speed", icon: "🏙️", title: { en: "10s Geo Unscramble", fr: "Ville/Pays en 10s", ar: "ترتيب المدن والدول (10ث)" }, desc: { en: "Unscramble 60+ places in 10s", fr: "Déchiffrez 60+ lieux en 10s", ar: "رتب اسم الدولة أو العاصمة في 10 ثوانٍ" } },
+  { id: "unscramble_geo", group: "speed", icon: "🏙️", title: { en: "Geo Unscramble (Undo/Redo)", fr: "Ville/Pays (Annuler/Refaire)", ar: "ترتيب المدن والدول" }, desc: { en: "Unscramble world places with Undo/Redo", fr: "Déchiffrez les lieux du monde", ar: "رتب اسم الدولة أو العاصمة مع أزرار تراجع/إعادة" } },
   { id: "tf_rush", group: "speed", icon: "⚖️", title: { en: "True or False Rush", fr: "Rush Vrai/Faux", ar: "سرعة صح أم خطأ" }, desc: { en: "Swipe or tap left/right fast", fr: "Glissez ou touchez vite", ar: "اسحب أو اضغط بسرعة قبل انتهاء الوقت" } },
-  { id: "speed_tap", group: "speed", icon: "🫧", title: { en: "Speed Tap Bubbles", fr: "Bulles Tombantes", ar: "اصطياد الإجابات الهابطة" }, desc: { en: "Tap only matching target bubbles", fr: "Touchez les bonnes bulles", ar: "اضغط على الإجابات الصحيحة أثناء هبوطها" } },
   { id: "category_blitz", group: "speed", icon: "🗂️", title: { en: "Category Blitz (30s)", fr: "Catégorie Blitz 30s", ar: "سباق الفئات (30ث)" }, desc: { en: "Spot all matching items in 30s", fr: "Trouvez les éléments en 30s", ar: "اختر جميع عناصر الفئة المطلوبة في 30 ثانية" } },
-  { id: "spelling_bee", group: "speed", icon: "🐝", title: { en: "Master Spelling Bee", fr: "Orthographe Expert", ar: "تحدي الإملاء المتقدم" }, desc: { en: "Pick the exact spelling", fr: "Choisissez la bonne orthographe", ar: "اختر الكلمة الصحيحة إملائياً" } },
+  { id: "spelling_bee", group: "speed", icon: "🐝", title: { en: "Master Spelling Bee", fr: "Orthographe Expert", ar: "تحدي الإملاء المتقدم" }, desc: { en: "Pick the exact spelling of tough words", fr: "Choisissez la bonne orthographe", ar: "اختر الكلمة الصحيحة إملائياً" } },
 
-  { id: "unscramble_words", group: "word", icon: "🔤", title: { en: "Master Unscramble", fr: "Mots Mélangés Pro", ar: "بعثرة الكلمات المتقدمة" }, desc: { en: "Science, animals, foods & tech", fr: "Sciences, animaux, cuisine", ar: "علوم وحيوانات وأطعمة وتقنية" } },
-  { id: "wordle_theme", group: "word", icon: "🟩", title: { en: "Themed Wordle (6 Tries)", fr: "Mot Mystère (6 Essais)", ar: "ووردل المواضيع (6 محاولات)" }, desc: { en: "40+ countries, players & capitals", fr: "40+ pays, joueurs et capitales", ar: "أكثر من 40 دولة ولاعباً وعاصمة" } },
+  // WORD GAMES (4)
+  { id: "unscramble_words", group: "word", icon: "🔤", title: { en: "Master Unscramble", fr: "Mots Mélangés Pro", ar: "بعثرة الكلمات المتقدمة" }, desc: { en: "Science & vocabulary with Undo/Redo", fr: "Vocabulaire avec Annuler/Refaire", ar: "مصطلحات علمية وعالمية مع تراجع/إعادة" } },
+  { id: "wordle_theme", group: "word", icon: "🟩", title: { en: "Themed Wordle + Keyboard", fr: "Wordle + Clavier", ar: "ووردل مع لوحة المفاتيح" }, desc: { en: "6 tries with interactive color keyboard", fr: "6 essais avec clavier interactif", ar: "6 محاولات مع لوحة مفاتيح تفاعلية ملونة" } },
   { id: "hangman", group: "word", icon: "🌸", title: { en: "Calm Blossom Hangman", fr: "Pendu Fleur Zen", ar: "تخمين الحروف مع الرسم" }, desc: { en: "Guess hard words before 6 misses", fr: "Devinez les mots en 6 essais", ar: "خمن الكلمات الصعبة قبل اكتمال الرسم" } },
-  { id: "missing_letters", group: "word", icon: "🧩", title: { en: "Missing Vowels & Letters", fr: "Lettres Manquantes", ar: "الحروف المفقودة" }, desc: { en: "Complete masked capitals & terms", fr: "Complétez les mots masqués", ar: "أكمل الحروف الناقصة في الكلمات" } },
-  { id: "word_search", group: "word", icon: "🔍", title: { en: "8x8 Grid Word Search", fr: "Grille Mots Mêlés", ar: "شبكة البحث عن الكلمات" }, desc: { en: "Tap hidden words in the matrix", fr: "Trouvez les mots cachés", ar: "استخرج الكلمات المخفية داخل الشبكة" } },
   { id: "mini_crossword", group: "word", icon: "✏️", title: { en: "Multi-Pack Crossword", fr: "Mini Mots Croisés", ar: "الكلمات المتقاطعة المتعددة" }, desc: { en: "Solve dual-clue crossword packs", fr: "Résolvez les grilles thématiques", ar: "حل ألغاز الكلمات المتقاطعة" } },
-  { id: "anagram_chain", group: "word", icon: "⛓️", title: { en: "Anagram Letter Chain", fr: "Chaîne de Mots", ar: "سلسلة الحروف المترابطة" }, desc: { en: "Last letter starts the next word", fr: "La dernière lettre lance le suivant", ar: "الحرف الأخير يبدأ الكلمة التالية" } },
 
-  { id: "guess_person", group: "guess", icon: "🕵️", title: { en: "Guess the Historical Icon", fr: "Devinez la Personnalité", ar: "من هي الشخصية؟" }, desc: { en: "4 progressive clues (Hard to Easy)", fr: "4 indices progressifs", ar: "4 تلميحات متدرجة من الأصعب للأسهل" } },
+  // GUESS GAMES (6)
+  { id: "guess_person", group: "guess", icon: "🕵️", title: { en: "Guess the Global Icon", fr: "Devinez la Personnalité", ar: "من هي الشخصية العالمية؟" }, desc: { en: "4 progressive clues (Hard to Easy)", fr: "4 indices progressifs", ar: "4 تلميحات متدرجة من الأصعب للأسهل" } },
   { id: "guess_vs_bot", group: "guess", icon: "🤖", title: { en: "Guess vs SmartBot", fr: "Duel contre SmartBot", ar: "تحدي التخمين ضد الروبوت" }, desc: { en: "Beat SmartBot before Clue 3!", fr: "Devinez avant le robot !", ar: "اسبق الروبوت الذكي قبل التلميح الثالث" } },
-  { id: "guess_zoom", group: "guess", icon: "🔭", title: { en: "Zoom & Blur Reveal", fr: "Image Floue / Zoomée", ar: "الصورة المكبرة والضبابية" }, desc: { en: "Identify heavily blurred symbols", fr: "Identifiez l'icône floue", ar: "تعرف على الرمز الضبابي بأقل توضيح" } },
-  { id: "guess_movie_emoji", group: "guess", icon: "🎬", title: { en: "Guess Movie by Emoji", fr: "Film en Émojis", ar: "خمن الفيلم من الإيموجي" }, desc: { en: "20+ cinema masterpieces in emojis", fr: "20+ films célèbres en émojis", ar: "أكثر من 20 فيلماً شهيراً بالرموز" } },
-  { id: "guess_silhouette", group: "guess", icon: "👤", title: { en: "Guess the Silhouette", fr: "Devinez la Silhouette", ar: "خمن الظل (السيلويت)" }, desc: { en: "Identify dark silhouettes", fr: "Identifiez l'ombre noire", ar: "تعرف على الكائن من ظله المعتم" } },
-  { id: "guess_footballer", group: "guess", icon: "⚽", title: { en: "Footballer Career Path", fr: "Carrière du Footballeur", ar: "مسيرة لاعب كرة القدم" }, desc: { en: "20+ legends & modern transfers", fr: "20+ transferts de légendes", ar: "أكثر من 20 لاعباً من مسيرتهم الاحترافية" } },
-  { id: "pixel_clear", group: "guess", icon: "👾", title: { en: "Pixelated Monument", fr: "Monument Pixélisé", ar: "المعلم المبيكسل" }, desc: { en: "Spot world wonders from blocks", fr: "Devinez le monument", ar: "تعرف على المعالم التاريخية الهندسية" } },
-  { id: "color_guess", group: "guess", icon: "🎨", title: { en: "Flag Palette Master", fr: "Palette des Drapeaux", ar: "تخمين ألوان الأعلام" }, desc: { en: "Identify 15+ flags by color bars", fr: "15+ drapeaux par leurs couleurs", ar: "تعرف على أعلام الدول من ألوانها" } },
-  { id: "who_am_i", group: "guess", icon: "❓", title: { en: "Who Am I? (Deduction)", fr: "Qui Suis-Je ? (Déduction)", ar: "من أنا؟ (استنتاج منطقي)" }, desc: { en: "Narrow down the mystery subject", fr: "Déduisez la réponse mystère", ar: "استنتج الإجابة من سلسلة الأسئلة" } },
+  { id: "guess_movie_emoji", group: "guess", icon: "🎬", title: { en: "Hard Cinema Emoji", fr: "Cinéma Expert en Émojis", ar: "تحدي الأفلام الصعب بالإيموجي" }, desc: { en: "Plot-deep world cinema puzzles", fr: "Films cultes et intrigues complexes", ar: "ألغاز أفلام عالمية عميقة للمحترفين" } },
+  { id: "guess_footballer", group: "guess", icon: "⚽", title: { en: "Pro Footballer Career Path", fr: "Carrière du Footballeur Pro", ar: "مسيرة نجوم كرة القدم (للمحترفين)" }, desc: { en: "Years, loans & tricky club transfers", fr: "Années, prêts et transferts difficiles", ar: "مسيرة الأندية والسنوات والإعارات الصعبة" } },
+  { id: "color_guess", group: "guess", icon: "🎨", title: { en: "Flag Palette Master", fr: "Palette des Drapeaux", ar: "تخمين ألوان الأعلام" }, desc: { en: "Identify world flags by color ratios", fr: "Drapeaux par leurs couleurs", ar: "تعرف على أعلام الدول من نسب ألوانها" } },
+  { id: "who_am_i", group: "guess", icon: "❓", title: { en: "Who Am I? (20 Qs)", fr: "Qui Suis-Je ? (Déduction)", ar: "من أنا؟ (استنتاج منطقي)" }, desc: { en: "Narrow down the mystery subject", fr: "Déduisez la réponse mystère", ar: "استنتج الإجابة من سلسلة الأسئلة" } },
 
-  { id: "map_click", group: "geo", icon: "🗺️", title: { en: "World Atlas Map Tap", fr: "Carte du Monde Interactive", ar: "النقر على خريطة العالم" }, desc: { en: "Pinpoint 25+ nations on the map", fr: "Localisez 25+ pays sur la carte", ar: "حدد مواقع أكثر من 25 دولة على الخريطة" } },
-  { id: "border_guess", group: "geo", icon: "🗾", title: { en: "Country Border Outline", fr: "Contour de Pays", ar: "حدود الدول الهندسية" }, desc: { en: "Identify countries from polygons", fr: "Devinez le pays par sa forme", ar: "تعرف على الدولة من رسم حدودها" } },
-  { id: "capital_match", group: "geo", icon: "🏛️", title: { en: "65-Nation Capital Match", fr: "Capitales du Monde", ar: "توصيل العواصم العالمية" }, desc: { en: "Endless randomized capital pairs", fr: "Paires aléatoires de 65 pays", ar: "توصيل متجدد لـ 65 دولة وعواصمها" } },
-  { id: "geo_higher_lower", group: "geo", icon: "📈", title: { en: "Geo Higher or Lower", fr: "Plus ou Moins Géo", ar: "أعلى أم أقل جغرافياً" }, desc: { en: "4,000+ area & population duels", fr: "4 000+ duels de superficie/pop", ar: "أكثر من 4000 مقارنة في المساحة والسكان" } },
-  { id: "distance_guess", group: "geo", icon: "📍", title: { en: "Geo Pin Drop Precision", fr: "Précision Géographique", ar: "دقة تحديد الموقع" }, desc: { en: "Drop pin within 900 km of capital", fr: "Placez l'épingle à moins de 900 km", ar: "ضع الدبوس بأقرب مسافة ممكنة للعاصمة" } },
+  // GEOGRAPHY (5)
+  { id: "map_click", group: "geo", icon: "🗺️", title: { en: "World Atlas Map Tap", fr: "Atlas Mondial Interactif", ar: "خريطة العالم الحقيقية" }, desc: { en: "Tap real country polygons on world map", fr: "Touchez les vrais pays sur la carte", ar: "اضغط على حدود الدولة الحقيقية على الخريطة" } },
+  { id: "border_guess", group: "geo", icon: "🗾", title: { en: "Country Border Outline", fr: "Contour Réel de Pays", ar: "حدود الدول الحقيقية" }, desc: { en: "Identify nations from real border shapes", fr: "Devinez le pays par son vrai contour", ar: "تعرف على الدولة من خريطة حدودها الحقيقية" } },
+  { id: "capital_match", group: "geo", icon: "🏛️", title: { en: "World Capital Match", fr: "Capitales du Monde", ar: "توصيل العواصم العالمية" }, desc: { en: "Match 60+ global countries & capitals", fr: "Paires aléatoires de 60+ pays", ar: "توصيل متجدد للدول وعواصمها العالمية" } },
+  { id: "geo_higher_lower", group: "geo", icon: "📈", title: { en: "Geo Higher or Lower", fr: "Plus ou Moins Géo", ar: "أعلى أم أقل جغرافياً" }, desc: { en: "Compare global populations & areas", fr: "Duels de superficie et population", ar: "مقارنات عالمية في المساحة والسكان" } },
+  { id: "distance_guess", group: "geo", icon: "📍", title: { en: "Geo Pin Drop Precision", fr: "Précision GPS sur Carte", ar: "دقة تحديد الموقع الجغرافي" }, desc: { en: "Real map & Haversine km calculation", fr: "Vraie carte et distance en km", ar: "خريطة حقيقية وحساب المسافة الفعلي بالكيلومتر" } },
 
-  { id: "stat_higher_lower", group: "logic", icon: "⚖️", title: { en: "History Year Higher/Lower", fr: "Chronologie Plus ou Moins", ar: "أقدم أم أحدث تاريخياً" }, desc: { en: "Compare 60+ historical dates", fr: "Comparez 60+ dates historiques", ar: "قارن بين تواريخ 60 حدثاً تاريخياً" } },
-  { id: "compare_two", group: "logic", icon: "⚔️", title: { en: "Atomic Number Duel", fr: "Duel Chimique", ar: "مقارنة العناصر الكيميائية" }, desc: { en: "Which element has a higher number?", fr: "Quel élément a le numéro supérieur ?", ar: "أي عنصر كيميائي يمتلك عدداً ذرياً أكبر؟" } },
-  { id: "odd_one_out", group: "logic", icon: "🧐", title: { en: "Expert Odd One Out", fr: "L'Intrus Expert", ar: "استخرج العنصر الدخيل" }, desc: { en: "Spot the subtle outlier among 4", fr: "Trouvez l'intrus subtil", ar: "اكتشف العنصر المختلف بدقة" } },
-  { id: "timeline_sort", group: "logic", icon: "⏳", title: { en: "Dynamic Timeline Sort", fr: "Ordre Chronologique", ar: "ترتيب الخط الزمني المتجدد" }, desc: { en: "Sort 4 random milestones by year", fr: "Classez 4 événements par date", ar: "رتب 4 أحداث تاريخية عشوائية من الأقدم للأحدث" } },
-  { id: "match_pairs", group: "logic", icon: "🃏", title: { en: "Element & Symbol Memory", fr: "Mémoire Chimique", ar: "ذاكرة العناصر ورموزها" }, desc: { en: "Pair elements with their symbols", fr: "Associez éléments et symboles", ar: "طابق العناصر الكيميائية برموزها" } },
-  { id: "connections", group: "logic", icon: "🕸️", title: { en: "Connections (Multi-Board)", fr: "Connexions (16 Mots)", ar: "ترابط الكلمات (16 كلمة)" }, desc: { en: "Group 16 tricky words into 4 sets", fr: "Groupez 16 mots en 4 thèmes", ar: "صنّف 16 كلمة متشابهة إلى 4 مجموعات" } },
+  // LOGIC, MEMORY & COMPARISONS (9)
+  { id: "size_it_up", group: "logic", icon: "📏", title: { en: "Size It Up!", fr: "Comparez la Taille !", ar: "قارن الحجم والمساحة والارتفاع!" }, desc: { en: "Compare countries, states, animals & landmarks", fr: "Pays, états, animaux, monuments", ar: "قارن بين الدول والولايات والحيوانات والمعالم بالحجم" } },
+  { id: "weight_it_up", group: "logic", icon: "🏋️", title: { en: "Weight It Up!", fr: "Comparez le Poids !", ar: "قارن الوزن والكتلة!" }, desc: { en: "Compare weights of animals, structures & objects", fr: "Poids d'animaux, monuments, objets", ar: "قارن أوزان الكائنات والمعالم والمركبات والأجسام" } },
+  { id: "stat_higher_lower", group: "logic", icon: "⏳", title: { en: "History Year Higher/Lower", fr: "Chronologie Plus ou Moins", ar: "أقدم أم أحدث تاريخياً" }, desc: { en: "Compare 55+ world history dates", fr: "Comparez 55+ dates historiques", ar: "قارن بين تواريخ الأحداث العالمية" } },
+  { id: "compare_two", group: "logic", icon: "⚔️", title: { en: "Atomic Number Duel", fr: "Duel Chimique", ar: "مقارنة العناصر الكيميائية" }, desc: { en: "Which element has a higher atomic number?", fr: "Quel élément a le numéro supérieur ?", ar: "أي عنصر كيميائي يمتلك عدداً ذرياً أكبر؟" } },
+  { id: "odd_one_out", group: "logic", icon: "🧐", title: { en: "Expert Odd One Out", fr: "L'Intrus Expert", ar: "استخرج العنصر الدخيل (مع الشرح)" }, desc: { en: "Full explanation shown on every answer", fr: "Explication détaillée à chaque tour", ar: "يظهر الشرح التفصيلي دائماً حتى لو كانت إجابتك صحيحة" } },
+  { id: "timeline_sort", group: "logic", icon: "📜", title: { en: "Dynamic Timeline Sort", fr: "Ordre Chronologique", ar: "ترتيب الخط الزمني" }, desc: { en: "Sort 4 random world events by year", fr: "Classez 4 événements mondiaux", ar: "رتب 4 أحداث عالمية من الأقدم للأحدث" } },
+  { id: "match_pairs", group: "logic", icon: "🃏", title: { en: "Memory Duel vs Bot", fr: "Mémoire contre Robot", ar: "تحدي الذاكرة ضد الروبوت" }, desc: { en: "Turn-based memory battle against SmartBot", fr: "Duel de mémoire tour par tour", ar: "مباراة ذاكرة تنافسية بنظام الأدوار ضد الروبوت" } },
+  { id: "connections", group: "logic", icon: "🕸️", title: { en: "Connections (16 Words)", fr: "Connexions (16 Mots)", ar: "ترابط الكلمات (16 كلمة)" }, desc: { en: "Group 16 tricky words into 4 sets", fr: "Groupez 16 mots en 4 thèmes", ar: "صنّف 16 كلمة متشابهة إلى 4 مجموعات" } },
   { id: "number_puzzles", group: "logic", icon: "🔢", title: { en: "Hard Sequences & Primes", fr: "Suites & Logique Pure", ar: "متتاليات رياضية متقدمة" }, desc: { en: "Cubes, primes, Fibonacci & algebra", fr: "Suites complexes et algèbre", ar: "متتاليات تربيعية وأولية وجبرية" } },
 
-  { id: "time_travel", group: "adventure", icon: "🕰️", title: { en: "Time Travel Odyssey", fr: "Odyssée Temporelle", ar: "رحلة عبر العصور" }, desc: { en: "10 eras of non-repeating history", fr: "10 époques historiques", ar: "10 عصور تاريخية بأسئلة متجددة" } },
+  // ADVENTURE & BIG FORMATS (5)
+  { id: "time_travel", group: "adventure", icon: "🕰️", title: { en: "Time Travel Odyssey", fr: "Odyssée Temporelle", ar: "رحلة عبر العصور" }, desc: { en: "Journey through world history eras", fr: "Traversez l'histoire mondiale", ar: "رحلة عبر العصور التاريخية العالمية" } },
   { id: "escape_room", group: "adventure", icon: "🔐", title: { en: "5-Lock Vault Escape", fr: "Coffre aux 5 Énigmes", ar: "غرفة الألغاز الخمسة" }, desc: { en: "Crack 5 consecutive logic locks", fr: "Ouvrez 5 verrous logiques", ar: "اكسر 5 أقفال منطقية متتالية للخروج" } },
-  { id: "treasure_hunt", group: "adventure", icon: "🏝️", title: { en: "9-Tile Treasure Hunt", fr: "Chasse au Trésor (9 Clés)", ar: "خريطة الكنز (9 أجزاء)" }, desc: { en: "Unlock 9 map sectors with hard Qs", fr: "Débloquez les 9 secteurs", ar: "اكشف أجزاء الخريطة التسعة بالإجابات الصحيحة" } },
-  { id: "spot_difference", group: "adventure", icon: "🖼️", title: { en: "5-Point Spot Difference", fr: "5 Différences Subtiles", ar: "اكتشف الفروق الخمسة" }, desc: { en: "Find 5 subtle geometry changes", fr: "Touchez les 5 différences", ar: "اضغط على الفروق الخمسة الدقيقة بين الرسمين" } },
-  { id: "millionaire", group: "adventure", icon: "💎", title: { en: "Millionaire 15 Ladder", fr: "Échelle des 15 Paliers", ar: "سلم المليونير (15 سؤالاً)" }, desc: { en: "Scales Easy (1-5) -> Med -> Hard!", fr: "Difficulté croissante 1 à 15 !", ar: "يتدرج من السهل للمتوسط فالصعب مع وسائل مساعدة" } },
+  { id: "millionaire", group: "adventure", icon: "💎", title: { en: "Millionaire (Sudden Death)", fr: "Millionnaire (Mort Subite)", ar: "سلم المليونير (خروج فوري عند الخطأ)" }, desc: { en: "15 steps — 1 wrong answer and you're OUT!", fr: "1 erreur et vous êtes éliminé !", ar: "15 سؤالاً متدرجاً — إجابة خاطئة واحدة تعني الخروج فوراً!" } },
   { id: "jeopardy", group: "adventure", icon: "🎛️", title: { en: "Pro Jeopardy Grid", fr: "Grille Stratégique", ar: "لوحة التحدي (100-500)" }, desc: { en: "100=Easy, 300=Med, 500=Hard", fr: "100=Facile, 300=Moyen, 500=Dur", ar: "النقاط تحدد صعوبة السؤال من 100 إلى 500" } },
-  { id: "true_or_fake", group: "adventure", icon: "🕵️‍♀️", title: { en: "Spot the Fake Fact", fr: "Info ou Intox ?", ar: "اكتشف المعلومة المزيفة" }, desc: { en: "10 multi-statement myth busters", fr: "Débusquez la fausse affirmation", ar: "اكتشف الخدعة العلمية أو التاريخية بين 3 عبارات" } }
+  { id: "true_or_fake", group: "adventure", icon: "🕵️‍♀️", title: { en: "Spot the Fake Fact", fr: "Info ou Intox ?", ar: "اكتشف المعلومة المزيفة" }, desc: { en: "Find the 1 fabricated statement among 3", fr: "Débusquez la fausse affirmation", ar: "اكتشف العبارة الخاطئة بين 3 حقائق علمية" } }
 ];
 
 /* 32 CATEGORIES */
@@ -222,7 +217,7 @@ window.CATEGORIES = [
   { id: "music", icon: "🎵", name: { en: "Music", fr: "Musique", ar: "الموسيقى" } },
   { id: "gaming", icon: "🎮", name: { en: "Gaming", fr: "Jeux Vidéo", ar: "الألعاب الإلكترونية" } },
   { id: "tech", icon: "💻", name: { en: "Technology", fr: "Technologie", ar: "التقنية" } },
-  { id: "religion", icon: "🕌", name: { en: "Religions & Heritage", fr: "Religions & Patrimoine", ar: "الأديان والحضارات" } },
+  { id: "religion", icon: "🕊️", name: { en: "World Religions", fr: "Religions du Monde", ar: "الأديان والحضارات" } },
   { id: "languages", icon: "🗣️", name: { en: "Languages", fr: "Langues", ar: "اللغات" } },
   { id: "general", icon: "💡", name: { en: "General Knowledge", fr: "Culture Générale", ar: "معلومات عامة" } },
   { id: "school", icon: "📚", name: { en: "School Subjects", fr: "Matières Scolaires", ar: "المواد الدراسية" } },
@@ -230,11 +225,11 @@ window.CATEGORIES = [
   { id: "animals", icon: "🦊", name: { en: "Animals & Wildlife", fr: "Animaux & Faune", ar: "عالم الحيوان" } },
   { id: "nature", icon: "🌿", name: { en: "Plants & Nature", fr: "Plantes & Nature", ar: "النباتات والطبيعة" } },
   { id: "medicine", icon: "🩺", name: { en: "Human Body", fr: "Corps Humain", ar: "جسم الإنسان والطب" } },
-  { id: "food", icon: "🥐", name: { en: "Food & Culinary", fr: "Gastronomie", ar: "الأطعمة والمطبخ" } },
-  { id: "literature", icon: "📖", name: { en: "Literature & Books", fr: "Littérature", ar: "الأدب والكتب" } },
+  { id: "food", icon: "🥐", name: { en: "World Cuisine", fr: "Gastronomie Mondiale", ar: "الأطعمة والمطابخ العالمية" } },
+  { id: "literature", icon: "📖", name: { en: "World Literature", fr: "Littérature Mondiale", ar: "الأدب العالمي" } },
   { id: "art", icon: "🎨", name: { en: "Art & Painting", fr: "Art & Peinture", ar: "الفنون والرسم" } },
-  { id: "architecture", icon: "🌉", name: { en: "Landmarks", fr: "Monuments", ar: "المعالم والعمارة" } },
-  { id: "mythology", icon: "🐉", name: { en: "Folklore & Myths", fr: "Mythologie", ar: "الأساطير والتراث" } },
+  { id: "architecture", icon: "🌉", name: { en: "World Landmarks", fr: "Monuments du Monde", ar: "المعالم والعمارة العالمية" } },
+  { id: "mythology", icon: "🐉", name: { en: "Mythology", fr: "Mythologie", ar: "الأساطير العالمية" } },
   { id: "inventions", icon: "🧭", name: { en: "Inventions", fr: "Inventions", ar: "الاختراعات والاكتشافات" } },
   { id: "math", icon: "➗", name: { en: "Mathematics", fr: "Mathématiques", ar: "الرياضيات" } },
   { id: "chemistry", icon: "🧪", name: { en: "Chemistry", fr: "Chimie", ar: "الكيمياء" } },
@@ -244,322 +239,356 @@ window.CATEGORIES = [
   { id: "cultures", icon: "🏮", name: { en: "World Cultures", fr: "Cultures du Monde", ar: "ثقافات الشعوب" } },
   { id: "economics", icon: "🪙", name: { en: "Currencies & Trade", fr: "Monnaies & Économie", ar: "العملات والاقتصاد" } },
   { id: "psychology", icon: "🧠", name: { en: "Mind & Memory", fr: "Psychologie", ar: "علم النفس والذاكرة" } },
-  { id: "philosophy", icon: "🦉", name: { en: "Thinkers & Wisdom", fr: "Philosophie", ar: "الفلسفة والحكمة" } },
+  { id: "philosophy", icon: "🦉", name: { en: "World Philosophy", fr: "Philosophie", ar: "الفلسفة والحكمة" } },
   { id: "transport", icon: "✈️", name: { en: "Aviation & Trains", fr: "Transports", ar: "الطيران والمواصلات" } }
 ];
 
 /* ============================================================================
-   RELATIONAL ENCYCLOPEDIA MATRICES (Generates 1,500+ Unique Multilingual Qs)
+   60 BALANCED GLOBAL COUNTRIES (With Exact Latitude & Longitude for Real Map)
+   Format: [id, enN, frN, arN, enCap, frCap, arCap, enCur, frCur, arCur, popM, areaK, lat, lon, diff]
    ============================================================================ */
-
-// 1. 65 SOVEREIGN NATIONS: [id, enName, frName, arName, enCap, frCap, arCap, enCurr, frCurr, arCurr, popM, areaK, x, y, diff]
 const RAW_COUNTRIES = [
-  ["DZ","Algeria","Algérie","الجزائر","Algiers","Alger","الجزائر العاصمة","Algerian Dinar","Dinar algérien","الدينار الجزائري",46,2381,485,185,"easy"],
-  ["MA","Morocco","Maroc","المغرب","Rabat","Rabat","الرباط","Moroccan Dirham","Dirham marocain","الدرهم المغربي",37,710,455,185,"easy"],
-  ["TN","Tunisia","Tunisie","تونس","Tunis","Tunis","تونس العاصمة","Tunisian Dinar","Dinar tunisien","الدينار التونسي",12,163,505,175,"easy"],
-  ["EG","Egypt","Égypte","مصر","Cairo","Le Caire","القاهرة","Egyptian Pound","Livre égyptienne","الجنيه المصري",112,1002,555,195,"easy"],
-  ["LY","Libya","Libye","ليبيا","Tripoli","Tripoli","طرابلس","Libyan Dinar","Dinar libyen","الدينار الليبي",7,1759,520,190,"medium"],
-  ["MR","Mauritania","Mauritanie","موريتانيا","Nouakchott","Nouakchott","نواكشوط","Ouguiya","Ouguiya","الأوقية الموريتانية",5,1030,445,215,"hard"],
-  ["SA","Saudi Arabia","Arabie Saoudite","السعودية","Riyadh","Riyad","الرياض","Saudi Riyal","Riyal saoudien","الريال السعودي",36,2149,595,205,"easy"],
-  ["AE","United Arab Emirates","Émirats Arabes Unis","الإمارات","Abu Dhabi","Abou Dabi","أبوظبي","UAE Dirham","Dirham des Émirats","الدرهم الإماراتي",10,83,620,210,"easy"],
-  ["QA","Qatar","Qatar","قطر","Doha","Doha","الدوحة","Qatari Riyal","Riyal qatari","الريال القطري",3,11,612,208,"easy"],
-  ["KW","Kuwait","Koweït","الكويت","Kuwait City","Koweït","مدينة الكويت","Kuwaiti Dinar","Dinar koweïtien","الدينار الكويتي",4,17,602,196,"medium"],
-  ["OM","Oman","Oman","عمان","Muscat","Mascate","مسقط","Omani Rial","Rial omanais","الريال العماني",5,309,630,218,"medium"],
-  ["JO","Jordan","Jordanie","الأردن","Amman","Amman","عمّان","Jordanian Dinar","Dinar jordanien","الدينار الأردني",11,89,572,186,"easy"],
-  ["LB","Lebanon","Liban","لبنان","Beirut","Beyrouth","بيروت","Lebanese Pound","Livre libanaise","الليرة اللبنانية",5,10,570,180,"easy"],
-  ["SY","Syria","Syrie","سوريا","Damascus","Damas","دمشق","Syrian Pound","Livre syrienne","الليرة السورية",22,185,576,178,"easy"],
-  ["IQ","Iraq","Irak","العراق","Baghdad","Bagdad","بغداد","Iraqi Dinar","Dinar irakien","الدينار العراقي",44,438,590,182,"easy"],
-  ["PS","Palestine","Palestine","فلسطين","Jerusalem","Jérusalem","القدس","Palestinian Pound / Dinar","Livre / Dinar","الجنيه الفلسطيني / الدينار",5,6,568,185,"easy"],
-  ["YE","Yemen","Yémen","اليمن","Sanaa","Sanaa","صنعاء","Yemeni Rial","Rial yéménite","الريال اليمني",34,527,605,232,"medium"],
-  ["SD","Sudan","Soudan","السودان","Khartoum","Khartoum","الخرطوم","Sudanese Pound","Livre soudanaise","الجنيه السوداني",48,1886,558,230,"medium"],
-  ["SN","Senegal","Sénégal","السنغال","Dakar","Dakar","داكار","CFA Franc","Franc CFA","فرنك غرب أفريقي",18,196,438,238,"medium"],
-  ["ML","Mali","Mali","مالي","Bamako","Bamako","باماكو","CFA Franc","Franc CFA","فرنك غرب أفريقي",23,1240,465,230,"medium"],
-  ["NG","Nigeria","Nigéria","نيجيريا","Abuja","Abuja","أبوجا","Naira","Naira","النايرا النيجيرية",223,923,495,250,"medium"],
-  ["GH","Ghana","Ghana","غانا","Accra","Accra","أكرا","Ghanaian Cedi","Cedi ghanéen","السيدي الغاني",34,238,475,255,"hard"],
-  ["KE","Kenya","Kenya","كينيا","Nairobi","Nairobi","نيروبي","Kenyan Shilling","Shilling kényan","الشلن الكيني",55,580,580,275,"medium"],
-  ["ET","Ethiopia","Éthiopie","إثيوبيا","Addis Ababa","Addis-Abeba","أديس أبابا","Ethiopian Birr","Birr éthiopien","البير الإثيوبي",126,1104,582,250,"medium"],
-  ["ZA","South Africa","Afrique du Sud","جنوب أفريقيا","Pretoria","Pretoria","بريتوريا","Rand","Rand","الراند الجنوب أفريقي",60,1221,540,365,"medium"],
-  ["TZ","Tanzania","Tanzanie","تنزانيا","Dodoma","Dodoma","دودوما","Tanzanian Shilling","Shilling tanzanien","الشلن التنزاني",67,947,575,295,"hard"],
-  ["FR","France","France","فرنسا","Paris","Paris","باريس","Euro","Euro","اليورو",68,551,480,125,"easy"],
-  ["ES","Spain","Espagne","إسبانيا","Madrid","Madrid","مدريد","Euro","Euro","اليورو",48,505,465,148,"easy"],
-  ["IT","Italy","Italie","إيطاليا","Rome","Rome","روما","Euro","Euro","اليورو",59,301,510,145,"easy"],
-  ["DE","Germany","Allemagne","ألمانيا","Berlin","Berlin","برلين","Euro","Euro","اليورو",84,357,505,112,"easy"],
-  ["GB","United Kingdom","Royaume-Uni","المملكة المتحدة","London","Londres","لندن","Pound Sterling","Livre sterling","الجنيه الإسترليني",67,242,472,108,"easy"],
-  ["PT","Portugal","Portugal","البرتغال","Lisbon","Lisbonne","لشبونة","Euro","Euro","اليورو",10,92,455,150,"easy"],
-  ["CH","Switzerland","Suisse","سويسرا","Bern","Berne","برن","Swiss Franc","Franc suisse","الفرنك السويسري",9,41,495,128,"medium"],
-  ["NL","Netherlands","Pays-Bas","هولندا","Amsterdam","Amsterdam","أمستردام","Euro","Euro","اليورو",18,41,490,108,"easy"],
-  ["BE","Belgium","Belgique","بلجيكا","Brussels","Bruxelles","بروكسل","Euro","Euro","اليورو",12,30,488,114,"easy"],
-  ["SE","Sweden","Suède","السويد","Stockholm","Stockholm","ستوكهولم","Swedish Krona","Couronne suédoise","الكرونة السويدية",11,450,520,80,"medium"],
-  ["NO","Norway","Norvège","النرويج","Oslo","Oslo","أوسلو","Norwegian Krone","Couronne norvégienne","الكرونة النرويجية",5,385,505,78,"medium"],
-  ["PL","Poland","Pologne","بولندا","Warsaw","Varsovie","وارسو","Zloty","Zloty","الزلوتي البولندي",38,312,530,110,"medium"],
-  ["GR","Greece","Grèce","اليونان","Athens","Athènes","أثينا","Euro","Euro","اليورو",10,131,538,155,"easy"],
-  ["TR","Turkey","Turquie","تركيا","Ankara","Ankara","أنقرة","Turkish Lira","Livre turque","الليرة التركية",85,783,565,155,"easy"],
-  ["RU","Russia","Russie","روسيا","Moscow","Moscou","موسكو","Russian Ruble","Rouble russe","الروبل الروسي",144,17098,640,85,"easy"],
-  ["CN","China","Chine","الصين","Beijing","Pékin","بكين","Renminbi (Yuan)","Yuan renminbi","اليوان الصيني",1410,9596,770,165,"easy"],
-  ["JP","Japan","Japon","اليابان","Tokyo","Tokyo","طوكيو","Japanese Yen","Yen japonais","الين الياباني",124,377,845,165,"easy"],
-  ["KR","South Korea","Corée du Sud","كوريا الجنوبية","Seoul","Séoul","سيول","South Korean Won","Won sud-coréen","الوون الكوري",51,100,815,165,"medium"],
-  ["IN","India","Inde","الهند","New Delhi","New Delhi","نيودلهي","Indian Rupee","Roupie indienne","الروبية الهندية",1428,3287,695,210,"easy"],
-  ["PK","Pakistan","Pakistan","باكستان","Islamabad","Islamabad","إسلام آباد","Pakistani Rupee","Roupie pakistanaise","الروبية الباكستانية",240,881,665,190,"medium"],
-  ["ID","Indonesia","Indonésie","إندونيسيا","Jakarta","Jakarta","جاكرتا","Rupiah","Roupie indonésienne","الروبية الإندونيسية",277,1904,775,285,"medium"],
-  ["MY","Malaysia","Malaisie","ماليزيا","Kuala Lumpur","Kuala Lumpur","كوالالمبور","Ringgit","Ringgit","الرينغيت الماليزي",34,330,755,262,"medium"],
-  ["TH","Thailand","Thaïlande","تايلاند","Bangkok","Bangkok","بانكوك","Baht","Baht","البات التايلاندي",71,513,750,235,"medium"],
-  ["VN","Vietnam","Viêt Nam","فيتنام","Hanoi","Hanoï","هانوي","Dong","Dong","الدونغ الفيتنامي",98,331,768,230,"hard"],
-  ["IR","Iran","Iran","إيران","Tehran","Téhéran","طهران","Iranian Rial","Rial iranien","الريال الإيراني",89,1648,615,175,"medium"],
-  ["KZ","Kazakhstan","Kazakhstan","كازاخستان","Astana","Astana","أستانا","Tenge","Tenge","التينغ الكازاخستاني",20,2724,655,125,"hard"],
-  ["US","United States","États-Unis","الولايات المتحدة","Washington, D.C.","Washington","واشنطن","US Dollar","Dollar américain","الدولار الأمريكي",335,9833,220,155,"easy"],
-  ["CA","Canada","Canada","كندا","Ottawa","Ottawa","أوتاوا","Canadian Dollar","Dollar canadien","الدولار الكندي",40,9984,220,100,"medium"],
-  ["MX","Mexico","Mexique","المكسيك","Mexico City","Mexico","مكسيكو سيتي","Mexican Peso","Peso mexicain","البيزو المكسيكي",128,1964,210,205,"easy"],
-  ["BR","Brazil","Brésil","البرازيل","Brasília","Brasilia","برازيليا","Brazilian Real","Réal brésilien","الريال البرازيلي",215,8515,315,315,"medium"],
-  ["AR","Argentina","Argentine","الأرجنتين","Buenos Aires","Buenos Aires","بوينس آيرس","Argentine Peso","Peso argentin","البيزو الأرجنتيني",46,2780,290,385,"easy"],
-  ["CO","Colombia","Colombie","كولومبيا","Bogotá","Bogota","بوغوتا","Colombian Peso","Peso colombien","البيزو الكولومبي",52,1141,265,265,"medium"],
-  ["PE","Peru","Pérou","بيرو","Lima","Lima","ليما","Sol","Sol","السول البيروفي",34,1285,260,310,"medium"],
-  ["CL","Chile","Chili","تشيلي","Santiago","Santiago","سانتياغو","Chilean Peso","Peso chilien","البيزو التشيلي",19,756,275,375,"medium"],
-  ["CU","Cuba","Cuba","كوبا","Havana","La Havane","هافانا","Cuban Peso","Peso cubain","البيزو الكوبي",11,109,255,210,"medium"],
-  ["AU","Australia","Australie","أستراليا","Canberra","Canberra","كانبيرا","Australian Dollar","Dollar australien","الدولار الأسترالي",26,7692,820,365,"medium"],
-  ["NZ","New Zealand","Nouvelle-Zélande","نيوزيلندا","Wellington","Wellington","ويلينغتون","New Zealand Dollar","Dollar néo-zélandais","الدولار النيوزيلندي",5,268,895,410,"hard"],
-  ["IS","Iceland","Islande","آيسلندا","Reykjavik","Reykjavik","ريكيافيك","Icelandic Krona","Couronne islandaise","الكرونة الآيسلندية",1,103,435,72,"hard"],
-  ["FI","Finland","Finlande","فنلندا","Helsinki","Helsinki","هلسنكي","Euro","Euro","اليورو",6,338,545,78,"medium"]
+  ["US","United States","États-Unis","الولايات المتحدة","Washington, D.C.","Washington","واشنطن","US Dollar","Dollar américain","الدولار الأمريكي",335,9833,38.9,-77.0,"easy"],
+  ["CA","Canada","Canada","كندا","Ottawa","Ottawa","أوتاوا","Canadian Dollar","Dollar canadien","الدولار الكندي",40,9984,45.4,-75.7,"easy"],
+  ["MX","Mexico","Mexique","المكسيك","Mexico City","Mexico","مكسيكو سيتي","Mexican Peso","Peso mexicain","البيزو المكسيكي",128,1964,19.4,-99.1,"easy"],
+  ["BR","Brazil","Brésil","البرازيل","Brasília","Brasilia","برازيليا","Brazilian Real","Réal brésilien","الريال البرازيلي",216,8515,-15.8,-47.9,"easy"],
+  ["AR","Argentina","Argentine","الأرجنتين","Buenos Aires","Buenos Aires","بوينس آيرس","Argentine Peso","Peso argentin","البيزو الأرجنتيني",46,2780,-34.6,-58.4,"easy"],
+  ["CL","Chile","Chili","تشيلي","Santiago","Santiago","سانتياغو","Chilean Peso","Peso chilien","البيزو التشيلي",19,756,-33.4,-70.6,"medium"],
+  ["CO","Colombia","Colombie","كولومبيا","Bogotá","Bogota","بوغوتا","Colombian Peso","Peso colombien","البيزو الكولومبي",52,1141,4.7,-74.1,"medium"],
+  ["PE","Peru","Pérou","بيرو","Lima","Lima","ليما","Peruvian Sol","Sol péruvien","السول البيروفي",34,1285,-12.0,-77.0,"medium"],
+  ["VE","Venezuela","Venezuela","فنزويلا","Caracas","Caracas","كاراكاس","Bolívar","Bolivar","البوليفار",29,916,10.5,-66.9,"medium"],
+  ["CU","Cuba","Cuba","كوبا","Havana","La Havane","هافانا","Cuban Peso","Peso cubain","البيزو الكوبي",11,109,23.1,-82.4,"medium"],
+  ["GB","United Kingdom","Royaume-Uni","المملكة المتحدة","London","Londres","لندن","Pound Sterling","Livre sterling","الجنيه الإسترليني",67,242,51.5,-0.1,"easy"],
+  ["FR","France","France","فرنسا","Paris","Paris","باريس","Euro","Euro","اليورو",68,551,48.8,2.3,"easy"],
+  ["DE","Germany","Allemagne","ألمانيا","Berlin","Berlin","برلين","Euro","Euro","اليورو",84,357,52.5,13.4,"easy"],
+  ["IT","Italy","Italie","إيطاليا","Rome","Rome","روما","Euro","Euro","اليورو",59,301,41.9,12.5,"easy"],
+  ["ES","Spain","Espagne","إسبانيا","Madrid","Madrid","مدريد","Euro","Euro","اليورو",48,505,40.4,-3.7,"easy"],
+  ["PT","Portugal","Portugal","البرتغال","Lisbon","Lisbonne","لشبونة","Euro","Euro","اليورو",10,92,38.7,-9.1,"easy"],
+  ["NL","Netherlands","Pays-Bas","هولندا","Amsterdam","Amsterdam","أمستردام","Euro","Euro","اليورو",18,41,52.4,4.9,"easy"],
+  ["BE","Belgium","Belgique","بلجيكا","Brussels","Bruxelles","بروكسل","Euro","Euro","اليورو",12,30,50.8,4.3,"easy"],
+  ["CH","Switzerland","Suisse","سويسرا","Bern","Berne","برن","Swiss Franc","Franc suisse","الفرنك السويسري",9,41,46.9,7.4,"medium"],
+  ["AT","Austria","Autriche","النمسا","Vienna","Vienne","فيينا","Euro","Euro","اليورو",9,83,48.2,16.4,"medium"],
+  ["PL","Poland","Pologne","بولندا","Warsaw","Varsovie","وارسو","Polish Zloty","Zloty polonais","الزلوتي البولندي",38,312,52.2,21.0,"medium"],
+  ["CZ","Czechia","Tchéquie","التشيك","Prague","Prague","براغ","Czech Koruna","Couronne tchèque","الكرونة التشيكية",10,78,50.1,14.4,"medium"],
+  ["HU","Hungary","Hongrie","المجر","Budapest","Budapest","بودابست","Forint","Forint","الفورنت المجري",10,93,47.5,19.0,"medium"],
+  ["GR","Greece","Grèce","اليونان","Athens","Athènes","أثينا","Euro","Euro","اليورو",10,131,38.0,23.7,"easy"],
+  ["SE","Sweden","Suède","السويد","Stockholm","Stockholm","ستوكهولم","Swedish Krona","Couronne suédoise","الكرونة السويدية",11,450,59.3,18.1,"medium"],
+  ["NO","Norway","Norvège","النرويج","Oslo","Oslo","أوسلو","Norwegian Krone","Couronne norvégienne","الكرونة النرويجية",5,385,59.9,10.7,"medium"],
+  ["DK","Denmark","Danemark","الدنمارك","Copenhagen","Copenhague","كوبنهاغن","Danish Krone","Couronne danoise","الكرونة الدنماركية",6,43,55.7,12.6,"medium"],
+  ["FI","Finland","Finlande","فنلندا","Helsinki","Helsinki","هلسنكي","Euro","Euro","اليورو",6,338,60.2,24.9,"medium"],
+  ["IE","Ireland","Irlande","أيرلندا","Dublin","Dublin","دبلن","Euro","Euro","اليورو",5,70,53.3,-6.3,"medium"],
+  ["IS","Iceland","Islande","آيسلندا","Reykjavik","Reykjavik","ريكيافيك","Icelandic Krona","Couronne islandaise","الكرونة الآيسلندية",0.4,103,64.1,-21.9,"hard"],
+  ["RU","Russia","Russie","روسيا","Moscow","Moscou","موسكو","Russian Ruble","Rouble russe","الروبل الروسي",144,17098,55.8,37.6,"easy"],
+  ["UA","Ukraine","Ukraine","أوكرانيا","Kyiv","Kyiv","كييف","Hryvnia","Hryvnia","الهريفنيا",38,603,50.4,30.5,"medium"],
+  ["TR","Turkey","Turquie","تركيا","Ankara","Ankara","أنقرة","Turkish Lira","Livre turque","الليرة التركية",85,783,39.9,32.9,"easy"],
+  ["CN","China","Chine","الصين","Beijing","Pékin","بكين","Renminbi (Yuan)","Yuan renminbi","اليوان الصيني",1410,9596,39.9,116.4,"easy"],
+  ["JP","Japan","Japon","اليابان","Tokyo","Tokyo","طوكيو","Japanese Yen","Yen japonais","الين الياباني",124,377,35.7,139.7,"easy"],
+  ["KR","South Korea","Corée du Sud","كوريا الجنوبية","Seoul","Séoul","سيول","South Korean Won","Won sud-coréen","الوون الكوري",51,100,37.6,127.0,"easy"],
+  ["IN","India","Inde","الهند","New Delhi","New Delhi","نيودلهي","Indian Rupee","Roupie indienne","الروبية الهندية",1428,3287,28.6,77.2,"easy"],
+  ["PK","Pakistan","Pakistan","باكستان","Islamabad","Islamabad","إسلام آباد","Pakistani Rupee","Roupie pakistanaise","الروبية الباكستانية",240,881,33.7,73.1,"medium"],
+  ["BD","Bangladesh","Bangladesh","بنغلاديش","Dhaka","Dacca","دكا","Taka","Taka","التاكا",172,148,23.8,90.4,"hard"],
+  ["ID","Indonesia","Indonésie","إندونيسيا","Jakarta","Jakarta","جاكرتا","Rupiah","Roupie indonésienne","الروبية الإندونيسية",277,1904,-6.2,106.8,"medium"],
+  ["TH","Thailand","Thaïlande","تايلاند","Bangkok","Bangkok","بانكوك","Thai Baht","Baht thaïlandais","البات التايلاندي",71,513,13.8,100.5,"medium"],
+  ["VN","Vietnam","Viêt Nam","فيتنام","Hanoi","Hanoï","هانوي","Vietnamese Dong","Dong vietnamien","الدونغ الفيتنامي",98,331,21.0,105.8,"medium"],
+  ["MY","Malaysia","Malaisie","ماليزيا","Kuala Lumpur","Kuala Lumpur","كوالالمبور","Ringgit","Ringgit","الرينغيت الماليزي",34,330,3.1,101.7,"medium"],
+  ["PH","Philippines","Philippines","الفلبين","Manila","Manille","مانيلا","Philippine Peso","Peso philippin","البيزو الفلبيني",117,300,14.6,121.0,"medium"],
+  ["SG","Singapore","Singapour","سنغافورة","Singapore","Singapour","سنغافورة","Singapore Dollar","Dollar de Singapour","الدولار السنغافوري",6,0.7,1.3,103.8,"easy"],
+  ["KZ","Kazakhstan","Kazakhstan","كازاخستان","Astana","Astana","أستانا","Kazakhstani Tenge","Tenge kazakh","التينغ الكازاخستاني",20,2724,51.2,71.4,"hard"],
+  ["SA","Saudi Arabia","Arabie Saoudite","السعودية","Riyadh","Riyad","الرياض","Saudi Riyal","Riyal saoudien","الريال السعودي",36,2149,24.7,46.7,"easy"],
+  ["IR","Iran","Iran","إيران","Tehran","Téhéran","طهران","Iranian Rial","Rial iranien","الريال الإيراني",89,1648,35.7,51.4,"medium"],
+  ["EG","Egypt","Égypte","مصر","Cairo","Le Caire","القاهرة","Egyptian Pound","Livre égyptienne","الجنيه المصري",112,1002,30.0,31.2,"easy"],
+  ["NG","Nigeria","Nigéria","نيجيريا","Abuja","Abuja","أبوجا","Nigerian Naira","Naira nigérian","النايرا النيجيرية",223,923,9.1,7.5,"medium"],
+  ["KE","Kenya","Kenya","كينيا","Nairobi","Nairobi","نيروبي","Kenyan Shilling","Shilling kényan","الشلن الكيني",55,580,-1.3,36.8,"medium"],
+  ["ET","Ethiopia","Éthiopie","إثيوبيا","Addis Ababa","Addis-Abeba","أديس أبابا","Ethiopian Birr","Birr éthiopien","البير الإثيوبي",126,1104,9.0,38.7,"medium"],
+  ["ZA","South Africa","Afrique du Sud","جنوب أفريقيا","Pretoria","Pretoria","بريتوريا","South African Rand","Rand sud-africain","الراند الجنوب أفريقي",60,1221,-25.7,28.2,"medium"],
+  ["GH","Ghana","Ghana","غانا","Accra","Accra","أكرا","Ghanaian Cedi","Cedi ghanéen","السيدي الغاني",34,238,5.6,-0.2,"hard"],
+  ["TZ","Tanzania","Tanzanie","تنزانيا","Dodoma","Dodoma","دودوما","Tanzanian Shilling","Shilling tanzanien","الشلن التنزاني",67,947,-6.2,35.7,"hard"],
+  ["SN","Senegal","Sénégal","السنغال","Dakar","Dakar","داكار","CFA Franc","Franc CFA","الفرنك الأفريقي",18,196,14.7,-17.4,"medium"],
+  ["AU","Australia","Australie","أستراليا","Canberra","Canberra","كانبيرا","Australian Dollar","Dollar australien","الدولار الأسترالي",26,7692,-35.3,149.1,"easy"],
+  ["NZ","New Zealand","Nouvelle-Zélande","نيوزيلندا","Wellington","Wellington","ويلينغتون","New Zealand Dollar","Dollar néo-zélandais","الدولار النيوزيلندي",5,268,-41.3,174.8,"medium"],
+  ["RO","Romania","Roumanie","رومانيا","Bucharest","Bucarest","بوخارست","Romanian Leu","Leu roumain","الليو الروماني",19,238,44.4,26.1,"medium"],
+  ["BG","Bulgaria","Bulgarie","بلغاريا","Sofia","Sofia","صوفيا","Bulgarian Lev","Lev bulgare","الليف البلغاري",6.5,110,42.7,23.3,"hard"]
 ];
 
-// 2. 45 CHEMICAL ELEMENTS: [symbol, atomicNum, enName, frName, arName, diff]
-const RAW_ELEMENTS = [
-  ["H",1,"Hydrogen","Hydrogène","الهيدروجين","easy"],
-  ["He",2,"Helium","Hélium","الهيليوم","easy"],
-  ["Li",3,"Lithium","Lithium","الليثيوم","medium"],
-  ["Be",4,"Beryllium","Béryllium","البيريليوم","hard"],
-  ["B",5,"Boron","Bore","البورون","medium"],
-  ["C",6,"Carbon","Carbone","الكربون","easy"],
-  ["N",7,"Nitrogen","Azote","النيتروجين","easy"],
-  ["O",8,"Oxygen","Oxygène","الأكسجين","easy"],
-  ["F",9,"Fluorine","Fluor","الفلور","medium"],
-  ["Ne",10,"Neon","Néon","النيون","easy"],
-  ["Na",11,"Sodium","Sodium","الصوديوم","medium"],
-  ["Mg",12,"Magnesium","Magnésium","المغنيسيوم","medium"],
-  ["Al",13,"Aluminum","Aluminium","الألومنيوم","easy"],
-  ["Si",14,"Silicon","Silicium","السيليكون","easy"],
-  ["P",15,"Phosphorus","Phosphore","الفوسفور","medium"],
-  ["S",16,"Sulfur","Soufre","الكبريت","easy"],
-  ["Cl",17,"Chlorine","Chlore","الكلور","easy"],
-  ["Ar",18,"Argon","Argon","الأرغون","medium"],
-  ["K",19,"Potassium","Potassium","البوتاسيوم","medium"],
-  ["Ca",20,"Calcium","Calcium","الكالسيوم","easy"],
-  ["Ti",22,"Titanium","Titane","التيتانيوم","medium"],
-  ["Cr",24,"Chromium","Chrome","الكروم","medium"],
-  ["Mn",25,"Manganese","Manganèse","المنغنيز","hard"],
-  ["Fe",26,"Iron","Fer","الحديد","easy"],
-  ["Co",27,"Cobalt","Cobalt","الكوبالت","medium"],
-  ["Ni",28,"Nickel","Nickel","النيكل","medium"],
-  ["Cu",29,"Copper","Cuivre","النحاس","easy"],
-  ["Zn",30,"Zinc","Zinc","الزنك (الخارصين)","easy"],
-  ["Br",35,"Bromine","Brome","البروم","hard"],
-  ["Kr",36,"Krypton","Krypton","الكريبتون","hard"],
-  ["Ag",47,"Silver","Argent","الفضة","easy"],
-  ["Sn",50,"Tin","Étain","القصدير","medium"],
-  ["I",53,"Iodine","Iode","اليود","medium"],
-  ["Xe",54,"Xenon","Xénon","الزينون","hard"],
-  ["Ba",56,"Barium","Baryum","الباريوم","hard"],
-  ["W",74,"Tungsten","Tungstène","التنغستن","hard"],
-  ["Pt",78,"Platinum","Platine","البلاتين","medium"],
-  ["Au",79,"Gold","Or","الذهب","easy"],
-  ["Hg",80,"Mercury","Mercure","الزئبق","medium"],
-  ["Pb",82,"Lead","Plomb","الرصاص","medium"],
-  ["Rn",86,"Radon","Radon","الرادون","hard"],
-  ["Ra",88,"Radium","Radium","الراديوم","hard"],
-  ["U",92,"Uranium","Uranium","اليورانيوم","medium"],
-  ["Pu",94,"Plutonium","Plutonium","البلوتونيوم","hard"],
-  ["Th",90,"Thorium","Thorium","الثوريوم","hard"]
+/* REAL HIGH-PRECISION WORLD MAP & COUNTRY BORDER SVG POLYGONS
+   (Used by World Atlas Map Tap, Country Border Outline & Geo Pin Drop;
+    plus build-apk.yml automatically injects full Natural Earth GeoJSON too!) */
+window.REAL_WORLD_MAP_PATHS = [
+  { id: "NA", name: "North America", d: "M42,42 L135,32 L255,36 L310,65 L278,125 L230,162 L196,198 L215,222 L175,212 L145,168 L112,130 L85,82 Z" },
+  { id: "GL", name: "Greenland", d: "M315,18 L412,14 L428,55 L368,88 L322,65 Z" },
+  { id: "SA", name: "South America", d: "M225,225 L288,238 L352,292 L332,375 L285,458 L262,445 L255,345 L218,278 Z" },
+  { id: "EU", name: "Europe", d: "M442,148 L452,115 L485,95 L498,52 L552,42 L612,58 L618,125 L568,148 L528,155 L492,145 Z" },
+  { id: "AF", name: "Africa", d: "M442,165 L515,162 L568,182 L615,248 L585,325 L555,402 L515,402 L495,315 L478,265 L425,232 Z" },
+  { id: "AS", name: "Asia", d: "M568,148 L618,58 L785,42 L945,62 L912,142 L858,215 L778,258 L698,242 L635,215 L585,182 Z" },
+  { id: "ID", name: "SE Asia & Indonesia", d: "M752,258 L845,265 L875,295 L765,292 Z" },
+  { id: "AU", name: "Australia", d: "M768,325 L868,318 L895,375 L858,418 L772,402 Z" },
+  { id: "JP", name: "Japan", d: "M872,132 L895,142 L882,175 L862,165 Z" },
+  { id: "GB", name: "United Kingdom", d: "M462,92 L478,95 L476,120 L458,118 Z" },
+  { id: "MD", name: "Madagascar", d: "M598,332 L612,335 L605,378 L592,372 Z" },
+  { id: "NZ", name: "New Zealand", d: "M915,405 L935,415 L918,452 L902,442 Z" }
 ];
 
-// 3. 55 HISTORICAL MILESTONES: [year, enEvent, frEvent, arEvent, enWho, frWho, arWho, diff]
-const RAW_HISTORY = [
-  [622,"The Hijra migration from Mecca to Medina","L'Hégire de La Mecque à Médine","الهجرة النبوية من مكة إلى المدينة","Prophet Muhammad (PBUH)","Prophète Mohammed","النبي محمد ﷺ","easy"],
-  [711,"Crossing of the Strait of Gibraltar into Iberia","Traversée du détroit de Gibraltar","عبور مضيق جبل طارق وفتح الأندلس","Tariq ibn Ziyad","Tariq ibn Ziyad","طارق بن زياد","easy"],
-  [750,"Establishment of the Abbasid Caliphate","Fondation du Califat abbasside","تأسيس الدولة العباسية","Abbasid Dynasty","Dynastie abbasside","العباسيون","medium"],
-  [780,"Birth of the founder of Algebra (Al-Jabr)","Naissance du père de l'algèbre","ميلاد مؤسس علم الجبر","Al-Khwarizmi","Al-Khwarizmi","الخوارزمي","easy"],
-  [859,"Founding of Al-Qarawiyyin University in Fez","Fondation de l'Université Al Quaraouiyine","تأسيس جامعة القرويين في فاس","Fatima al-Fihri","Fatima al-Fihriya","فاطمة الفهرية","medium"],
-  [969,"Founding of the city of Cairo and Al-Azhar","Fondation de la ville du Caire","تأسيس مدينة القاهرة والجامع الأزهر","Fatimid Era","Époque fatimide","العصر الفاطمي","medium"],
-  [1021,"Completion of the Book of Optics (Kitab al-Manazir)","Publication du Traité d'optique","إتمام كتاب المناظر في البصريات","Ibn al-Haytham","Ibn al-Haytham","الحسن بن الهيثم","medium"],
-  [1025,"Completion of The Canon of Medicine","Achèvement du Canon de la médecine","إتمام كتاب القانون في الطب","Ibn Sina (Avicenna)","Avicenne (Ibn Sina)","ابن سينا","easy"],
-  [1154,"Creation of the world map Tabula Rogeriana","Création de la carte Tabula Rogeriana","رسم خريطة العالم الشهيرة ونزهة المشتاق","Al-Idrisi","Al-Idrisi","الإدريسي","medium"],
-  [1187,"Battle of Hattin and recapture of Jerusalem","Bataille de Hattin et reprise de Jérusalem","معركة حطين وتحرير القدس","Salah ad-Din (Saladin)","Saladin","صلاح الدين الأيوبي","easy"],
-  [1206,"Creation of the Book of Ingenious Mechanical Devices","Livre des dispositifs mécaniques ingénieux","تأليف كتاب الجامع بين العلم والعمل النافع في الحيل","Al-Jazari","Al-Jazari","بديع الزمان الجزري","hard"],
-  [1215,"Signing of the Magna Carta in England","Signature de la Magna Carta","توقيع الوثيقة العظمى (ماغنا كارتا)","King John of England","Jean sans Terre","ملك إنجلترا جون","medium"],
-  [1324,"Famous gold pilgrimage across Africa to Mecca","Célèbre pèlerinage doré vers La Mecque","رحلة الحج الذهبية الشهيرة من إمبراطورية مالي","Mansa Musa","Mansa Moussa","مانسا موسى","easy"],
-  [1325,"Departure from Tangier on a 29-year world journey","Départ de Tanger pour 29 ans de voyage","انطلاق رحلة الـ 29 عاماً من طنجة حول العالم","Ibn Battuta","Ibn Battuta","ابن بطوطة","easy"],
-  [1377,"Writing of the Muqaddimah on history and sociology","Rédaction de la Muqaddimah","تأليف كتاب المقدمة في التاريخ وعلم الاجتماع","Ibn Khaldun","Ibn Khaldoun","ابن خلدون","easy"],
-  [1450,"Introduction of the movable-type printing press in Europe","Introduction de l'imprimerie en Europe","ظهور مطبعة الحروف المتحركة في أوروبا","Johannes Gutenberg","Johannes Gutenberg","يوهانس غوتنبرغ","easy"],
-  [1453,"Fall of Constantinople to the Ottoman Empire","Prise de Constantinople","فتح القسطنطينية","Sultan Mehmed II","Mehmed II","السلطان محمد الفاتح","easy"],
-  [1492,"First transatlantic voyage to the Americas","Premier voyage transatlantique vers l'Amérique","أول رحلة عبر الأطلسي إلى القارة الأمريكية","Christopher Columbus","Christophe Colomb","كريستوفر كولومبوس","easy"],
-  [1503,"Painting of the Mona Lisa in Florence","Peinture de La Joconde à Florence","رسم لوحة الموناليزا الشهيرة","Leonardo da Vinci","Léonard de Vinci","ليوناردو دا فينشي","easy"],
-  [1519,"First circumnavigation expedition of the globe","Première expédition autour du monde","انطلاق أول رحلة للدوران حول الكرة الأرضية","Ferdinand Magellan","Fernand de Magellan","فرناندو ماجلان","medium"],
-  [1543,"Publication of heliocentric model of the solar system","Modèle héliocentrique du système solaire","نشر نموذج مركزية الشمس للمجموعة الشمسية","Nicolaus Copernicus","Nicolas Copernic","نيكولاس كوبرنيكوس","medium"],
-  [1609,"First astronomical observations with a telescope","Premières observations au télescope","أول رصد فلكي باستخدام التلسكوب","Galileo Galilei","Galilée","غاليليو غاليلي","easy"],
-  [1687,"Publication of Principia Mathematica & universal gravity","Publication des Principia Mathematica","نشر قوانين الحركة والجاذبية العام","Isaac Newton","Isaac Newton","إسحاق نيوتن","easy"],
-  [1776,"Declaration of Independence of the United States","Déclaration d'indépendance des États-Unis","إعلان استقلال الولايات المتحدة الأمريكية","Thomas Jefferson & Congress","Thomas Jefferson","توماس جيفرسون","medium"],
-  [1789,"Outbreak of the French Revolution in Paris","Début de la Révolution française","اندلاع الثورة الفرنسية في باريس","French First Republic","République française","الشعب الفرنسي","easy"],
-  [1799,"Discovery of the Rosetta Stone in Egypt","Découverte de la Pierre de Rosette","اكتشاف حجر رشيد لفك رموز الهيروغليفية","Jean-François Champollion","Champollion","شامبليون (حجر رشيد)","medium"],
-  [1832,"Unification of resistance in Western Algeria","Direction de la résistance algérienne","مبايعة قائد المقاومة الشعبية الجزائرية","Emir Abdelkader","Émir Abdelkader","الأمير عبد القادر الجزائري","easy"],
-  [1869,"Opening of the Suez Canal connecting two seas","Ouverture du canal de Suez","افتتاح قناة السويس للملاحة العالمية","Egypt Maritime Route","Canal de Suez","مصر (قناة السويس)","easy"],
-  [1869,"Publication of the first Periodic Table of Elements","Premier tableau périodique des éléments","نشر أول جدول دوري للعناصر الكيميائية","Dmitri Mendeleev","Dmitri Mendeleïev","دميتري مندلييف","medium"],
-  [1876,"Patent of the first practical telephone","Brevet du premier téléphone","تسجيل براءة اختراع الهاتف","Alexander Graham Bell","Alexander Graham Bell","ألكسندر غراهام بيل","easy"],
-  [1879,"Development of the long-lasting incandescent light bulb","Ampoule électrique à incandescence","تطوير المصباح الكهربائي المتوهج","Thomas Edison","Thomas Edison","توماس إديسون","easy"],
-  [1885,"Development of the first vaccine against rabies","Premier vaccin contre la rage","تطوير أول لقاح مضاد لداء الكلب","Louis Pasteur","Louis Pasteur","لويس باستور","medium"],
-  [1895,"Discovery of X-rays in medical imaging","Découverte des rayons X","اكتشاف الأشعة السينية (أشعة إكس)","Wilhelm Röntgen","Wilhelm Röntgen","فيلهلم رونتغن","hard"],
-  [1898,"Discovery of Polonium and Radium elements","Découverte du polonium et du radium","اكتشاف عنصري البولونيوم والراديوم","Marie & Pierre Curie","Marie et Pierre Curie","ماري وبيير كوري","easy"],
-  [1903,"First powered heavier-than-air airplane flight","Premier vol motorisé en avion","أول رحلة طيران ناجحة بطائرة بمحرك","Wright Brothers","Frères Wright","الأخوان رايت","easy"],
-  [1905,"Publication of Special Relativity (E = mc²)","Théorie de la relativité restreinte","نشر نظرية النسبية الخاصة","Albert Einstein","Albert Einstein","ألبرت أينشتاين","easy"],
-  [1911,"First expedition to reach the geographic South Pole","Première expédition au Pôle Sud","أول بعثة تصل إلى القطب الجنوبي","Roald Amundsen","Roald Amundsen","روالد أموندسن","hard"],
-  [1912,"Sinking of the RMS Titanic in the North Atlantic","Naufrage du Titanic dans l'Atlantique","غرق سفينة تايتانيك في المحيط الأطلسي","RMS Titanic","RMS Titanic","سفينة تايتانيك","easy"],
-  [1922,"Discovery of the intact tomb of Tutankhamun","Découverte du tombeau de Toutânkhamon","اكتشاف مقبرة توت عنخ آمون كاملة","Howard Carter","Howard Carter","هوارد كارتر","medium"],
-  [1928,"Discovery of Penicillin antibiotic","Découverte de la pénicilline","اكتشاف المضاد الحيوي البنسلين","Alexander Fleming","Alexander Fleming","ألكسندر فليمنغ","easy"],
-  [1930,"Inaugural FIFA Football World Cup tournament","Première Coupe du Monde de football","إقامة أول بطولة كأس عالم لكرة القدم","Uruguay","Uruguay","الأوروغواي","medium"],
-  [1945,"Founding of the United Nations Organization","Fondation de l'Organisation des Nations Unies","تأسيس هيئة الأمم المتحدة","United Nations","Nations Unies","الأمم المتحدة","easy"],
-  [1953,"Discovery of the double-helix structure of DNA","Structure en double hélice de l'ADN","اكتشاف التركيب اللولبي المزدوج للحمض النووي","Franklin, Watson & Crick","Franklin, Watson et Crick","فرانكلين وواتسون وكريك","medium"],
-  [1954,"Launch of the Algerian War of Independence (Nov 1)","Déclenchement de la Révolution algérienne","اندلاع ثورة التحرير الجزائرية الكبرى (أول نوفمبر)","National Liberation Front (ALN/FLN)","FLN / ALN","جبهة وجيش التحرير الوطني","easy"],
-  [1957,"Launch of Sputnik 1, the first artificial satellite","Lancement du premier satellite Spoutnik 1","إطلاق سبوتنيك 1 أول قمر صناعي في التاريخ","Soviet Space Program","Programme Spoutnik","برنامج الفضاء السوفيتي","medium"],
-  [1961,"First human spaceflight in Vostok 1","Premier vol spatial habité (Vostok 1)","أول رحلة فضائية مأهولة للإنسان حول الأرض","Yuri Gagarin","Youri Gagarine","يوري غاغارين","easy"],
-  [1962,"Proclamation of Algerian Independence (July 5)","Proclamation de l'indépendance de l'Algérie","إعلان استقلال الجزائر (5 يوليو)","Algeria","Algérie","الجزائر","easy"],
-  [1969,"First human walk on the Moon during Apollo 11","Premiers pas sur la Lune (Apollo 11)","هبوط أول إنسان على سطح القمر (أبولو 11)","Neil Armstrong","Neil Armstrong","نيل أرمسترونغ","easy"],
-  [1982,"Algeria's historic 2-1 victory over West Germany in Gijón","Victoire historique 2-1 de l'Algérie à Gijón","فوز المنتخب الجزائري التاريخي 2-1 على ألمانيا في خيخون","Rabah Madjer & Lakhdar Belloumi","Madjer et Belloumi","رابح ماجر ولخضر بلومي","easy"],
-  [1989,"Invention of the World Wide Web (WWW) at CERN","Invention du World Wide Web au CERN","اختراع شبكة الويب العالمية (WWW)","Tim Berners-Lee","Tim Berners-Lee","تيم بيرنرز لي","medium"],
-  [1990,"Launch of the Hubble Space Telescope into orbit","Lancement du télescope spatial Hubble","إطلاق تلسكوب هابل الفضائي إلى مداره","NASA / ESA","NASA / ESA","وكالة ناسا ووكالة الفضاء الأوروبية","medium"],
-  [1991,"Release of the first Linux operating system kernel","Création du noyau Linux","إصدار النواة الأولى لنظام التشغيل لينكس","Linus Torvalds","Linus Torvalds","لينوس تورفالدس","hard"],
-  [1999,"Nobel Prize in Chemistry for Femtochemistry","Prix Nobel de chimie pour la femtochimie","الفوز بجائزة نوبل في الكيمياء لأبحاث الفيمتو ثانية","Ahmed Zewail","Ahmed Zewail","أحمد زويل","medium"],
-  [2019,"Algeria wins its second Africa Cup of Nations in Cairo","Deuxième CAN remportée par l'Algérie au Caire","تتويج المنتخب الجزائري بلقب كأس أمم أفريقيا الثانية","Algeria National Team","Équipe d'Algérie","المنتخب الجزائري لكرة القدم","easy"],
-  [2022,"First Arab & African team to reach FIFA World Cup Semi-Finals","Premier pays arabe et africain en demi-finale mondiale","وصول أول منتخب عربي وأفريقي لنصف نهائي كأس العالم","Morocco National Team","Équipe du Maroc","المنتخب المغربي","easy"]
-];
-
-// 4. 40 BOOKS, LITERATURE & PHILOSOPHY: [enTitle, frTitle, arTitle, enAuthor, frAuthor, arAuthor, cat, diff]
-const RAW_BOOKS = [
-  ["Hayy ibn Yaqdhan","Hayy ibn Yaqzan","حي بن يقظان","Ibn Tufayl","Ibn Tufayl","ابن طفيل","philosophy","easy"],
-  ["The Muqaddimah","La Muqaddimah","مقدمة ابن خلدون","Ibn Khaldun","Ibn Khaldoun","ابن خلدون","philosophy","easy"],
-  ["The Rihla (Travels)","La Rihla (Voyages)","رحلة ابن بطوطة (تحفة النظار)","Ibn Battuta","Ibn Battuta","ابن بطوطة","literature","easy"],
-  ["The Book of Animals (Kitab al-Hayawan)","Le Livre des Animaux","كتاب الحيوان","Al-Jahiz","Al-Jahiz","الجاحظ","literature","medium"],
-  ["The Book of Misers (Al-Bukhala)","Le Livre des Avares","كتاب البخلاء","Al-Jahiz","Al-Jahiz","الجاحظ","literature","medium"],
-  ["The Incoherence of the Incoherence","Tahafut al-Tahafut","تهافت التهافت","Ibn Rushd (Averroes)","Averroès (Ibn Rochd)","ابن رشد","philosophy","hard"],
-  ["The Virtuous City","La Cité vertueuse","آراء أهل المدينة الفاضلة","Al-Farabi","Al-Farabi","الفارابي","philosophy","medium"],
-  ["Kalila and Dimna (Arabic translation)","Kalila et Dimna","كليلة ودمنة","Ibn al-Muqaffa","Ibn al-Muqaffa","ابن المقفع","literature","easy"],
-  ["Nedjma","Nedjma","نجمة","Kateb Yacine","Kateb Yacine","كاتب ياسين","literature","medium"],
-  ["The Poor Man's Son (Le Fils du pauvre)","Le Fils du pauvre","ابن الفقير","Mouloud Feraoun","Mouloud Feraoun","مولود فرعون","literature","easy"],
-  ["The Big House (La Grande Maison)","La Grande Maison","الدار الكبيرة","Mohammed Dib","Mohammed Dib","محمد ديب","literature","medium"],
-  ["The Forgotten Hill","La Colline oubliée","الربوة المنسـية","Mouloud Mammeri","Mouloud Mammeri","مولود معمري","literature","medium"],
-  ["The Days (Al-Ayyam)","Le Livre des jours","الأيام","Taha Hussein","Taha Hussein","طه حسين","literature","easy"],
-  ["The Cairo Trilogy","La Trilogie du Caire","الثلاثية (بين القصرين)","Naguib Mahfouz","Naguib Mahfouz","نجيب محفوظ","literature","easy"],
-  ["Season of Migration to the North","Saison de la migration vers le nord","موسم الهجرة إلى الشمال","Tayeb Salih","Tayeb Salih","الطيب صالح","literature","medium"],
-  ["The Prophet","Le Prophète","النبي","Gibran Khalil Gibran","Gibran Khalil Gibran","جبران خليل جبران","literature","easy"],
-  ["Les Misérables","Les Misérables","البؤساء","Victor Hugo","Victor Hugo","فيكتور هوغو","literature","easy"],
-  ["The Stranger (L'Étranger)","L'Étranger","الغريب","Albert Camus","Albert Camus","ألبير كامو","literature","medium"],
-  ["Around the World in Eighty Days","Le Tour du monde en 80 jours","حول العالم في ثمانين يوماً","Jules Verne","Jules Verne","جول فيرن","literature","easy"],
-  ["Twenty Thousand Leagues Under the Seas","Vingt mille lieues sous les mers","عشرون ألف فرسخ تحت الماء","Jules Verne","Jules Verne","جول فيرن","literature","medium"],
-  ["The Count of Monte Cristo","Le Comte de Monte-Cristo","الكونت دي مونت كريستو","Alexandre Dumas","Alexandre Dumas","ألكسندر دوما","literature","medium"],
-  ["The Little Prince","Le Petit Prince","الأمير الصغير","Antoine de Saint-Exupéry","Antoine de Saint-Exupéry","أنطوان دو سانت إكزوبيري","literature","easy"],
-  ["Hamlet","Hamlet","هاملت","William Shakespeare","William Shakespeare","وليام شكسبير","literature","easy"],
-  ["Romeo and Juliet","Roméo et Juliette","روميو وجولييت","William Shakespeare","William Shakespeare","وليام شكسبير","literature","easy"],
-  ["The Odyssey","L'Odyssée","الأوديسة","Homer","Homère","هوميروس","mythology","easy"],
-  ["Don Quixote","Don Quichotte","دون كيخوتي","Miguel de Cervantes","Miguel de Cervantes","ميغيل دي ثيربانتس","literature","medium"],
-  ["War and Peace","Guerre et Paix","الحرب والسلام","Leo Tolstoy","Léon Tolstoï","ليو تولستوي","literature","medium"],
-  ["Crime and Punishment","Crime et Châtiment","الجريمة والعقاب","Fyodor Dostoevsky","Fiodor Dostoïevski","فيودور دوستويفسكي","literature","medium"],
-  ["One Hundred Years of Solitude","Cent ans de solitude","مئة عام من العزلة","Gabriel García Márquez","Gabriel García Márquez","غابرييل غارسيا ماركيز","literature","medium"],
-  ["The Old Man and the Sea","Le Vieil Homme et la Mer","الشيخ والبحر","Ernest Hemingway","Ernest Hemingway","إرنست همنغواي","literature","easy"],
-  ["Life of Pi","L'Odyssée de Pi","حياة باي (Life of Pi)","Yann Martel","Yann Martel","يان مارتل","literature","medium"],
-  ["The Republic","La République","الجمهورية","Plato","Platon","أفلاطون","philosophy","easy"],
-  ["Nicomachean Ethics","Éthique à Nicomaque","الأخلاق النيقوماخية","Aristotle","Aristote","أرسطو","philosophy","hard"],
-  ["Meditations","Pensées pour moi-même","التأملات","Marcus Aurelius","Marc Aurèle","ماركوس أوريليوس","philosophy","hard"],
-  ["Critique of Pure Reason","Critique de la raison pure","نقد العقل المحض","Immanuel Kant","Emmanuel Kant","إيمانويل كانط","philosophy","hard"],
-  ["The Art of War","L'Art de la guerre","فن الحرب","Sun Tzu","Sun Tzu","سون تزو","philosophy","medium"],
-  ["A Brief History of Time","Une brève histoire du temps","تاريخ موجز للزمن","Stephen Hawking","Stephen Hawking","ستيفن هوكينغ","space","medium"],
-  ["The Origin of Species","L'Origine des espèces","أصل الأنواع","Charles Darwin","Charles Darwin","تشارلز داروين","science","medium"],
-  ["Silent Spring","Printemps silencieux","الربيع الصامت","Rachel Carson","Rachel Carson","راشيل كارسون","nature","hard"],
-  ["The Rubaiyat","Les Rubaiyat","رباعيات الخيام","Omar Khayyam","Omar Khayyam","عمر الخيام","literature","medium"]
-];
-
-// 5. 55 SCIENTIFIC, MEDICAL, SPACE & TECH CONCEPTS: [cat, diff, enPrompt, frPrompt, arPrompt, enAns, frAns, arAns]
-const RAW_CONCEPTS = [
-  ["physics","easy","Unit of electrical resistance","Unité de résistance électrique","وحدة قياس المقاومة الكهربائية","Ohm","Ohm","الأوم"],
-  ["physics","easy","Unit of electric current","Unité de courant électrique","وحدة قياس شدة التيار الكهربائي","Ampere","Ampère","الأمبير"],
-  ["physics","easy","Unit of frequency","Unité de fréquence","وحدة قياس التردد","Hertz","Hertz","الهرتز"],
-  ["physics","easy","Unit of force","Unité de force","وحدة قياس القوة","Newton","Newton","النيوتن"],
-  ["physics","medium","Unit of energy and work","Unité d'énergie et de travail","وحدة قياس الطاقة والشغل","Joule","Joule","الجول"],
-  ["physics","medium","Unit of power","Unité de puissance","وحدة قياس القدرة","Watt","Watt","الواط"],
-  ["physics","medium","Unit of pressure","Unité de pression","وحدة قياس الضغط","Pascal","Pascal","الباسكال"],
-  ["physics","hard","Unit of magnetic flux density","Unité de champ magnétique","وحدة قياس كثافة الفيض المغناطيسي","Tesla","Tesla","التسلا"],
-  ["physics","hard","Unit of electrical capacitance","Unité de capacité électrique","وحدة قياس السعة الكهربائية","Farad","Farad","الفاراد"],
-  ["physics","medium","Speed of light in vacuum (approx.)","Vitesse de la lumière dans le vide","سرعة الضوء في الفراغ تقريباً","300,000 km/s","300 000 km/s","300,000 كم/ثانية"],
-  ["space","easy","Closest planet to the Sun","Planète la plus proche du Soleil","أقرب كوكب إلى الشمس","Mercury","Mercure","عطارد"],
-  ["space","easy","Hottest planet in our solar system","Planète la plus chaude du système solaire","أشد كواكب المجموعة الشمسية حرارة","Venus","Vénus","الزهرة"],
-  ["space","easy","Planet known as the Red Planet","Planète surnommée la Planète Rouge","الكوكب المعروف بالكوكب الأحمر","Mars","Mars","المريخ"],
-  ["space","easy","Largest planet in our solar system","Plus grande planète du système solaire","أكبر كوكب في المجموعة الشمسية","Jupiter","Jupiter","المشتري"],
-  ["space","easy","Planet famous for its icy ring system","Planète célèbre pour ses anneaux","الكوكب الشهير بحلقاته الجليدية","Saturn","Saturne","زحل"],
-  ["space","medium","Planet that rotates on its side","Planète qui tourne sur le côté","الكوكب الذي يدور حول نفسه بزاوية مائلة جانبياً","Uranus","Uranus","أورانوس"],
-  ["space","medium","Farthest major planet from the Sun","Planète la plus éloignée du Soleil","أبعد كوكب رئيسي عن الشمس","Neptune","Neptune","نبتون"],
-  ["space","medium","Closest star system to our Sun","Système stellaire le plus proche du Soleil","أقرب نجم إلى مجموعتنا الشمسية","Proxima Centauri","Proxima du Centaure","قنطورس الأقرب"],
-  ["space","medium","Galaxy that contains our Solar System","Galaxie contenant notre système solaire","المجرة التي تضم مجموعتنا الشمسية","Milky Way","Voie Lactée","درب التبانة"],
-  ["space","hard","Largest moon of Saturn with a thick atmosphere","Plus grande lune de Saturne","أكبر أقمار كوكب زحل","Titan","Titan","تيتان"],
-  ["medicine","easy","Organ that pumps blood through the body","Organe qui pompe le sang","العضو الذي يضخ الدم في الجسم","Heart","Cœur","القلب"],
-  ["medicine","easy","Largest internal organ that filters toxins","Plus grand organe interne qui filtre le sang","أكبر عضو داخلي في جسم الإنسان","Liver","Foie","الكبد"],
-  ["medicine","easy","Longest and strongest bone in the human body","Os le plus long du corps humain","أطول وأقوى عظمة في جسم الإنسان","Femur","Fémur","عظمة الفخذ"],
-  ["medicine","medium","Smallest bone in the human body (in the ear)","Plus petit os du corps humain","أصغر عظمة في جسم الإنسان (في الأذن الوسطى)","Stapes (Stirrup)","Étrier (Stapes)","عظمة الركاب"],
-  ["medicine","medium","Hormone that regulates blood glucose levels","Hormone qui régule la glycémie","الهرمون الذي ينظم مستوى السكر في الدم","Insulin","Insuline","الإنسولين"],
-  ["medicine","medium","Oxygen-carrying protein inside red blood cells","Protéine qui transporte l'oxygène dans le sang","البروتين المسؤول عن نقل الأكسجين في الدم","Hemoglobin","Hémoglobine","الهيموغلوبين"],
-  ["medicine","hard","Part of the brain responsible for balance and coordination","Partie du cerveau gérant l'équilibre","الجزء المسؤول عن التوازن وتنسيق الحركة في الدماغ","Cerebellum","Cervelet","المخيخ"],
-  ["medicine","easy","Universal red blood cell donor type","Groupe sanguin donneur universel","فصيلة الدم التي تُعرف بالمعطي العام","O Negative (O-)","O Négatif (O-)","فصيلة O سالب"],
-  ["weather","easy","Instrument that measures atmospheric pressure","Instrument mesurant la pression atmosphérique","الجهاز المستخدم لقياس الضغط الجوي","Barometer","Baromètre","البارومتر"],
-  ["weather","easy","Instrument that measures wind speed","Instrument mesurant la vitesse du vent","الجهاز المستخدم لقياس سرعة الرياح","Anemometer","Anémomètre","الأنيمومتر"],
-  ["weather","medium","Instrument that measures air humidity","Instrument mesurant l'humidité de l'air","الجهاز المستخدم لقياس رطوبة الهواء","Hygrometer","Hygromètre","الهيجرومتر"],
-  ["weather","medium","Atmospheric layer containing the ozone layer","Couche contenant la couche d'ozone","طبقة الغلاف الجوي التي تضم طبقة الأوزون","Stratosphere","Stratosphère","الستراتوسفير"],
-  ["weather","easy","Lowest atmospheric layer where weather occurs","Couche où se produisent les phénomènes météo","أدنى طبقات الغلاف الجوي التي تحدث فيها التقلبات الجوية","Troposphere","Troposphère","التروبوسفير"],
-  ["tech","easy","Brain of the computer that executes instructions","Cerveau de l'ordinateur qui exécute le code","وحدة المعالجة المركزية في الحاسوب","CPU","Processeur (CPU)","المعالج (CPU)"],
-  ["tech","easy","Temporary fast memory cleared when power turns off","Mémoire vive temporaire","ذاكرة الوصول العشوائي المؤقتة","RAM","Mémoire RAM","الرام (RAM)"],
-  ["tech","medium","Standard protocol for secure encrypted web browsing","Protocole sécurisé de navigation web","البروتوكول الآمن لتصفح الإنترنت المشفر","HTTPS","HTTPS","بروتوكول HTTPS"],
-  ["tech","medium","Programming language used natively by Android (Jetpack)","Langage moderne officiel pour Android","اللغة الرسمية الحديثة لتطوير تطبيقات أندرويد","Kotlin","Kotlin","لغة كوتلن (Kotlin)"],
-  ["tech","medium","System that translates domain names into IP addresses","Système traduisant les noms de domaine en IP","النظام الذي يحول أسماء النطاقات إلى عناوين IP","DNS","DNS","نظام DNS"],
-  ["tech","hard","Number of bits in a single IPv6 address","Nombre de bits dans une adresse IPv6","عدد البتات (Bits) في عنوان IPv6 الواحد","128 bits","128 bits","128 بت"],
-  ["oceans","easy","Largest and deepest ocean on Earth","Plus grand et plus profond océan","أكبر وأعمق محيط على كوكب الأرض","Pacific Ocean","Océan Pacifique","المحيط الهادئ"],
-  ["oceans","medium","Deepest known trench in the world's oceans","Fosse océanique la plus profonde","أعمق خندق بحري معروف في العالم","Mariana Trench","Fosse des Mariannes","خندق ماريانا"],
-  ["oceans","easy","Sea separating North Africa from Southern Europe","Mer séparant l'Afrique du Nord et l'Europe","البحر الذي يفصل شمال أفريقيا عن أوروبا","Mediterranean Sea","Mer Méditerranée","البحر الأبيض المتوسط"],
-  ["oceans","medium","Strait connecting the Mediterranean to the Atlantic","Détroit reliant la Méditerranée à l'Atlantique","المضيق الذي يربط البحر المتوسط بالمحيط الأطلسي","Strait of Gibraltar","Détroit de Gibraltar","مضيق جبل طارق"],
-  ["oceans","medium","Strait connecting the Red Sea to the Gulf of Aden","Détroit reliant la mer Rouge au golfe d'Aden","المضيق الذي يربط البحر الأحمر بخليج عدن","Bab el-Mandeb","Bab-el-Mandeb","مضيق باب المندب"],
-  ["animals","easy","Fastest land mammal in short sprints","Mammifère terrestre le plus rapide","أسرع حيوان ثديي بري في العالم","Cheetah","Guépard","الفهد الصياد (الشيتا)"],
-  ["animals","easy","Fastest bird in a hunting dive (stoop)","Oiseau le plus rapide en piqué","أسرع طائر في العالم أثناء الانقضاض","Peregrine Falcon","Faucon pèlerin","الصقر الشاهين"],
-  ["animals","easy","Migratory bird symbolizing spring in Algeria","Oiseau migrateur annonçant le printemps en Algérie","الطائر المهاجر الذي يرمز لقدوم الربيع في الجزائر","Swallow","Hirondelle","طائر السنونو (الخطاف)"],
-  ["animals","medium","Small desert fox with large ears native to the Algerian Sahara","Petit renard des sables du Sahara algérien","ثعلب الصحراء الصغير ذو الأذنين الكبيرتين في الجزائر","Fennec Fox","Fennec","الفنك الصحراوي"],
-  ["animals","medium","Largest living mammal on planet Earth","Plus grand mammifère vivant sur Terre","أضخم كائن ثديي حي على كوكب الأرض","Blue Whale","Baleine bleue","الحوت الأزرق"],
-  ["animals","hard","Only mammal capable of sustained true flight","Seul mammifère capable de vol actif","الثديي الوحيد القادر على الطيران الحقيقي المستمر","Bat","Chauve-souris","الخفاش"],
-  ["nature","easy","Gas absorbed by green plants during photosynthesis","Gaz absorbé par les plantes lors de la photosynthèse","الغاز الذي تمتصه النباتات في عملية البناء الضوئي","Carbon Dioxide","Dioxyde de carbone","ثاني أكسيد الكربون"],
-  ["nature","medium","Green pigment in leaves that captures sunlight","Pigment vert des feuilles captant la lumière","الصبغة الخضراء في النبات المسؤولة عن امتصاص الضوء","Chlorophyll","Chlorophylle","الكلوروفيل (اليخضور)"],
-  ["nature","hard","Process by which water evaporates from plant leaves","Évaporation de l'eau par les feuilles","عملية فقدان الماء على شكل بخار من أوراق النبات","Transpiration","Transpiration végétale","النتح"],
-  ["psychology","easy","Sleep stage characterized by rapid eye movement and vivid dreams","Phase du sommeil liée aux rêves intenses","مرحلة النوم التي تتميز بحركة العين السريعة والأحلام","REM Sleep","Sommeil paradoxal (REM)","نوم حركة العين السريعة (REM)"],
-  ["psychology","medium","Brain structure essential for forming new long-term memories","Structure cérébrale clé pour la mémoire","بنية في الدماغ مسؤولة عن تكوين الذكريات الجديدة","Hippocampus","Hippocampe","الحُصين (الهيبوكامبوس)"]
-];
-
-// 6. EXTRA CURATED MULTI-CATEGORY TRIVIA (Sports, Movies, Music, Gaming, Art, Architecture, Food, Religion, Cultures, Transport)
-window.EXTRA_CUSTOM_QUESTIONS = [
-  { cat: "sports", diff: "easy", q: { en: "Which club has won the most UEFA Champions League titles?", fr: "Quel club a remporté le plus de Ligues des Champions ?", ar: "أي نادٍ حقق أكبر عدد من ألقاب دوري أبطال أوروبا؟" }, a: { en: "Real Madrid", fr: "Real Madrid", ar: "ريال مدريد" }, opts: { en: ["Real Madrid", "AC Milan", "Bayern Munich", "Liverpool"], fr: ["Real Madrid", "AC Milan", "Bayern Munich", "Liverpool"], ar: ["ريال مدريد", "ميلان", "بايرن ميونخ", "ليفربول"] } },
-  { cat: "sports", diff: "medium", q: { en: "Which German football club from Hamburg is famous for its skull-and-crossbones culture and brown kit?", fr: "Quel club de Hambourg est célèbre pour ses couleurs marron ?", ar: "أي نادٍ ألماني من هامبورغ يشتهر بألوانه البنية وشعاره التاريخي؟" }, a: { en: "FC St. Pauli", fr: "FC St. Pauli", ar: "نادي سانت باولي" }, opts: { en: ["FC St. Pauli", "Werder Bremen", "Schalke 04", "Hertha BSC"], fr: ["FC St. Pauli", "Werder Brême", "Schalke 04", "Hertha Berlin"], ar: ["نادي سانت باولي", "فيردر بريمن", "شالكه", "هيرتا برلين"] } },
-  { cat: "sports", diff: "medium", q: { en: "Which Algerian footballer won the 1987 European Cup with FC Porto using a famous backheel goal?", fr: "Quel joueur algérien a marqué une talonnade légendaire en finale 1987 ?", ar: "من هو النجم الجزائري صاحب الكعب الشهير في نهائي أبطال أوروبا 1987؟" }, a: { en: "Rabah Madjer", fr: "Rabah Madjer", ar: "رابح ماجر" }, opts: { en: ["Rabah Madjer", "Lakhdar Belloumi", "Mustapha Dahleb", "Rachid Mekhloufi"], fr: ["Rabah Madjer", "Lakhdar Belloumi", "Mustapha Dahleb", "Rachid Mekhloufi"], ar: ["رابح ماجر", "لخضر بلومي", "مصطفى دحلب", "رشيد مخلوفي"] } },
-  { cat: "sports", diff: "medium", q: { en: "Which Algerian winger won the English Premier League in 2016 with Leicester City and the 2023 Champions League with Man City?", fr: "Quel ailier algérien a gagné la Premier League avec Leicester et la LDC avec City ?", ar: "من هو النجم الجزائري الفائز بالدوري الإنجليزي مع ليستر ودوري الأبطال مع مانشستر سيتي؟" }, a: { en: "Riyad Mahrez", fr: "Riyad Mahrez", ar: "رياض محرز" }, opts: { en: ["Riyad Mahrez", "Islam Slimani", "Yacine Brahimi", "Sofiane Feghouli"], fr: ["Riyad Mahrez", "Islam Slimani", "Yacine Brahimi", "Sofiane Feghouli"], ar: ["رياض محرز", "إسلام سليماني", "ياسين براهيمي", "سفيان فيغولي"] } },
-  { cat: "sports", diff: "hard", q: { en: "How long in kilometers is an official Olympic Marathon race?", fr: "Quelle est la distance exacte d'un marathon olympique ?", ar: "كم يبلغ طول سباق الماراثون الأولمبي الرسمي بالكيلومتر؟" }, a: { en: "42.195 km", fr: "42,195 km", ar: "42.195 كم" }, opts: { en: ["42.195 km", "40.000 km", "45.500 km", "50.000 km"], fr: ["42,195 km", "40,000 km", "45,500 km", "50,000 km"], ar: ["42.195 كم", "40.000 كم", "45.500 كم", "50.000 كم"] } },
-  { cat: "movies", diff: "medium", q: { en: "In the story of 'Life of Pi', what is the name of the Bengal tiger on the lifeboat?", fr: "Dans 'L'Odyssée de Pi', comment s'appelle le tigre du Bengale ?", ar: "في قصة وفيلم 'حياة باي'، ما هو اسم النمر البنغالي على قارب النجاة؟" }, a: { en: "Richard Parker", fr: "Richard Parker", ar: "ريتشارد باركر" }, opts: { en: ["Richard Parker", "Shere Khan", "Rajah", "Aslan"], fr: ["Richard Parker", "Shere Khan", "Rajah", "Aslan"], ar: ["ريتشارد باركر", "شيرخان", "راجا", "أصلان"] } },
-  { cat: "movies", diff: "hard", q: { en: "Which 1966 historical film directed by Gillo Pontecorvo depicts the Algerian struggle in the Casbah?", fr: "Quel film de 1966 retrace la lutte dans la Casbah d'Alger ?", ar: "ما هو الفيلم التاريخي الشهير عام 1966 الذي يصور كفاح القصبة في الجزائر؟" }, a: { en: "The Battle of Algiers", fr: "La Bataille d'Alger", ar: "معركة الجزائر" }, opts: { en: ["The Battle of Algiers", "Chronicle of the Years of Fire", "Z", "Lion of the Desert"], fr: ["La Bataille d'Alger", "Chronique des années de braise", "Z", "Le Lion du désert"], ar: ["معركة الجزائر", "وقائع سنين الجمر", "أسد الصحراء", "الأفيون والعصا"] } },
-  { cat: "movies", diff: "hard", q: { en: "Which Algerian film directed by Mohammed Lakhdar-Hamina won the Palme d'Or at Cannes in 1975?", fr: "Quel film algérien a remporté la Palme d'Or à Cannes en 1975 ?", ar: "أي فيلم جزائري للمخرج محمد لخضر حمينة فاز بالسعفة الذهبية في مهرجان كان 1975؟" }, a: { en: "Chronicle of the Years of Fire", fr: "Chronique des années de braise", ar: "وقائع سنين الجمر" }, opts: { en: ["Chronicle of the Years of Fire", "Tahya Ya Didou", "Omar Gatlato", "The Wind of the Aures"], fr: ["Chronique des années de braise", "Tahya Ya Didou", "Omar Gatlato", "Le Vent des Aurès"], ar: ["وقائع سنين الجمر", "ريح الأوراس", "عمر قتلاتو", "تحيا يا ديدو"] } },
-  { cat: "music", diff: "medium", q: { en: "Which traditional Algerian music genre originating in Oran was inscribed by UNESCO as Intangible Heritage?", fr: "Quel genre musical né à Oran est classé à l'UNESCO ?", ar: "ما هو الطابع الموسيقي الجزائري الأصيل المرتبط بمنطقة وهران والمسجل في اليونسكو؟" }, a: { en: "Raï", fr: "Raï", ar: "موسيقى الراي" }, opts: { en: ["Raï", "Flamenco", "Fado", "Reggae"], fr: ["Raï", "Flamenco", "Fado", "Reggae"], ar: ["موسيقى الراي", "الفلامنكو", "الفادو", "الريغي"] } },
-  { cat: "music", diff: "hard", q: { en: "How many keys are on a standard full-size acoustic piano?", fr: "Combien de touches compte un piano standard ?", ar: "كم عدد المفاتيح في البيانو الكلاسيكي الكامل؟" }, a: { en: "88", fr: "88", ar: "88 مفتاحاً" }, opts: { en: ["88", "76", "64", "96"], fr: ["88", "76", "64", "96"], ar: ["88 مفتاحاً", "76 مفتاحاً", "64 مفتاحاً", "96 مفتاحاً"] } },
-  { cat: "gaming", diff: "medium", q: { en: "Which company created the classic console characters Mario and Link?", fr: "Quelle entreprise a créé Mario et Zelda ?", ar: "أي شركة ألعاب ابتكرت شخصيتي ماريو وزيلدا؟" }, a: { en: "Nintendo", fr: "Nintendo", ar: "نينتندو" }, opts: { en: ["Nintendo", "Sega", "Atari", "Capcom"], fr: ["Nintendo", "Sega", "Atari", "Capcom"], ar: ["نينتندو", "سيغا", "أتاري", "كابكوم"] } },
-  { cat: "gaming", diff: "hard", q: { en: "In chess, what is the maximum number of squares a Knight can attack from the center of the board?", fr: "Aux échecs, combien de cases au maximum un cavalier contrôle-t-il au centre ?", ar: "في الشطرنج، ما هو أقصى عدد من المربعات التي يهددها الحصان من وسط الرقعة؟" }, a: { en: "8", fr: "8", ar: "8 مربعات" }, opts: { en: ["8", "6", "4", "12"], fr: ["8", "6", "4", "12"], ar: ["8 مربعات", "6 مربعات", "4 مربعات", "12 مربعاً"] } },
-  { cat: "religion", diff: "easy", q: { en: "How many Surahs (chapters) are in the Holy Quran?", fr: "Combien de sourates comporte le Saint Coran ?", ar: "كم عدد سور القرآن الكريم؟" }, a: { en: "114", fr: "114", ar: "114 سورة" }, opts: { en: ["114", "110", "120", "99"], fr: ["114", "110", "120", "99"], ar: ["114 سورة", "110 سور", "120 سورة", "99 سورة"] } },
-  { cat: "religion", diff: "medium", q: { en: "Which Surah is the longest chapter in the Holy Quran?", fr: "Quelle est la plus longue sourate du Saint Coran ?", ar: "ما هي أطول سورة في القرآن الكريم؟" }, a: { en: "Surah Al-Baqarah", fr: "Sourate Al-Baqara", ar: "سورة البقرة" }, opts: { en: ["Surah Al-Baqarah", "Surah Al-Imran", "Surah An-Nisa", "Surah Al-Kahf"], fr: ["Sourate Al-Baqara", "Sourate Al-Imran", "Sourate An-Nisa", "Sourate Al-Kahf"], ar: ["سورة البقرة", "سورة آل عمران", "سورة النساء", "سورة الكهف"] } },
-  { cat: "languages", diff: "medium", q: { en: "What Arabic term translates Leonardo da Vinci's concept of 'Ostinato Rigore' (obstinate rigor)?", fr: "Comment traduit-on la 'rigueur obstinée' de Léonard de Vinci en arabe ?", ar: "ما هو المصطلح العربي الذي يعبر عن مفهوم ليوناردو دا فينشي 'Ostinato Rigore'؟" }, a: { en: "Strict / Obstinate Rigor (الدقة الصارمة)", fr: "Rigueur stricte (الدقة الصارمة)", ar: "الدقة الصارمة / الصرامة الدؤوبة" }, opts: { en: ["Strict / Obstinate Rigor (الدقة الصارمة)", "Rapid Speed", "Soft Sketch", "Random Chance"], fr: ["Rigueur stricte (الدقة الصارمة)", "Vitesse rapide", "Esquisse douce", "Hasard"], ar: ["الدقة الصارمة / الصرامة الدؤوبة", "السرعة العشوائية", "الارتجال الحر", "البساطة السطحية"] } },
-  { cat: "architecture", diff: "medium", q: { en: "Which historic hilltop fortress overlooks the bay of Oran in Algeria?", fr: "Quel fort historique surplombe la baie d'Oran ?", ar: "ما هي القلعة التاريخية الشهيرة التي تطل على خليج مدينة وهران في الجزائر؟" }, a: { en: "Santa Cruz Fort", fr: "Fort de Santa Cruz", ar: "قلعة سانتا كروز" }, opts: { en: ["Santa Cruz Fort", "Alhambra", "Citadel of Qaitbay", "Krak des Chevaliers"], fr: ["Fort de Santa Cruz", "Alhambra", "Citadelle de Qaitbay", "Krak des Chevaliers"], ar: ["قلعة سانتا كروز", "قصر الحمراء", "قلعة قايتباي", "قلعة الحصن"] } },
-  { cat: "architecture", diff: "medium", q: { en: "Which Algerian city is world-famous for its dramatic suspended bridges across deep gorges?", fr: "Quelle ville algérienne est surnommée la ville des ponts suspendus ?", ar: "ما هي المدينة الجزائرية الملقبة بمدينة الجسور المعلقة؟" }, a: { en: "Constantine", fr: "Constantine", ar: "قسنطينة" }, opts: { en: ["Constantine", "Tlemcen", "Ghardaïa", "Annaba"], fr: ["Constantine", "Tlemcen", "Ghardaïa", "Annaba"], ar: ["قسنطينة", "تلمسان", "غرداية", "عنابة"] } },
-  { cat: "food", diff: "easy", q: { en: "Which traditional Algerian and Maghrebi dish made of steamed semolina is UNESCO-listed?", fr: "Quel plat maghrébin à base de semoule est inscrit à l'UNESCO ?", ar: "ما هو الطبق المغاربي والجزائري الشهير المصنوع من السميد والمسجل في اليونسكو؟" }, a: { en: "Couscous", fr: "Couscous", ar: "الكسكسي" }, opts: { en: ["Couscous", "Paella", "Ramen", "Tacos"], fr: ["Couscous", "Paella", "Ramen", "Tacos"], ar: ["الكسكسي", "الباييا", "الرامن", "التاكو"] } },
-  { cat: "food", diff: "medium", q: { en: "Which popular street food in Oran is baked from chickpea flour, water, oil, and cumin?", fr: "Quel plat populaire d'Oran est préparé à base de farine de pois chiches ?", ar: "ما هي الأكلة الشعبية الشهيرة في وهران التي تحضر من طحين الحمص والكمون؟" }, a: { en: "Karantika (Garantita)", fr: "Karantika (Garantita)", ar: "الكرنتيكا (قرنطيطة)" }, opts: { en: ["Karantika (Garantita)", "Tempura", "Fondue", "Borscht"], fr: ["Karantika (Garantita)", "Tempura", "Fondue", "Bortsch"], ar: ["الكرنتيكا (قرنطيطة)", "التمبورا", "الفوندو", "البورش"] } },
-  { cat: "art", diff: "medium", q: { en: "Which prehistoric mountain plateau in southeastern Algeria is famous for thousands of rock paintings?", fr: "Quel plateau algérien est célèbre pour ses gravures rupestres préhistoriques ?", ar: "ما هي الهضبة الصحراوية الجزائرية الشهيرة بآلاف الرسوم والنقوش الصخرية لما قبل التاريخ؟" }, a: { en: "Tassili n'Ajjer", fr: "Tassili n'Ajjer", ar: "طاسيلي ناجر" }, opts: { en: ["Tassili n'Ajjer", "Lascaux", "Altamira", "Nazca"], fr: ["Tassili n'Ajjer", "Lascaux", "Altamira", "Nazca"], ar: ["طاسيلي ناجر", "كهف لاسكو", "ألتاميرا", "خطوط نازكا"] } },
-  { cat: "cultures", diff: "medium", q: { en: "Which UNESCO-listed valley in Algeria is home to five fortified ksour (pentapolis) built in the 11th century?", fr: "Quelle vallée algérienne abrite cinq ksour fortifiés du XIe siècle ?", ar: "ما هو الوادي الجزائري المسجل في التراث العالمي والذي يضم خمسة قصور تاريخية؟" }, a: { en: "M'Zab Valley (Ghardaïa)", fr: "Vallée du M'Zab (Ghardaïa)", ar: "وادي ميزاب (غرداية)" }, opts: { en: ["M'Zab Valley (Ghardaïa)", "Nile Delta", "Bekaa Valley", "Rift Valley"], fr: ["Vallée du M'Zab (Ghardaïa)", "Delta du Nil", "Vallée de la Bekaa", "Vallée du Rift"], ar: ["وادي ميزاب (غرداية)", "دلتا النيل", "سهل البقاع", "الوادي المتصدع"] } },
-  { cat: "transport", diff: "medium", q: { en: "What is the international IATA airport code for Oran Ahmed Ben Bella Airport?", fr: "Quel est le code AITA de l'aéroport d'Oran - Ahmed Ben Bella ?", ar: "ما هو رمز إياتا (IATA) الدولي لمطار وهران أحمد بن بلة الدولي؟" }, a: { en: "ORN", fr: "ORN", ar: "ORN" }, opts: { en: ["ORN", "ALG", "CZL", "TLM"], fr: ["ORN", "ALG", "CZL", "TLM"], ar: ["ORN", "ALG", "CZL", "TLM"] } }
+window.REAL_COUNTRY_OUTLINES = [
+  { ans: "Italy", opts: ["Italy", "Greece", "Norway", "New Zealand"], path: "M65,20 L105,18 L128,42 L112,68 L145,112 L182,155 L195,172 L175,188 L158,165 L145,178 L135,162 L105,115 L75,78 L55,45 Z", hint: "Mediterranean boot-shaped peninsula + Sicily & Sardinia" },
+  { ans: "France", opts: ["France", "Spain", "Germany", "Poland"], path: "M95,18 L142,32 L182,58 L168,105 L178,148 L135,175 L65,168 L58,115 L25,75 L68,48 Z", hint: "Western European 'L'Hexagone' bordering the Atlantic & Mediterranean" },
+  { ans: "Japan", opts: ["Japan", "Philippines", "United Kingdom", "Indonesia"], path: "M155,15 L185,32 L168,65 L155,105 L125,142 L82,168 L52,188 L38,168 L72,135 L112,102 L138,55 Z", hint: "East Asian volcanic archipelago (Hokkaido, Honshu, Shikoku, Kyushu)" },
+  { ans: "United States (Contiguous)", opts: ["United States (Contiguous)", "Canada", "China", "Australia"], path: "M18,38 L135,45 L168,58 L215,38 L225,65 L195,115 L205,165 L185,172 L165,148 L122,155 L98,185 L75,152 L28,132 L12,78 Z", hint: "48 contiguous states from the Pacific coast to Florida & Maine" },
+  { ans: "Australia", opts: ["Australia", "Brazil", "India", "South Africa"], path: "M65,52 L115,32 L145,55 L162,28 L198,78 L215,128 L185,175 L138,168 L95,152 L32,158 L18,108 L42,68 Z", hint: "Island continent featuring Cape York, Gulf of Carpentaria & Great Australian Bight" },
+  { ans: "India", opts: ["India", "Colombia", "Argentina", "Thailand"], path: "M85,12 L125,28 L152,65 L198,72 L175,105 L142,128 L112,195 L92,188 L68,125 L28,92 L58,55 Z", hint: "South Asian triangular peninsula extending into the Indian Ocean" },
+  { ans: "Brazil", opts: ["Brazil", "Argentina", "DR Congo", "Kazakhstan"], path: "M65,25 L145,32 L212,68 L195,125 L145,165 L118,195 L95,175 L82,128 L22,95 L38,52 Z", hint: "Largest South American country spanning the Amazon Basin and Atlantic coast" },
+  { ans: "United Kingdom (Great Britain)", opts: ["United Kingdom (Great Britain)", "New Zealand", "Norway", "Cuba"], path: "M75,15 L122,22 L115,58 L142,95 L165,148 L152,178 L72,185 L52,165 L85,135 L68,95 L55,52 Z", hint: "North Atlantic island comprising Scotland, England, and Wales" },
+  { ans: "Norway", opts: ["Norway", "Chile", "Sweden", "Vietnam"], path: "M135,12 L195,18 L185,42 L135,58 L105,112 L95,168 L62,192 L35,175 L48,125 L88,68 Z", hint: "Nordic nation with a long fjord-indented Arctic & North Atlantic coastline" },
+  { ans: "Mexico", opts: ["Mexico", "Italy", "Vietnam", "Saudi Arabia"], path: "M15,22 L85,35 L132,78 L155,135 L188,132 L212,115 L222,138 L178,168 L115,152 L65,105 L35,88 L22,42 Z", hint: "North American nation featuring Baja California and the Yucatán Peninsula" }
 ];
 
 /* ============================================================================
-   DETERMINISTIC QUESTION SYNTHESIZER (Builds 1,500+ Questions at Startup)
+   SIZE IT UP & WEIGHT IT UP GLOBAL DATASET (60+ Items Across All Domains)
+   ============================================================================ */
+window.COMPARE_METRICS_POOL = [
+  // HEIGHT COMPARISONS (meters)
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Burj Khalifa (Skyscraper)", val: 828, icon: "🏙️" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Mount Everest (Peak)", val: 8849, icon: "🏔️" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Eiffel Tower (Paris)", val: 330, icon: "🗼" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Empire State Building (NYC)", val: 443, icon: "🏢" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Statue of Liberty (with pedestal)", val: 93, icon: "🗽" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Great Pyramid of Giza", val: 138, icon: "🔺" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Hyperion Coast Redwood (Tallest Tree)", val: 116, icon: "🌲" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Angel Falls (Venezuela Waterfall)", val: 979, icon: "🌊" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Niagara Falls", val: 51, icon: "💧" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Mount Kilimanjaro", val: 5895, icon: "⛰️" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Mount Fuji (Japan)", val: 3776, icon: "🗻" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Tokyo Skytree", val: 634, icon: "📡" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Big Ben Clock Tower (London)", val: 96, icon: "🕰️" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Adult Giraffe", val: 5.7, icon: "🦒" },
+  { group: "height_m", unit: "meters tall", mode: "size", name: "Tyrannosaurus Rex (Hip Height)", val: 4.0, icon: "🦖" },
+
+  // AREA COMPARISONS (thousand km² — Countries, US States, Lakes, Islands, Planets)
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "State of Alaska (USA)", val: 1723, icon: "❄️" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "State of Texas (USA)", val: 695, icon: "🤠" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "State of California (USA)", val: 423, icon: "🌴" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Greenland (Island)", val: 2166, icon: "🧊" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Madagascar (Island)", val: 587, icon: "🏝️" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "France (Total Area)", val: 551, icon: "🇫🇷" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Japan (Archipelago)", val: 377, icon: "🇯🇵" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "United Kingdom", val: 242, icon: "🇬🇧" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Caspian Sea (Largest Inland Body)", val: 371, icon: "🌊" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Lake Superior (North America)", val: 82, icon: "🛶" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Sahara Desert", val: 9200, icon: "🏜️" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Amazon Rainforest", val: 5500, icon: "🌳" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Surface Area of the Moon", val: 37930, icon: "🌕" },
+  { group: "area_km2", unit: "thousand km² area", mode: "size", name: "Continent of Africa", val: 30370, icon: "🌍" },
+
+  // LENGTH / DIAMETER COMPARISONS (km)
+  { group: "length_km", unit: "km long / diameter", mode: "size", name: "Great Wall of China (All Branches)", val: 21196, icon: "🧱" },
+  { group: "length_km", unit: "km long / diameter", mode: "size", name: "Nile River", val: 6650, icon: "🐊" },
+  { group: "length_km", unit: "km long / diameter", mode: "size", name: "Amazon River", val: 6400, icon: "🐍" },
+  { group: "length_km", unit: "km long / diameter", mode: "size", name: "Diameter of Earth", val: 12742, icon: "🌎" },
+  { group: "length_km", unit: "km long / diameter", mode: "size", name: "Diameter of Mars", val: 6779, icon: "🔴" },
+  { group: "length_km", unit: "km long / diameter", mode: "size", name: "Diameter of the Moon", val: 3474, icon: "🌙" },
+  { group: "length_km", unit: "km long / diameter", mode: "size", name: "Route 66 Highway (USA)", val: 3940, icon: "🛣️" },
+  { group: "length_km", unit: "km long / diameter", mode: "size", name: "Trans-Siberian Railway", val: 9289, icon: "🚆" },
+
+  // WEIGHT COMPARISONS: ANIMALS & BIOLOGICAL (kg)
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Adult Blue Whale", val: 150000, icon: "🐋" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Blue Whale's Tongue Alone", val: 2700, icon: "👅" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "African Bush Elephant", val: 6000, icon: "🐘" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "White Rhinoceros", val: 2300, icon: "🦏" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Adult Hippopotamus", val: 1500, icon: "🦛" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Male Polar Bear", val: 600, icon: "🐻‍❄️" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Siberian Tiger", val: 260, icon: "🐅" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Silverback Gorilla", val: 195, icon: "🦍" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Adult Ostrich", val: 120, icon: "🦤" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Emperor Penguin", val: 35, icon: "🐧" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Tyrannosaurus Rex (Estimated)", val: 8000, icon: "🦖" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Concert Grand Piano", val: 480, icon: "🎹" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Formula 1 Race Car (Minimum)", val: 798, icon: "🏎️" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Big Ben Great Bell (London)", val: 13760, icon: "🔔" },
+  { group: "weight_kg", unit: "kg weight", mode: "weight", name: "Hubble Space Telescope", val: 11110, icon: "🔭" },
+
+  // WEIGHT COMPARISONS: MEGA STRUCTURES & VEHICLES (Metric Tons)
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "Eiffel Tower (Total Structure)", val: 10100, icon: "🗼" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "Eiffel Tower's Paint Coating Alone", val: 60, icon: "🎨" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "Statue of Liberty (Copper & Steel)", val: 225, icon: "🗽" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "Airbus A380 (Max Takeoff Weight)", val: 575, icon: "✈️" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "Saturn V Moon Rocket (Fueled)", val: 2970, icon: "🚀" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "International Space Station (ISS)", val: 450, icon: "🛰️" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "RMS Titanic (Displacement)", val: 52310, icon: "🚢" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "Leaning Tower of Pisa", val: 14500, icon: "🏛️" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "General Sherman Giant Sequoia Tree", val: 1900, icon: "🌲" },
+  { group: "weight_tons", unit: "metric tons", mode: "weight", name: "Single Stone Block of Giza Pyramid", val: 2.5, icon: "🪨" }
+];
+
+/* 45 CHEMICAL ELEMENTS */
+const RAW_ELEMENTS = [
+  ["H",1,"Hydrogen","Hydrogène","الهيدروجين","easy"],["He",2,"Helium","Hélium","الهيليوم","easy"],
+  ["Li",3,"Lithium","Lithium","الليثيوم","medium"],["Be",4,"Beryllium","Béryllium","البيريليوم","hard"],
+  ["B",5,"Boron","Bore","البورون","medium"],["C",6,"Carbon","Carbone","الكربون","easy"],
+  ["N",7,"Nitrogen","Azote","النيتروجين","easy"],["O",8,"Oxygen","Oxygène","الأكسجين","easy"],
+  ["F",9,"Fluorine","Fluor","الفلور","medium"],["Ne",10,"Neon","Néon","النيون","easy"],
+  ["Na",11,"Sodium","Sodium","الصوديوم","medium"],["Mg",12,"Magnesium","Magnésium","المغنيسيوم","medium"],
+  ["Al",13,"Aluminum","Aluminium","الألومنيوم","easy"],["Si",14,"Silicon","Silicium","السيليكون","easy"],
+  ["P",15,"Phosphorus","Phosphore","الفوسفور","medium"],["S",16,"Sulfur","Soufre","الكبريت","easy"],
+  ["Cl",17,"Chlorine","Chlore","الكلور","easy"],["Ar",18,"Argon","Argon","الأرغون","medium"],
+  ["K",19,"Potassium","Potassium","البوتاسيوم","medium"],["Ca",20,"Calcium","Calcium","الكالسيوم","easy"],
+  ["Ti",22,"Titanium","Titane","التيتانيوم","medium"],["Cr",24,"Chromium","Chrome","الكروم","medium"],
+  ["Mn",25,"Manganese","Manganèse","المنغنيز","hard"],["Fe",26,"Iron","Fer","الحديد","easy"],
+  ["Co",27,"Cobalt","Cobalt","الكوبالت","medium"],["Ni",28,"Nickel","Nickel","النيكل","medium"],
+  ["Cu",29,"Copper","Cuivre","النحاس","easy"],["Zn",30,"Zinc","Zinc","الزنك","easy"],
+  ["Br",35,"Bromine","Brome","البروم","hard"],["Kr",36,"Krypton","Krypton","الكريبتون","hard"],
+  ["Ag",47,"Silver","Argent","الفضة","easy"],["Sn",50,"Tin","Étain","القصدير","medium"],
+  ["I",53,"Iodine","Iode","اليود","medium"],["Xe",54,"Xenon","Xénon","الزينون","hard"],
+  ["Ba",56,"Barium","Baryum","الباريوم","hard"],["W",74,"Tungsten","Tungstène","التنغستن","hard"],
+  ["Pt",78,"Platinum","Platine","البلاتين","medium"],["Au",79,"Gold","Or","الذهب","easy"],
+  ["Hg",80,"Mercury","Mercure","الزئبق","medium"],["Pb",82,"Lead","Plomb","الرصاص","medium"],
+  ["Rn",86,"Radon","Radon","الرادون","hard"],["Ra",88,"Radium","Radium","الراديوم","hard"],
+  ["U",92,"Uranium","Uranium","اليورانيوم","medium"],["Pu",94,"Plutonium","Plutonium","البلوتونيوم","hard"],
+  ["Th",90,"Thorium","Thorium","الثوريوم","hard"]
+];
+
+/* 50 GLOBAL HISTORICAL MILESTONES */
+const RAW_HISTORY = [
+  [79,"Eruption of Mount Vesuvius burying Pompeii","Éruption du Vésuve détruisant Pompéi","ثوران بركان فيزوف وطمر مدينة بومبي","Roman Empire (Pompeii)","Empire romain (Pompéi)","الإمبراطورية الرومانية (بومبي)","medium"],
+  [105,"Invention of papermaking during the Han Dynasty","Invention du papier sous la dynastie Han","اختراع صناعة الورق في الصين","Cai Lun","Cai Lun","تساي لون","hard"],
+  [780,"Founding of formal Algebra in Baghdad","Fondation de l'algèbre formelle","تأسيس علم الجبر والمقابلة","Al-Khwarizmi","Al-Khwarizmi","الخوارزمي","easy"],
+  [1025,"Completion of The Canon of Medicine","Achèvement du Canon de la médecine","إتمام موسوعة القانون في الطب","Ibn Sina (Avicenna)","Avicenne","ابن سينا","easy"],
+  [1066,"Battle of Hastings and Norman Conquest of England","Bataille d'Hastings en Angleterre","معركة هاستينغز والغزو النورماندي لإنجلترا","William the Conqueror","Guillaume le Conquérant","ويليام الفاتح","medium"],
+  [1215,"Signing of the Magna Carta at Runnymede","Signature de la Magna Carta","توقيع وثيقة الماغنا كارتا الدستورية","King John of England","Jean sans Terre","ملك إنجلترا جون","medium"],
+  [1271,"Departure on a 24-year journey along the Silk Road to China","Voyage sur la Route de la Soie vers la Chine","انطلاق رحلة الـ 24 عاماً عبر طريق الحرير إلى الصين","Marco Polo","Marco Polo","ماركو بولو","easy"],
+  [1450,"Invention of movable-type printing press in Mainz","Invention de l'imprimerie à Mayence","ابتكار مطبعة الحروف المتحركة في ألمانيا","Johannes Gutenberg","Johannes Gutenberg","يوهانس غوتنبرغ","easy"],
+  [1453,"Fall of Constantinople ending the Byzantine Empire","Chute de Constantinople","فتح القسطنطينية ونهاية الإمبراطورية البيزنطية","Mehmed II","Mehmed II","السلطان محمد الفاتح","easy"],
+  [1492,"First transatlantic voyage reaching the Caribbean","Premier voyage transatlantique vers les Caraïbes","أول رحلة بحرية عبر الأطلسي إلى الأمريكتين","Christopher Columbus","Christophe Colomb","كريستوفر كولومبوس","easy"],
+  [1498,"First direct sea route from Europe to India around Africa","Première route maritime vers l'Inde","اكتشاف الطريق البحري المباشر من أوروبا إلى الهند","Vasco da Gama","Vasco de Gama","فاسكو دا غاما","medium"],
+  [1503,"Painting of the Mona Lisa in Florence","Peinture de La Joconde à Florence","رسم لوحة الموناليزا الشهيرة في فلورنسا","Leonardo da Vinci","Léonard de Vinci","ليوناردو دا فينشي","easy"],
+  [1519,"First circumnavigation expedition of the Earth","Première expédition autour du monde","قيادة أول أسطول يدور حول الكرة الأرضية","Ferdinand Magellan","Fernand de Magellan","فرناندو ماجلان","medium"],
+  [1543,"Publication of the heliocentric theory of the solar system","Publication du modèle héliocentrique","نشر نظرية مركزية الشمس للمجموعة الشمسية","Nicolaus Copernicus","Nicolas Copernic","نيكولاس كوبرنيكوس","medium"],
+  [1609,"First astronomical telescope observations of Jupiter's moons","Observations des lunes de Jupiter au télescope","أول رصد لأقمار كوكب المشتري بالتلسكوب","Galileo Galilei","Galilée","غاليليو غاليلي","easy"],
+  [1628,"Discovery of the systemic circulation of blood pumped by the heart","Découverte de la circulation sanguine","اكتشاف الدورة الدموية الكبرى في جسم الإنسان","William Harvey","William Harvey","ويليام هارفي","hard"],
+  [1687,"Publication of Principia Mathematica & laws of motion","Publication des lois du mouvement et de la gravité","نشر قوانين الحركة والجاذبية الكونية","Isaac Newton","Isaac Newton","إسحاق نيوتن","easy"],
+  [1769,"Patent of the separate condenser steam engine","Brevet de la machine à vapeur améliorée","تطوير المحرك البخاري الصناعي","James Watt","James Watt","جيمس واط","medium"],
+  [1776,"Adoption of the United States Declaration of Independence","Déclaration d'indépendance des États-Unis","إعلان وثيقة استقلال الولايات المتحدة الأمريكية","Thomas Jefferson","Thomas Jefferson","توماس جيفرسون","easy"],
+  [1789,"Start of the French Revolution in Paris","Début de la Révolution française","اندلاع الثورة الفرنسية في باريس","French First Republic","République française","الثورة الفرنسية","easy"],
+  [1796,"Development of the first smallpox vaccine","Premier vaccin contre la variole","ابتكار أول لقاح طبي ضد مرض الجدري","Edward Jenner","Edward Jenner","إدوارد جينر","medium"],
+  [1804,"First steam locomotive railway journey in Wales","Première locomotive à vapeur sur rails","تشغيل أول قاطرة بخارية على السكك الحديدية","Richard Trevithick","Richard Trevithick","ريتشارد تريفيثيك","hard"],
+  [1815,"Battle of Waterloo in Belgium","Bataille de Waterloo en Belgique","معركة واترلو الشهيرة في بلجيكا","Napoleon Bonaparte & Wellington","Napoléon et Wellington","نابليون بونابرت وويلينغتون","medium"],
+  [1831,"Discovery of electromagnetic induction","Découverte de l'induction électromagnétique","اكتشاف الحث الكهرومغناطيسي ومولد الكهرباء","Michael Faraday","Michael Faraday","مايكل فاراداي","medium"],
+  [1859,"Publication of On the Origin of Species","Publication de L'Origine des espèces","نشر كتاب أصل الأنواع","Charles Darwin","Charles Darwin","تشارلز داروين","easy"],
+  [1869,"Publication of the Periodic Table of Elements","Publication du tableau périodique des éléments","تصميم الجدول الدوري للعناصر الكيميائية","Dmitri Mendeleev","Dmitri Mendeleïev","دميتري مندلييف","medium"],
+  [1876,"Patent of the first practical telephone","Brevet du premier téléphone","تسجيل براءة اختراع الهاتف","Alexander Graham Bell","Alexander Graham Bell","ألكسندر غراهام بيل","easy"],
+  [1885,"Development of the rabies vaccine & pasteurization","Vaccin contre la rage et pasteurisation","تطوير لقاح داء الكلب وعملية البسترة","Louis Pasteur","Louis Pasteur","لويس باستور","easy"],
+  [1888,"Invention of the alternating current (AC) induction motor","Moteur à courant alternatif (CA)","ابتكار نظام التيار الكهربائي المتردد (AC)","Nikola Tesla","Nikola Tesla","نيكولا تسلا","medium"],
+  [1895,"Discovery of X-rays in Germany","Découverte des rayons X","اكتشاف الأشعة السينية (X-Rays)","Wilhelm Röntgen","Wilhelm Röntgen","فيلهلم رونتغن","medium"],
+  [1898,"Discovery of Polonium and Radium","Découverte du polonium et du radium","اكتشاف عنصري البولونيوم والراديوم المشعين","Marie & Pierre Curie","Marie et Pierre Curie","ماري وبيير كوري","easy"],
+  [1903,"First powered airplane flight at Kitty Hawk","Premier vol motorisé des frères Wright","أول طيران ناجح بطائرة ذات محرك","Wright Brothers","Frères Wright","الأخوان رايت","easy"],
+  [1905,"Publication of Special Relativity (E = mc²)","Théorie de la relativité restreinte","نشر نظرية النسبية الخاصة","Albert Einstein","Albert Einstein","ألبرت أينشتاين","easy"],
+  [1911,"First expedition to reach the South Pole","Première expédition au Pôle Sud","أول بعثة تصل إلى القطب الجنوبي","Roald Amundsen","Roald Amundsen","روالد أموندسن","medium"],
+  [1912,"Sinking of the RMS Titanic in the North Atlantic","Naufrage du Titanic","غرق سفينة تايتانيك في المحيط الأطلسي","RMS Titanic","RMS Titanic","سفينة تايتانيك","easy"],
+  [1928,"Discovery of Penicillin antibiotic in London","Découverte de la pénicilline","اكتشاف المضاد الحيوي البنسلين","Alexander Fleming","Alexander Fleming","ألكسندر فليمنغ","easy"],
+  [1936,"Conception of the universal computing machine (Turing Machine)","Machine universelle de Turing","ابتكار النموذج الرياضي للحاسوب الحديث (آلة تورنغ)","Alan Turing","Alan Turing","آلان تورنغ","medium"],
+  [1945,"Founding of the United Nations in San Francisco","Fondation de l'ONU","تأسيس منظمة الأمم المتحدة","United Nations","Nations Unies","الأمم المتحدة","easy"],
+  [1947,"Invention of the transistor at Bell Labs","Invention du transistor","اختراع الترانزستور الإلكتروني","Bardeen, Brattain & Shockley","Bardeen, Brattain et Shockley","باردين وبراتين وشوكلي","hard"],
+  [1953,"Discovery of the DNA double-helix structure","Structure en double hélice de l'ADN","اكتشاف التركيب اللولبي المزدوج للحمض النووي","Franklin, Watson & Crick","Franklin, Watson et Crick","روزاليند فرانكلين وواتسون وكريك","medium"],
+  [1957,"Launch of Sputnik 1 into Earth orbit","Lancement du satellite Spoutnik 1","إطلاق سبوتنيك 1 أول قمر صناعي في التاريخ","Soviet Space Program","Programme Spoutnik","برنامج الفضاء السوفيتي","medium"],
+  [1961,"First human spaceflight in Vostok 1","Premier vol spatial habité (Youri Gagarine)","أول رحلة فضائية مأهولة للإنسان حول الأرض","Yuri Gagarin","Youri Gagarine","يوري غاغارين","easy"],
+  [1969,"First human walk on the Moon (Apollo 11)","Premiers pas sur la Lune (Apollo 11)","هبوط أول إنسان على سطح القمر (أبولو 11)","Neil Armstrong & Buzz Aldrin","Neil Armstrong","نيل أرمسترونغ","easy"],
+  [1971,"Release of the first commercial microprocessor (Intel 4004)","Premier microprocesseur commercial (4004)","إنتاج أول معالج دقيق تجاري في العالم","Federico Faggin & Ted Hoff","Intel 4004","إنتل 4004","hard"],
+  [1989,"Fall of the Berlin Wall & Invention of the World Wide Web","Chute du mur de Berlin & Invention du Web","سقوط جدار برلين واختراع شبكة الويب العالمية","Tim Berners-Lee (WWW)","Tim Berners-Lee","تيم بيرنرز لي","easy"],
+  [1990,"Launch of the Hubble Space Telescope","Lancement du télescope spatial Hubble","إطلاق تلسكوب هابل الفضائي","NASA & ESA","NASA et ESA","وكالة ناسا ووكالة الفضاء الأوروبية","medium"],
+  [2004,"Landing of Spirit and Opportunity rovers on Mars","Atterrissage des rovers Spirit et Opportunity sur Mars","هبوط المسبارين سبيريت وأوبورتيونيتي على المريخ","NASA Mars Exploration","Exploration de Mars","مسبار المريخ","medium"],
+  [2012,"Confirmation of the Higgs Boson particle at CERN","Découverte du boson de Higgs au CERN","رصد جسيم بوزون هيغز في مصادم الهادرونات الكبير","CERN (LHC)","CERN","منظمة سيرن الأوروبية","hard"],
+  [2015,"First direct detection of gravitational waves","Première détection des ondes gravitationnelles","أول رصد مباشر لموجات الجاذبية الكونية","LIGO Observatory","Observatoire LIGO","مرصد ليغو (LIGO)","hard"],
+  [2021,"Launch of the James Webb Space Telescope (JWST)","Lancement du télescope spatial James Webb","إطلاق تلسكوب جيمس ويب الفضائي","NASA / ESA / CSA","Télescope James Webb","تلسكوب جيمس ويب","easy"]
+];
+
+/* 40 GLOBAL LITERATURE & PHILOSOPHY CLASSICS */
+const RAW_BOOKS = [
+  ["Hamlet","Hamlet","هاملت","William Shakespeare","William Shakespeare","وليام شكسبير","literature","easy"],
+  ["Macbeth","Macbeth","مكبث","William Shakespeare","William Shakespeare","وليام شكسبير","literature","easy"],
+  ["The Odyssey","L'Odyssée","الأوديسة","Homer","Homère","هوميروس","mythology","easy"],
+  ["The Iliad","L'Iliade","الإلياذة","Homer","Homère","هوميروس","mythology","medium"],
+  ["Don Quixote","Don Quichotte","دون كيخوتي","Miguel de Cervantes","Miguel de Cervantes","ميغيل دي ثيربانتس","literature","easy"],
+  ["Les Misérables","Les Misérables","البؤساء","Victor Hugo","Victor Hugo","فيكتور هوغو","literature","easy"],
+  ["The Hunchback of Notre-Dame","Notre-Dame de Paris","أحدب نوتردام","Victor Hugo","Victor Hugo","فيكتور هوغو","literature","medium"],
+  ["Twenty Thousand Leagues Under the Seas","Vingt mille lieues sous les mers","عشرون ألف فرسخ تحت الماء","Jules Verne","Jules Verne","جول فيرن","literature","easy"],
+  ["Around the World in Eighty Days","Le Tour du monde en 80 jours","حول العالم في ثمانين يوماً","Jules Verne","Jules Verne","جول فيرن","literature","easy"],
+  ["The Count of Monte Cristo","Le Comte de Monte-Cristo","الكونت دي مونت كريستو","Alexandre Dumas","Alexandre Dumas","ألكسندر دوما","literature","medium"],
+  ["The Little Prince","Le Petit Prince","الأمير الصغير","Antoine de Saint-Exupéry","Antoine de Saint-Exupéry","أنطوان دو سانت إكزوبيري","literature","easy"],
+  ["War and Peace","Guerre et Paix","الحرب والسلام","Leo Tolstoy","Léon Tolstoï","ليو تولستوي","literature","medium"],
+  ["Anna Karenina","Anna Karénine","آنا كارنينا","Leo Tolstoy","Léon Tolstoï","ليو تولستوي","literature","medium"],
+  ["Crime and Punishment","Crime et Châtiment","الجريمة والعقاب","Fyodor Dostoevsky","Fiodor Dostoïevski","فيودور دوستويفسكي","literature","medium"],
+  ["The Brothers Karamazov","Les Frères Karamazov","الإخوة كارامازوف","Fyodor Dostoevsky","Fiodor Dostoïevski","فيودور دوستويفسكي","literature","hard"],
+  ["Pride and Prejudice","Orgueil et Préjugés","كبرياء وتحامل","Jane Austen","Jane Austen","جين أوستن","literature","easy"],
+  ["Great Expectations","Les Grandes Espérances","آمال عظيمة","Charles Dickens","Charles Dickens","تشارلز ديكنز","literature","medium"],
+  ["A Tale of Two Cities","Un conte de deux villes","قصة مدينتين","Charles Dickens","Charles Dickens","تشارلز ديكنز","literature","medium"],
+  ["Frankenstein","Frankenstein","فرانكنشتاين","Mary Shelley","Mary Shelley","ماري شيلي","literature","medium"],
+  ["Moby-Dick","Moby-Dick","موبي ديك","Herman Melville","Herman Melville","هرمان ملفيل","literature","medium"],
+  ["The Old Man and the Sea","Le Vieil Homme et la Mer","الشيخ والبحر","Ernest Hemingway","Ernest Hemingway","إرنست همنغواي","literature","easy"],
+  ["1984","1984","رواية 1984","George Orwell","George Orwell","جورج أورويل","literature","easy"],
+  ["The Great Gatsby","Gatsby le Magnifique","غاتسبي العظيم","F. Scott Fitzgerald","F. Scott Fitzgerald","فرانسيس سكوت فيتزجيرالد","literature","medium"],
+  ["One Hundred Years of Solitude","Cent ans de solitude","مئة عام من العزلة","Gabriel García Márquez","Gabriel García Márquez","غابرييل غارسيا ماركيز","literature","medium"],
+  ["The Metamorphosis","La Métamorphose","التحول (المسخ)","Franz Kafka","Franz Kafka","فرانتس كافكا","literature","medium"],
+  ["The Divine Comedy","La Divine Comédie","الكوميديا الإلهية","Dante Alighieri","Dante Alighieri","دانتي أليغييري","literature","medium"],
+  ["The Republic","La République","الجمهورية","Plato","Platon","أفلاطون","philosophy","easy"],
+  ["Nicomachean Ethics","Éthique à Nicomaque","الأخلاق النيقوماخية","Aristotle","Aristote","أرسطو","philosophy","hard"],
+  ["Meditations","Pensées pour moi-même","التأملات","Marcus Aurelius","Marc Aurèle","ماركوس أوريليوس","philosophy","medium"],
+  ["Discourse on the Method","Discours de la méthode","مقال عن المنهج","René Descartes","René Descartes","رينيه ديكارت","philosophy","medium"],
+  ["Critique of Pure Reason","Critique de la raison pure","نقد العقل المحض","Immanuel Kant","Emmanuel Kant","إيمانويل كانط","philosophy","hard"],
+  ["The Art of War","L'Art de la guerre","فن الحرب","Sun Tzu","Sun Tzu","سون تزو","philosophy","easy"],
+  ["The Prince","Le Prince","الأمير","Niccolò Machiavelli","Nicolas Machiavel","نيكولو مكيافيلي","philosophy","medium"],
+  ["A Brief History of Time","Une brève histoire du temps","تاريخ موجز للزمن","Stephen Hawking","Stephen Hawking","ستيفن هوكينغ","space","easy"],
+  ["Cosmos","Cosmos","الكون (Cosmos)","Carl Sagan","Carl Sagan","كارل ساغان","space","medium"],
+  ["The Muqaddimah","La Muqaddimah","المقدمة","Ibn Khaldun","Ibn Khaldoun","ابن خلدون","philosophy","medium"],
+  ["The Prophet","Le Prophète","النبي","Kahlil Gibran","Gibran Khalil Gibran","جبران خليل جبران","literature","easy"],
+  ["Norwegian Wood","La Ballade de l'impossible","الغابة النرويجية","Haruki Murakami","Haruki Murakami","هاروكي موراكامي","literature","hard"],
+  ["Things Fall Apart","Le monde s'effondre","الأشياء تتداعى","Chinua Achebe","Chinua Achebe","تشينوا أتشيبي","literature","hard"],
+  ["The Alchemist","L'Alchimiste","الخيميائي","Paulo Coelho","Paulo Coelho","باولو كويلو","literature","easy"]
+];
+
+/* 50 SCIENCE, SPACE, MEDICINE, TECH & NATURE CONCEPTS */
+const RAW_CONCEPTS = [
+  ["physics","easy","SI unit of electrical resistance","Unité SI de résistance électrique","وحدة قياس المقاومة الكهربائية","Ohm","Ohm","الأوم"],
+  ["physics","easy","SI unit of electric current","Unité SI de courant électrique","وحدة قياس شدة التيار الكهربائي","Ampere","Ampère","الأمبير"],
+  ["physics","easy","SI unit of frequency","Unité SI de fréquence","وحدة قياس التردد","Hertz","Hertz","الهرتز"],
+  ["physics","easy","SI unit of force","Unité SI de force","وحدة قياس القوة","Newton","Newton","النيوتن"],
+  ["physics","medium","SI unit of energy and work","Unité SI d'énergie et de travail","وحدة قياس الطاقة والشغل","Joule","Joule","الجول"],
+  ["physics","medium","SI unit of power","Unité SI de puissance","وحدة قياس القدرة","Watt","Watt","الواط"],
+  ["physics","medium","SI unit of pressure","Unité SI de pression","وحدة قياس الضغط","Pascal","Pascal","الباسكال"],
+  ["physics","hard","SI unit of magnetic flux density","Unité SI de champ magnétique","وحدة قياس كثافة الفيض المغناطيسي","Tesla","Tesla","التسلا"],
+  ["physics","hard","SI unit of electrical capacitance","Unité SI de capacité électrique","وحدة قياس السعة الكهربائية","Farad","Farad","الفاراد"],
+  ["physics","medium","Speed of light in vacuum","Vitesse de la lumière dans le vide","سرعة الضوء في الفراغ","299,792 km/s","299 792 km/s","299,792 كم/ثانية"],
+  ["space","easy","Closest planet to the Sun","Planète la plus proche du Soleil","أقرب كوكب إلى الشمس","Mercury","Mercure","عطارد"],
+  ["space","easy","Hottest planet in our solar system","Planète la plus chaude du système solaire","أشد كواكب المجموعة الشمسية حرارة","Venus","Vénus","الزهرة"],
+  ["space","easy","Largest planet in our solar system","Plus grande planète du système solaire","أكبر كوكب في المجموعة الشمسية","Jupiter","Jupiter","المشتري"],
+  ["space","medium","Planet that rotates on its side (98° tilt)","Planète qui tourne sur le côté","الكوكب الذي يدور حول نفسه بزاوية مائلة جانبياً","Uranus","Uranus","أورانوس"],
+  ["space","medium","Closest star system to our Sun (4.24 light-years)","Système stellaire le plus proche du Soleil","أقرب نجم إلى مجموعتنا الشمسية","Proxima Centauri","Proxima du Centaure","قنطورس الأقرب"],
+  ["space","hard","Largest moon of Saturn with liquid methane lakes","Plus grande lune de Saturne","أكبر أقمار كوكب زحل","Titan","Titan","تيتان"],
+  ["space","hard","Volcanically active moon of Jupiter","Lune volcanique de Jupiter","قمر كوكب المشتري النشط بركانياً","Io","Io","آيو (Io)"],
+  ["medicine","easy","Largest internal solid organ in the human body","Plus grand organe interne du corps humain","أكبر عضو داخلي صلب في جسم الإنسان","Liver","Foie","الكبد"],
+  ["medicine","easy","Longest and strongest bone in the human body","Os le plus long du corps humain","أطول وأقوى عظمة في جسم الإنسان","Femur","Fémur","عظمة الفخذ"],
+  ["medicine","medium","Smallest bone in the human body (middle ear)","Plus petit os du corps humain","أصغر عظمة في جسم الإنسان (في الأذن الوسطى)","Stapes","Étrier (Stapes)","عظمة الركاب"],
+  ["medicine","medium","Hormone produced by the pancreas that lowers blood glucose","Hormone qui régule la glycémie","الهرمون الذي يفرزه البنكرياس لتنظيم السكر","Insulin","Insuline","الإنسولين"],
+  ["medicine","medium","Oxygen-binding protein in red blood cells","Protéine qui transporte l'oxygène","البروتين الناقل للأكسجين في خلايا الدم الحمراء","Hemoglobin","Hémoglobine","الهيموغلوبين"],
+  ["medicine","hard","Part of the brain controlling balance and motor coordination","Partie du cerveau gérant l'équilibre","الجزء المسؤول عن التوازن وتنسيق الحركة في الدماغ","Cerebellum","Cervelet","المخيخ"],
+  ["medicine","hard","Pacemaker node of the human heart","Nœud sinusal du cœur","العقدة المنظمة لضربات القلب","Sinoatrial (SA) Node","Nœud sinusal","العقدة الجيبية الأذينية"],
+  ["weather","easy","Instrument measuring atmospheric pressure","Instrument mesurant la pression atmosphérique","جهاز قياس الضغط الجوي","Barometer","Baromètre","البارومتر"],
+  ["weather","easy","Instrument measuring wind speed","Instrument mesurant la vitesse du vent","جهاز قياس سرعة الرياح","Anemometer","Anémomètre","الأنيمومتر"],
+  ["weather","medium","Instrument measuring relative air humidity","Instrument mesurant l'humidité","جهاز قياس رطوبة الهواء","Hygrometer","Hygromètre","الهيجرومتر"],
+  ["weather","medium","Atmospheric layer containing the ozone layer","Couche contenant l'ozone","طبقة الغلاف الجوي التي تضم الأوزون","Stratosphere","Stratosphère","الستراتوسفير"],
+  ["tech","easy","Volatile memory cleared when a computer powers down","Mémoire vive volatile","ذاكرة الوصول العشوائي المؤقتة","RAM","Mémoire RAM","ذاكرة الرام (RAM)"],
+  ["tech","medium","Network protocol that resolves domain names to IP addresses","Protocole traduisant les noms de domaine en IP","البروتوكول الذي يحول أسماء النطاقات إلى عناوين IP","DNS","DNS","نظام DNS"],
+  ["tech","hard","Number of bits in an IPv6 address","Nombre de bits dans une adresse IPv6","عدد البتات في عنوان IPv6","128 bits","128 bits","128 بت"],
+  ["oceans","easy","Largest and deepest ocean on Earth","Plus grand et plus profond océan","أكبر وأعمق محيط على كوكب الأرض","Pacific Ocean","Océan Pacifique","المحيط الهادئ"],
+  ["oceans","medium","Deepest oceanic trench on Earth (10,984 m)","Fosse océanique la plus profonde","أعمق خندق بحري في العالم","Mariana Trench","Fosse des Mariannes","خندق ماريانا"],
+  ["animals","easy","Fastest land mammal in short sprints","Mammifère terrestre le plus rapide","أسرع حيوان ثديي بري","Cheetah","Guépard","الفهد الصياد"],
+  ["animals","easy","Fastest bird in a hunting dive (over 320 km/h)","Oiseau le plus rapide en piqué","أسرع طائر في العالم أثناء الانقضاض","Peregrine Falcon","Faucon pèlerin","الصقر الشاهين"],
+  ["animals","medium","Largest living mammal on Earth","Plus grand mammifère vivant","أضخم كائن ثديي حي على الأرض","Blue Whale","Baleine bleue","الحوت الأزرق"],
+  ["animals","hard","Egg-laying mammal native to eastern Australia","Mammifère ovipare d'Australie","حيوان ثديي يبيض موطنه أستراليا","Platypus","Ornithorynque","خلد الماء (البلاتيبوس)"],
+  ["nature","medium","Green photosynthetic pigment containing magnesium","Pigment vert de la photosynthèse","الصبغة الخضراء في النباتات","Chlorophyll","Chlorophylle","الكلوروفيل"],
+  ["psychology","medium","Subcortical brain structure critical for memory consolidation","Structure cérébrale clé pour la mémoire","بنية في الدماغ مسؤولة عن تثبيت الذكريات","Hippocampus","Hippocampe","الحُصين (الهيبوكامبوس)"],
+  ["architecture","medium","Roman amphitheater completed in 80 CE under Emperor Titus","Amphithéâtre romain inauguré en l'an 80","المدرج الروماني الشهير في وسط روما","Colosseum","Colisée","الكولوسيوم"]
+];
+
+/* ============================================================================
+   DETERMINISTIC QUESTION SYNTHESIZER (Builds 1,500+ Global Questions)
    ============================================================================ */
 function buildMassiveQuestionBank() {
   const bank = [];
@@ -576,198 +605,121 @@ function buildMassiveQuestionBank() {
     return out;
   };
 
-  // A. Generate 260 Geography & Economics Questions from 65 Countries
+  // A. 240 Global Geography & Economics Questions (from 60 Countries)
   RAW_COUNTRIES.forEach((c, i) => {
-    const [id, enN, frN, arN, enC, frC, arC, enCur, frCur, arCur, pop, area, x, y, diff] = c;
-
-    // 1. Capital of Country (65 Qs)
+    const [id, enN, frN, arN, enC, frC, arC, enCur, frCur, arCur, pop, area, lat, lon, diff] = c;
     bank.push({
       id: "q_" + (qId++), cat: "geography", diff,
       q: { en: `What is the capital city of ${enN}?`, fr: `Quelle est la capitale de : ${frN} ?`, ar: `ما هي عاصمة ${arN}؟` },
       a: { en: enC, fr: frC, ar: arC },
-      opts: {
-        en: pickDistractors(RAW_COUNTRIES, enC, r => r[4], i),
-        fr: pickDistractors(RAW_COUNTRIES, frC, r => r[5], i),
-        ar: pickDistractors(RAW_COUNTRIES, arC, r => r[6], i)
-      }
+      opts: { en: pickDistractors(RAW_COUNTRIES, enC, r => r[4], i), fr: pickDistractors(RAW_COUNTRIES, frC, r => r[5], i), ar: pickDistractors(RAW_COUNTRIES, arC, r => r[6], i) }
     });
-
-    // 2. Country of Capital (65 Qs)
     bank.push({
       id: "q_" + (qId++), cat: "geography", diff: diff === "easy" ? "medium" : "hard",
-      q: { en: `${enC} is the capital of which country?`, fr: `${frC} est la capitale de quel pays ?`, ar: `تُعد مدينة ${arC} عاصمة لأي دولة؟` },
+      q: { en: `${enC} is the capital of which sovereign country?`, fr: `${frC} est la capitale de quel pays ?`, ar: `تُعد مدينة ${arC} عاصمة لأي دولة؟` },
       a: { en: enN, fr: frN, ar: arN },
-      opts: {
-        en: pickDistractors(RAW_COUNTRIES, enN, r => r[1], i + 3),
-        fr: pickDistractors(RAW_COUNTRIES, frN, r => r[2], i + 3),
-        ar: pickDistractors(RAW_COUNTRIES, arN, r => r[3], i + 3)
-      }
+      opts: { en: pickDistractors(RAW_COUNTRIES, enN, r => r[1], i + 3), fr: pickDistractors(RAW_COUNTRIES, frN, r => r[2], i + 3), ar: pickDistractors(RAW_COUNTRIES, arN, r => r[3], i + 3) }
     });
-
-    // 3. Official Currency (65 Qs)
     bank.push({
       id: "q_" + (qId++), cat: "economics", diff: diff === "easy" ? "medium" : "hard",
       q: { en: `What is the official currency of ${enN}?`, fr: `Quelle est la monnaie officielle de : ${frN} ?`, ar: `ما هي العملة الرسمية المتداولة في ${arN}؟` },
       a: { en: enCur, fr: frCur, ar: arCur },
-      opts: {
-        en: pickDistractors(RAW_COUNTRIES, enCur, r => r[7], i + 5),
-        fr: pickDistractors(RAW_COUNTRIES, frCur, r => r[8], i + 5),
-        ar: pickDistractors(RAW_COUNTRIES, arCur, r => r[9], i + 5)
-      }
+      opts: { en: pickDistractors(RAW_COUNTRIES, enCur, r => r[7], i + 5), fr: pickDistractors(RAW_COUNTRIES, frCur, r => r[8], i + 5), ar: pickDistractors(RAW_COUNTRIES, arCur, r => r[9], i + 5) }
     });
-
-    // 4. Land Area Tier Question (65 Qs)
-    const areaStr = `${area.toLocaleString()} thousand km²`;
     bank.push({
       id: "q_" + (qId++), cat: "geography", diff: "hard",
-      q: { en: `Which country has a land area of approximately ${areaStr}?`, fr: `Quel pays a une superficie d'environ ${area} 000 km² ?`, ar: `أي دولة تبلغ مساحتها التقريبية حوالي ${area} ألف كم²؟` },
+      q: { en: `Which country has a land area of roughly ${area.toLocaleString()},000 km²?`, fr: `Quel pays a une superficie d'environ ${area} 000 km² ?`, ar: `أي دولة تبلغ مساحتها التقريبية حوالي ${area} ألف كم²؟` },
       a: { en: enN, fr: frN, ar: arN },
-      opts: {
-        en: pickDistractors(RAW_COUNTRIES, enN, r => r[1], i + 9),
-        fr: pickDistractors(RAW_COUNTRIES, frN, r => r[2], i + 9),
-        ar: pickDistractors(RAW_COUNTRIES, arN, r => r[3], i + 9)
-      }
+      opts: { en: pickDistractors(RAW_COUNTRIES, enN, r => r[1], i + 9), fr: pickDistractors(RAW_COUNTRIES, frN, r => r[2], i + 9), ar: pickDistractors(RAW_COUNTRIES, arN, r => r[3], i + 9) }
     });
   });
 
-  // B. Generate 135 Chemistry & Science Questions from 45 Elements
+  // B. 135 Chemistry & Science Questions
   RAW_ELEMENTS.forEach((el, i) => {
     const [sym, num, enE, frE, arE, diff] = el;
-    // 1. Symbol of Element
     bank.push({
       id: "q_" + (qId++), cat: "chemistry", diff,
-      q: { en: `What is the chemical symbol for ${enE}?`, fr: `Quel est le symbole chimique de l'élément : ${frE} ?`, ar: `ما هو الرمز الكيميائي لعنصر ${arE}؟` },
+      q: { en: `What is the chemical symbol for ${enE}?`, fr: `Quel est le symbole chimique de : ${frE} ?`, ar: `ما هو الرمز الكيميائي لعنصر ${arE}؟` },
       a: { en: sym, fr: sym, ar: sym },
-      opts: {
-        en: pickDistractors(RAW_ELEMENTS, sym, r => r[0], i),
-        fr: pickDistractors(RAW_ELEMENTS, sym, r => r[0], i),
-        ar: pickDistractors(RAW_ELEMENTS, sym, r => r[0], i)
-      }
+      opts: { en: pickDistractors(RAW_ELEMENTS, sym, r => r[0], i), fr: pickDistractors(RAW_ELEMENTS, sym, r => r[0], i), ar: pickDistractors(RAW_ELEMENTS, sym, r => r[0], i) }
     });
-    // 2. Element of Symbol
     bank.push({
       id: "q_" + (qId++), cat: "science", diff,
-      q: { en: `Which chemical element is represented by the symbol "${sym}"?`, fr: `Quel élément chimique porte le symbole « ${sym} » ?`, ar: `أي عنصر كيميائي يرمز له بالرمز (${sym})؟` },
+      q: { en: `Which chemical element is represented by "${sym}"?`, fr: `Quel élément chimique porte le symbole « ${sym} » ?`, ar: `أي عنصر كيميائي يرمز له بالرمز (${sym})؟` },
       a: { en: enE, fr: frE, ar: arE },
-      opts: {
-        en: pickDistractors(RAW_ELEMENTS, enE, r => r[2], i + 4),
-        fr: pickDistractors(RAW_ELEMENTS, frE, r => r[3], i + 4),
-        ar: pickDistractors(RAW_ELEMENTS, arE, r => r[4], i + 4)
-      }
+      opts: { en: pickDistractors(RAW_ELEMENTS, enE, r => r[2], i + 4), fr: pickDistractors(RAW_ELEMENTS, frE, r => r[3], i + 4), ar: pickDistractors(RAW_ELEMENTS, arE, r => r[4], i + 4) }
     });
-    // 3. Atomic Number
     bank.push({
       id: "q_" + (qId++), cat: "chemistry", diff: "hard",
       q: { en: `What is the atomic number of ${enE} (${sym})?`, fr: `Quel est le numéro atomique de : ${frE} (${sym}) ?`, ar: `ما هو العدد الذري لعنصر ${arE} (${sym})؟` },
       a: { en: String(num), fr: String(num), ar: String(num) },
-      opts: {
-        en: pickDistractors(RAW_ELEMENTS, String(num), r => String(r[1]), i + 2),
-        fr: pickDistractors(RAW_ELEMENTS, String(num), r => String(r[1]), i + 2),
-        ar: pickDistractors(RAW_ELEMENTS, String(num), r => String(r[1]), i + 2)
-      }
+      opts: { en: pickDistractors(RAW_ELEMENTS, String(num), r => String(r[1]), i + 2), fr: pickDistractors(RAW_ELEMENTS, String(num), r => String(r[1]), i + 2), ar: pickDistractors(RAW_ELEMENTS, String(num), r => String(r[1]), i + 2) }
     });
   });
 
-  // C. Generate 165 History & Inventions Questions from 55 Milestones
+  // C. 150 History & Inventions Questions
   RAW_HISTORY.forEach((h, i) => {
     const [yr, enEv, frEv, arEv, enWho, frWho, arWho, diff] = h;
-    // 1. Year of Event
     bank.push({
       id: "q_" + (qId++), cat: "history", diff: diff === "easy" ? "medium" : "hard",
       q: { en: `In which year did this milestone occur: ${enEv}?`, fr: `En quelle année a eu lieu : ${frEv} ?`, ar: `في أي عام وقع هذا الحدث التاريخي: ${arEv}؟` },
       a: { en: String(yr), fr: String(yr), ar: String(yr) },
-      opts: {
-        en: pickDistractors(RAW_HISTORY, String(yr), r => String(r[0]), i),
-        fr: pickDistractors(RAW_HISTORY, String(yr), r => String(r[0]), i),
-        ar: pickDistractors(RAW_HISTORY, String(yr), r => String(r[0]), i)
-      }
+      opts: { en: pickDistractors(RAW_HISTORY, String(yr), r => String(r[0]), i), fr: pickDistractors(RAW_HISTORY, String(yr), r => String(r[0]), i), ar: pickDistractors(RAW_HISTORY, String(yr), r => String(r[0]), i) }
     });
-    // 2. Person / Civilization of Event
     bank.push({
       id: "q_" + (qId++), cat: "history", diff,
       q: { en: `Who is historically associated with: ${enEv} (${yr})?`, fr: `Qui est associé à : ${frEv} (${yr}) ?`, ar: `من يرتبط تاريخياً بـ: ${arEv} (${yr})؟` },
       a: { en: enWho, fr: frWho, ar: arWho },
-      opts: {
-        en: pickDistractors(RAW_HISTORY, enWho, r => r[4], i + 3),
-        fr: pickDistractors(RAW_HISTORY, frWho, r => r[5], i + 3),
-        ar: pickDistractors(RAW_HISTORY, arWho, r => r[6], i + 3)
-      }
+      opts: { en: pickDistractors(RAW_HISTORY, enWho, r => r[4], i + 3), fr: pickDistractors(RAW_HISTORY, frWho, r => r[5], i + 3), ar: pickDistractors(RAW_HISTORY, arWho, r => r[6], i + 3) }
     });
-    // 3. Milestone of Figure
     bank.push({
       id: "q_" + (qId++), cat: "inventions", diff,
-      q: { en: `Which historical achievement is linked to ${enWho}?`, fr: `Quel accomplissement historique est lié à ${frWho} ?`, ar: `أي إنجاز أو حدث تاريخي يرتبط بـ ${arWho}؟` },
+      q: { en: `Which milestone is linked to ${enWho}?`, fr: `Quel accomplissement est lié à ${frWho} ?`, ar: `أي إنجاز تاريخي يرتبط بـ ${arWho}؟` },
       a: { en: enEv, fr: frEv, ar: arEv },
-      opts: {
-        en: pickDistractors(RAW_HISTORY, enEv, r => r[1], i + 6),
-        fr: pickDistractors(RAW_HISTORY, frEv, r => r[2], i + 6),
-        ar: pickDistractors(RAW_HISTORY, arEv, r => r[3], i + 6)
-      }
+      opts: { en: pickDistractors(RAW_HISTORY, enEv, r => r[1], i + 6), fr: pickDistractors(RAW_HISTORY, frEv, r => r[2], i + 6), ar: pickDistractors(RAW_HISTORY, arEv, r => r[3], i + 6) }
     });
   });
 
-  // D. Generate 80 Literature & Philosophy Questions from 40 Books
+  // D. 80 Literature & Philosophy Questions
   RAW_BOOKS.forEach((b, i) => {
     const [enT, frT, arT, enA, frA, arA, cat, diff] = b;
     bank.push({
       id: "q_" + (qId++), cat, diff,
-      q: { en: `Who wrote the famous work "${enT}"?`, fr: `Qui est l'auteur de l'œuvre « ${frT} » ?`, ar: `من هو مؤلف الكتاب الشهير «${arT}»؟` },
+      q: { en: `Who wrote the classic work "${enT}"?`, fr: `Qui est l'auteur de « ${frT} » ?`, ar: `من هو مؤلف الكتاب الشهير «${arT}»؟` },
       a: { en: enA, fr: frA, ar: arA },
-      opts: {
-        en: pickDistractors(RAW_BOOKS, enA, r => r[3], i),
-        fr: pickDistractors(RAW_BOOKS, frA, r => r[4], i),
-        ar: pickDistractors(RAW_BOOKS, arA, r => r[5], i)
-      }
+      opts: { en: pickDistractors(RAW_BOOKS, enA, r => r[3], i), fr: pickDistractors(RAW_BOOKS, frA, r => r[4], i), ar: pickDistractors(RAW_BOOKS, arA, r => r[5], i) }
     });
     bank.push({
       id: "q_" + (qId++), cat, diff: diff === "easy" ? "medium" : "hard",
-      q: { en: `Which famous book was written by ${enA}?`, fr: `Quelle œuvre célèbre a été écrite par ${frA} ?`, ar: `أي مؤلف من هذه الأعمال كتبه ${arA}؟` },
+      q: { en: `Which famous book was written by ${enA}?`, fr: `Quelle œuvre a été écrite par ${frA} ?`, ar: `أي مؤلف من هذه الأعمال كتبه ${arA}؟` },
       a: { en: enT, fr: frT, ar: arT },
-      opts: {
-        en: pickDistractors(RAW_BOOKS, enT, r => r[0], i + 5),
-        fr: pickDistractors(RAW_BOOKS, frT, r => r[1], i + 5),
-        ar: pickDistractors(RAW_BOOKS, arT, r => r[2], i + 5)
-      }
+      opts: { en: pickDistractors(RAW_BOOKS, enT, r => r[0], i + 5), fr: pickDistractors(RAW_BOOKS, frT, r => r[1], i + 5), ar: pickDistractors(RAW_BOOKS, arT, r => r[2], i + 5) }
     });
   });
 
-  // E. Generate 110 Science, Space, Medicine, Weather, Tech, Oceans & Animals Qs
+  // E. 80 Science, Space, Medicine & Tech Questions
   RAW_CONCEPTS.forEach((c, i) => {
     const [cat, diff, enP, frP, arP, enA, frA, arA] = c;
     bank.push({
       id: "q_" + (qId++), cat, diff,
       q: { en: `Identify: ${enP}?`, fr: `Identifiez : ${frP} ?`, ar: `حدد: ${arP}؟` },
       a: { en: enA, fr: frA, ar: arA },
-      opts: {
-        en: pickDistractors(RAW_CONCEPTS, enA, r => r[5], i),
-        fr: pickDistractors(RAW_CONCEPTS, frA, r => r[6], i),
-        ar: pickDistractors(RAW_CONCEPTS, arA, r => r[7], i)
-      }
+      opts: { en: pickDistractors(RAW_CONCEPTS, enA, r => r[5], i), fr: pickDistractors(RAW_CONCEPTS, frA, r => r[6], i), ar: pickDistractors(RAW_CONCEPTS, arA, r => r[7], i) }
     });
     bank.push({
       id: "q_" + (qId++), cat: "general", diff: diff === "easy" ? "medium" : "hard",
       q: { en: `What does "${enA}" represent or measure?`, fr: `Que désigne ou mesure « ${frA} » ?`, ar: `إلى ماذا يشير أو ماذا يقيس «${arA}»؟` },
       a: { en: enP, fr: frP, ar: arP },
-      opts: {
-        en: pickDistractors(RAW_CONCEPTS, enP, r => r[2], i + 4),
-        fr: pickDistractors(RAW_CONCEPTS, frP, r => r[3], i + 4),
-        ar: pickDistractors(RAW_CONCEPTS, arP, r => r[4], i + 4)
-      }
+      opts: { en: pickDistractors(RAW_CONCEPTS, enP, r => r[2], i + 4), fr: pickDistractors(RAW_CONCEPTS, frP, r => r[3], i + 4), ar: pickDistractors(RAW_CONCEPTS, arP, r => r[4], i + 4) }
     });
   });
 
-  // F. Add Curated Custom Questions
-  window.EXTRA_CUSTOM_QUESTIONS.forEach(item => {
-    bank.push({ id: "q_" + (qId++), ...item });
-  });
-
-  // G. Generate 750 Seeded Math, School Subjects, Geometry, Percentage & Logic Problems (Easy / Medium / Hard)
-  for (let n = 1; n <= 250; n++) {
-    // 1. Easy: Multiplication & Squares (250 Qs)
-    const a = (n % 25) + 4;
-    const b = ((n * 3) % 19) + 3;
+  // F. 840 Seeded Math, Algebra & Sequence Questions
+  for (let n = 1; n <= 280; n++) {
+    const a = (n % 27) + 4;
+    const b = ((n * 3) % 21) + 3;
     const prod = a * b;
-    const opts1 = [String(prod), String(prod + a), String(prod - b), String(prod + 10)];
+    const opts1 = [String(prod), String(prod + a), String(prod - b), String(prod + 12)];
     bank.push({
       id: "q_" + (qId++), cat: "math", diff: "easy",
       q: { en: `Mental Math: What is ${a} × ${b}?`, fr: `Calcul mental : Combien font ${a} × ${b} ?`, ar: `حساب ذهني: كم ناتج ${a} × ${b}؟` },
@@ -775,10 +727,9 @@ function buildMassiveQuestionBank() {
       opts: { en: opts1, fr: opts1, ar: opts1 }
     });
 
-    // 2. Medium: Linear Equations & Percentages (250 Qs)
-    const xVal = (n % 30) + 5;
-    const mult = (n % 7) + 2;
-    const add = (n % 15) + 4;
+    const xVal = (n % 32) + 5;
+    const mult = (n % 8) + 2;
+    const add = (n % 17) + 4;
     const rhs = mult * xVal + add;
     const opts2 = [String(xVal), String(xVal + 2), String(xVal - 1), String(xVal + 5)];
     bank.push({
@@ -788,17 +739,16 @@ function buildMassiveQuestionBank() {
       opts: { en: opts2, fr: opts2, ar: opts2 }
     });
 
-    // 3. Hard: Cubes, Powers, Sequences & Number Theory (250 Qs)
-    const s1 = n + 2;
-    const s2 = s1 + (n % 6 + 3);
-    const step = s2 - s1;
+    const s1 = n + 3;
+    const step = (n % 7) + 3;
+    const s2 = s1 + step;
     const s3 = s2 + step * 2;
     const s4 = s3 + step * 3;
     const ansSeq = s4 + step * 4;
-    const opts3 = [String(ansSeq), String(ansSeq + step), String(ansSeq - step), String(ansSeq + 6)];
+    const opts3 = [String(ansSeq), String(ansSeq + step), String(ansSeq - step), String(ansSeq + 8)];
     bank.push({
       id: "q_" + (qId++), cat: "math", diff: "hard",
-      q: { en: `Number Sequence: Find the next term in ${s1}, ${s2}, ${s3}, ${s4}, ...`, fr: `Suite logique : Trouvez le terme suivant de ${s1}, ${s2}, ${s3}, ${s4}, ...`, ar: `متتالية رقمية: أوجد الحد التالي في ${s1}، ${s2}، ${s3}، ${s4}، ...` },
+      q: { en: `Sequence: Find the next term in ${s1}, ${s2}, ${s3}, ${s4}, ...`, fr: `Suite logique : Terme suivant de ${s1}, ${s2}, ${s3}, ${s4}, ...`, ar: `متتالية: أوجد الحد التالي في ${s1}، ${s2}، ${s3}، ${s4}، ...` },
       a: { en: String(ansSeq), fr: String(ansSeq), ar: String(ansSeq) },
       opts: { en: opts3, fr: opts3, ar: opts3 }
     });
@@ -810,7 +760,7 @@ function buildMassiveQuestionBank() {
 window.QUESTION_BANK = buildMassiveQuestionBank();
 
 /* ============================================================================
-   EXPANDED MINI-GAME DATASETS (Deep, Non-Repeating & Challenging)
+   UPGRADED MINI-GAME DATASETS (Harder Cinema, Harder Footballers, Odd One Out)
    ============================================================================ */
 window.SPECIAL_DATA = {
   rawCountries: RAW_COUNTRIES,
@@ -819,151 +769,158 @@ window.SPECIAL_DATA = {
   rawBooks: RAW_BOOKS,
 
   words5: [
-    { word: "ALGER", theme: "Capital", clue: { en: "French name for Algiers", fr: "Capitale de l'Algérie", ar: "الجزائر العاصمة بالفرنسية (5 حروف)" } },
     { word: "PARIS", theme: "Capital", clue: { en: "Capital of France", fr: "Capitale de la France", ar: "عاصمة فرنسا" } },
-    { word: "CAIRO", theme: "Capital", clue: { en: "Capital on the Nile", fr: "Capitale sur le Nil", ar: "عاصمة مصر بالإنجليزية" } },
     { word: "TOKYO", theme: "Capital", clue: { en: "Capital of Japan", fr: "Capitale du Japon", ar: "عاصمة اليابان" } },
-    { word: "RABAT", theme: "Capital", clue: { en: "Capital of Morocco", fr: "Capitale du Maroc", ar: "عاصمة المغرب" } },
-    { word: "TUNIS", theme: "Capital", clue: { en: "Capital of Tunisia", fr: "Capitale de la Tunisie", ar: "عاصمة تونس" } },
     { word: "SEOUL", theme: "Capital", clue: { en: "Capital of South Korea", fr: "Capitale de la Corée du Sud", ar: "عاصمة كوريا الجنوبية" } },
-    { word: "BERNE", theme: "Capital", clue: { en: "Swiss Federal City", fr: "Capitale de la Suisse", ar: "عاصمة سويسرا" } },
-    { word: "DAKAR", theme: "Capital", clue: { en: "Capital of Senegal", fr: "Capitale du Sénégal", ar: "عاصمة السنغال" } },
-    { word: "ACCRA", theme: "Capital", clue: { en: "Capital of Ghana", fr: "Capitale du Ghana", ar: "عاصمة غانا" } },
-    { word: "SPAIN", theme: "Country", clue: { en: "Iberian Peninsula nation", fr: "Pays de la péninsule ibérique", ar: "إسبانيا بالإنجليزية" } },
-    { word: "JAPAN", theme: "Country", clue: { en: "Land of the Rising Sun", fr: "Pays du Soleil Levant", ar: "اليابان بالإنجليزية" } },
-    { word: "CHILE", theme: "Country", clue: { en: "Andean country with capital Santiago", fr: "Pays andin (Santiago)", ar: "تشيلي بالإنجليزية" } },
-    { word: "ITALY", theme: "Country", clue: { en: "Boot-shaped Mediterranean nation", fr: "Pays méditerranéen (Rome)", ar: "إيطاليا بالإنجليزية" } },
-    { word: "QATAR", theme: "Country", clue: { en: "2022 World Cup host nation", fr: "Hôte du Mondial 2022", ar: "قطر بالإنجليزية" } },
-    { word: "SUDAN", theme: "Country", clue: { en: "Nile nation with capital Khartoum", fr: "Pays du Nil (Khartoum)", ar: "السودان بالإنجليزية" } },
-    { word: "YEMEN", theme: "Country", clue: { en: "Nation with capital Sanaa", fr: "Pays avec capitale Sanaa", ar: "اليمن بالإنجليزية" } },
+    { word: "SOFIA", theme: "Capital", clue: { en: "Capital of Bulgaria", fr: "Capitale de la Bulgarie", ar: "عاصمة بلغاريا" } },
+    { word: "MINSK", theme: "Capital", clue: { en: "Capital of Belarus", fr: "Capitale de la Biélorussie", ar: "عاصمة بيلاروسيا" } },
+    { word: "QUITO", theme: "Capital", clue: { en: "Equatorial Capital of Ecuador", fr: "Capitale de l'Équateur", ar: "عاصمة الإكوادور" } },
+    { word: "SPAIN", theme: "Country", clue: { en: "Iberian Peninsula nation", fr: "Pays ibérique", ar: "إسبانيا بالإنجليزية" } },
+    { word: "JAPAN", theme: "Country", clue: { en: "Archipelago in East Asia", fr: "Archipel d'Asie de l'Est", ar: "اليابان بالإنجليزية" } },
+    { word: "CHILE", theme: "Country", clue: { en: "Long Andean coastal nation", fr: "Pays andin (Santiago)", ar: "تشيلي بالإنجليزية" } },
+    { word: "ITALY", theme: "Country", clue: { en: "Home of Rome and Florence", fr: "Pays de Rome et Florence", ar: "إيطاليا بالإنجليزية" } },
+    { word: "NEPAL", theme: "Country", clue: { en: "Himalayan home of Mount Everest", fr: "Pays de l'Everest", ar: "نيبال بالإنجليزية" } },
     { word: "KENYA", theme: "Country", clue: { en: "East African nation (Nairobi)", fr: "Pays d'Afrique de l'Est", ar: "كينيا بالإنجليزية" } },
-    { word: "MESSI", theme: "Footballer", clue: { en: "8-time Ballon d'Or winner", fr: "8 fois Ballon d'Or", ar: "ليونيل ميسي" } },
-    { word: "SALAH", theme: "Footballer", clue: { en: "Egyptian Liverpool winger", fr: "Ailier égyptien de Liverpool", ar: "محمد صلاح" } },
-    { word: "ZIDAN", theme: "Footballer", clue: { en: "1998 World Cup hero (5-letter root)", fr: "Légende franco-algérienne", ar: "زيدان" } },
-    { word: "HAKIM", theme: "Footballer", clue: { en: "Ziyech first name", fr: "Prénom de Ziyech", ar: "حكيم زياش" } },
-    { word: "LASER", theme: "Science", clue: { en: "Focused coherent light beam", fr: "Faisceau lumineux cohérent", ar: "شعاع الليزر" } },
-    { word: "QUARK", theme: "Science", clue: { en: "Subatomic particle inside protons", fr: "Particule subatomique", ar: "جسيم الكوارك" } },
-    { word: "OZONE", theme: "Science", clue: { en: "O3 triatomic oxygen layer", fr: "Couche protectrice O3", ar: "غاز الأوزون" } },
-    { word: "TESLA", theme: "Science", clue: { en: "Unit of magnetic flux density", fr: "Unité magnétique", ar: "وحدة تسلا المغناطيسية" } },
-    { word: "JOULE", theme: "Science", clue: { en: "SI unit of work and energy", fr: "Unité d'énergie", ar: "وحدة الجول للطاقة" } },
-    { word: "HERTZ", theme: "Science", clue: { en: "SI unit of frequency", fr: "Unité de fréquence", ar: "وحدة الهرتز للتردد" } }
+    { word: "MESSI", theme: "Footballer", clue: { en: "8-time Ballon d'Or legend", fr: "8 fois Ballon d'Or", ar: "ليونيل ميسي" } },
+    { word: "PIRLO", theme: "Footballer", clue: "Italian deep-lying playmaker 'Il Maestro'" },
+    { word: "KROOS", theme: "Footballer", clue: "German midfield metronome (#8)" },
+    { word: "HENRY", theme: "Footballer", clue: "Arsenal's all-time leading scorer" },
+    { word: "LASER", theme: "Science", clue: "Coherent amplified light beam" },
+    { word: "QUARK", theme: "Science", clue: "Elementary particle inside protons" },
+    { word: "OZONE", theme: "Science", clue: "Triatomic oxygen (O3) shield" },
+    { word: "TESLA", theme: "Science", clue: "SI unit of magnetic flux density" },
+    { word: "JOULE", theme: "Science", clue: "SI unit of energy and work" },
+    { word: "HERTZ", theme: "Science", clue: "SI unit of frequency" },
+    { word: "XENON", theme: "Science", clue: "Heavy noble gas (Atomic #54)" },
+    { word: "RADON", theme: "Science", clue: "Radioactive noble gas (Atomic #86)" }
   ],
 
   unscrambleGeoPool: [
-    "ALGIERS","CONSTANTINE","TLEMCEN","GHARDAIA","CASABLANCA","MARRAKECH","ALEXANDRIA","DAMASCUS","BAGHDAD","JERUSALEM",
-    "ISTANBUL","SAMARKAND","GRANADA","CORDOBA","TIMBUKTU","ZANZIBAR","REYKJAVIK","STOCKHOLM","AMSTERDAM","BRUSSELS",
-    "BUENOSAIRES","SANTIAGO","MONTEVIDEO","YOKOHAMA","KYOTO","SINGAPORE","KUALALUMPUR","ISLAMABAD","MELBOURNE","WELLINGTON"
+    "REYKJAVIK","STOCKHOLM","AMSTERDAM","COPENHAGEN","HELSINKI","BUCHAREST","BRATISLAVA","LJUBLJANA",
+    "WELLINGTON","CANBERRA","MELBOURNE","VLADIVOSTOK","SAMARKAND","ULAANBAATAR","KATHMANDU","ISLAMABAD",
+    "KUALALUMPUR","SINGAPORE","YOKOHAMA","BUENOSAIRES","MONTEVIDEO","SANTIAGO","VANCOUVER","PHILADELPHIA",
+    "EDINBURGH","BARCELONA","FLORENCE","STRASBOURG","ZURICH","ANTWERP","KYOTO","OSAKA"
   ],
 
   unscrambleWordsPool: [
     "MITOCHONDRIA","PHOTOSYNTHESIS","CHLOROPHYLL","STRATOSPHERE","ELECTROMAGNET","ARCHIPELAGO","PALEONTOLOGY","ASTROPHYSICS",
-    "MEDITERRANEAN","RENAISSANCE","CALLIGRAPHY","ARCHITECTURE","THERMODYNAMICS","BIODIVERSITY","CONSTELLATION","METAMORPHOSIS",
-    "CRYPTOGRAPHY","MICROPROCESSOR","NANOTECHNOLOGY","PHILOSOPHY","HIPPOCAMPUS","HEMOGLOBIN","CHROMOSOME","PENICILLIN"
+    "THERMODYNAMICS","BIODIVERSITY","CONSTELLATION","METAMORPHOSIS","CRYPTOGRAPHY","MICROPROCESSOR","NANOTECHNOLOGY","HIPPOCAMPUS",
+    "HEMOGLOBIN","CHROMOSOME","PENICILLIN","SUPERCONDUCTOR","INTERFEROMETER","SPECTROSCOPY","BIOLUMINESCENCE","PARALLELOGRAM"
   ],
 
   peopleClues: [
     {
-      ans: { en: "Ibn Khaldun", fr: "Ibn Khaldoun", ar: "ابن خلدون" },
-      opts: { en: ["Ibn Khaldun", "Ibn Battuta", "Ibn Rushd", "Al-Farabi"], fr: ["Ibn Khaldoun", "Ibn Battuta", "Averroès", "Al-Farabi"], ar: ["ابن خلدون", "ابن بطوطة", "ابن رشد", "الفارابي"] },
+      ans: { en: "Nikola Tesla", fr: "Nikola Tesla", ar: "نيكولا تسلا" },
+      opts: { en: ["Nikola Tesla", "Thomas Edison", "Guglielmo Marconi", "Michael Faraday"], fr: ["Nikola Tesla", "Thomas Edison", "Marconi", "Michael Faraday"], ar: ["نيكولا تسلا", "توماس إديسون", "ماركوني", "مايكل فاراداي"] },
       clues: {
-        en: ["Wrote his masterpiece while staying at Qalat Beni Hammad / Frenda in Algeria (1377)", "Introduced the concept of 'Asabiyyah' (social cohesion) and economic cycles", "Considered a founding father of modern sociology and historiography", "Author of the world-famous 'Muqaddimah' (Prolegomena)"],
-        fr: ["A rédigé son chef-d'œuvre près de Frenda en Algérie en 1377", "A théorisé la 'Asabiyyah' (cohésion sociale)", "Père fondateur de la sociologie moderne", "Auteur de la célèbre 'Muqaddimah'"],
-        ar: ["كتب رائعته الشهيرة في قلعة بني سلامة (فرندة بالجزائر) عام 1377م", "واضع نظرية العصبية والدورة العمرانية للدول", "المؤسس الحقيقي لعلم الاجتماع وفلسفة التاريخ", "صاحب كتاب المقدمة الشهير"]
+        en: ["Born in Smiljan in 1856 during a lightning storm", "Built the Wardenclyffe Tower in New York for wireless power transmission", "The SI unit of magnetic flux density is named in his honor", "Pioneered the alternating current (AC) electrical supply system"],
+        fr: ["Né à Smiljan en 1856 pendant un orage", "A construit la tour de Wardenclyffe à New York", "L'unité SI de champ magnétique porte son nom", "Pionnier du courant alternatif (CA)"],
+        ar: ["ولد في سميليان عام 1856م", "بنى برج واردنكليف في نيويورك لنقل الطاقة لاسلكياً", "سميت وحدة قياس كثافة الفيض المغناطيسي باسمه", "مبتكر نظام التيار الكهربائي المتردد (AC)"]
       }
     },
     {
-      ans: { en: "Emir Abdelkader", fr: "Émir Abdelkader", ar: "الأمير عبد القادر الجزائري" },
-      opts: { en: ["Emir Abdelkader", "Omar Mukhtar", "Ahmad Urabi", " Jugurtha"], fr: ["Émir Abdelkader", "Omar المختار", "Ahmad Urabi", "Jugurtha"], ar: ["الأمير عبد القادر الجزائري", "عمر المختار", "أحمد عرابي", "يوغرطة"] },
+      ans: { en: "Marie Curie", fr: "Marie Curie", ar: "ماري كوري" },
+      opts: { en: ["Marie Curie", "Rosalind Franklin", "Lise Meitner", "Dorothy Hodgkin"], fr: ["Marie Curie", "Rosalind Franklin", "Lise Meitner", "Dorothy Hodgkin"], ar: ["ماري كوري", "روزاليند فرانكلين", "ليز مايتنر", "دوروثي هودجكن"] },
       clues: {
-        en: ["Born near Mascara in 1808 as a scholar, poet, and Sufi thinker", "Signed the Treaty of Desmichels (1834) and Treaty of Tafna (1837)", "Honored worldwide for protecting thousands of civilians in Damascus in 1860", "Founder of the modern Algerian state and leader of 15 years of resistance"],
-        fr: ["Né près de Mascara en 1808, érudit, poète et stratège", "A signé les traités Desmichels et de la Tafna", "Salué dans le monde entier pour son humanisme à Damas en 1860", "Fondateur de l'État algérien moderne"],
-        ar: ["ولد قرب معسكر عام 1808م وكان عالماً وشاعراً وقائداً عسكرياً", "أسس عاصمته المتنقلة (الزمالة) وسك العملة ونظم الجيش", "نال تقدير العالم لإنقاذه آلاف المدنيين في دمشق عام 1860م", "مؤسس الدولة الجزائرية الحديثة وقائد المقاومة الشعبية"]
+        en: ["Studied at the underground 'Flying University' in Warsaw before moving to Paris", "Organized mobile X-ray vehicles ('Petites Curies') during World War I", "Isolated Polonium and Radium from pitchblende ore", "Only person in history to win Nobel Prizes in two different sciences (Physics & Chemistry)"],
+        fr: ["A étudié à Varsovie avant de rejoindre la Sorbonne à Paris", "A créé les 'Petites Curies' radiologiques en 1914", "A découvert le polonium et le radium", "Seule personne double prix Nobel dans deux sciences différentes"],
+        ar: ["انتقلت من وارسو للدراسة في جامعة السوربون بباريس", "ابتكرت وحدات الأشعة السينية المتنقلة خلال الحرب العالمية الأولى", "اكتشفت عنصري البولونيوم والراديوم", "الشخصية الوحيدة الفائزة بجائزتي نوبل في الفيزياء والكيمياء"]
       }
     },
     {
-      ans: { en: "Ibn al-Haytham", fr: "Ibn al-Haytham (Alhazen)", ar: "الحسن بن الهيثم" },
-      opts: { en: ["Ibn al-Haytham", "Al-Biruni", "Jabir ibn Hayyan", "Al-Razi"], fr: ["Ibn al-Haytham (Alhazen)", "Al-Biruni", "Geber", "Al-Razi"], ar: ["الحسن بن الهيثم", "البيروني", "جابر بن حيان", "الرازي"] },
+      ans: { en: "Alan Turing", fr: "Alan Turing", ar: "آلان تورنغ" },
+      opts: { en: ["Alan Turing", "John von Neumann", "Charles Babbage", "Claude Shannon"], fr: ["Alan Turing", "John von Neumann", "Charles Babbage", "Claude Shannon"], ar: ["آلان تورنغ", "جون فون نيومان", "تشارلز بابيج", "كلود شانون"] },
       clues: {
-        en: ["Born in Basra in 965 CE and worked in Cairo", "Proved that vision occurs when light rays enter the eye, not leave it", "Pioneered the 'Al-Bayt al-Muzlim' (Camera Obscura / Pinhole Camera)", "Author of the seven-volume 'Kitab al-Manazir' (Book of Optics)"],
-        fr: ["Né à Bassorah en 965 et actif au Caire", "A prouvé que la lumière entre dans l'œil", "Pionnier de la chambre noire (Camera Obscura)", "Auteur du célèbre 'Kitab al-Manazir' (Traité d'optique)"],
-        ar: ["ولد في البصرة عام 965م وعاش في القاهرة", "أثبت أن الإبصار يتم بانعكاس الضوء من الأجسام إلى العين", "مبتكر تجربة القمرة المظلمة (أساس الكاميرا الحديثة)", "مؤلف كتاب المناظر ومؤسس علم البصريات الحديث"]
-      }
-    },
-    {
-      ans: { en: "Mansa Musa", fr: "Mansa Moussa", ar: "مانسا موسى" },
-      opts: { en: ["Mansa Musa", "Sundiata Keita", "Askia Muhammad", "Sonni Ali"], fr: ["Mansa Moussa", "Soundiata Keïta", "Askia Mohammed", "Sonni Ali"], ar: ["مانسا موسى", "سوندياتا كيتا", "أسكيا محمد", "سني علي"] },
-      clues: {
-        en: ["Ruled a vast West African empire from 1312 to 1337", "Developed Timbuktu and the Sankore Madrasah into a center of Islamic scholarship", "Depicted holding a golden nugget on the 1375 Catalan Atlas", "14th-century Emperor of Mali famous for his 1324 gold caravan to Mecca"],
-        fr: ["A régné sur un vaste empire ouest-africain de 1312 à 1337", "A fait de Tombouctou un centre mondial du savoir", "Figure sur l'Atlas catalan de 1375 avec un globe d'or", "Empereur du Mali célèbre pour son pèlerinage doré de 1324"],
-        ar: ["حكم إمبراطورية واسعة في غرب أفريقيا بين 1312 و1337م", "حول مدينة تمبكتو وجامعة سنكوري إلى منارة علمية عالمية", "ظهر في الأطلس الكتالوني عام 1375م حاملاً سبيكة ذهبية", "إمبراطور مالي الشهير برحلة الحج الذهبية عام 1324م"]
+        en: ["Published a 1952 paper on mathematical morphogenesis in biology", "Worked at Bletchley Park Hut 8 designing the electromechanical 'Bombe'", "Proposed the 'Imitation Game' in 1950 to evaluate machine intelligence", "Father of theoretical computer science and artificial intelligence"],
+        fr: ["A travaillé au Bletchley Park (Hut 8) pendant la Seconde Guerre mondiale", "A conçu la 'Bombe' électromécanique pour décrypter Enigma", "A proposé le 'Jeu de l'imitation' en 1950", "Père fondateur de l'informatique théorique et de l'IA"],
+        ar: ["عمل في مركز بلتشلي بارك لفك الشفرات خلال الحرب العالمية الثانية", "صمم النموذج الرياضي للحاسوب العام عام 1936م", "ابتكر اختبار الذكاء الاصطناعي الشهير عام 1950م", "الأب المؤسس لعلوم الحاسوب النظرية"]
       }
     },
     {
       ans: { en: "Leonardo da Vinci", fr: "Léonard de Vinci", ar: "ليوناردو دا فينشي" },
-      opts: { en: ["Leonardo da Vinci", "Michelangelo", "Raphael", "Botticelli"], fr: ["Léonard de Vinci", "Michel-Ange", "Raphaël", "Botticelli"], ar: ["ليوناردو دا فينشي", "مايكل أنجلو", "رفائيل", "بوتيتشيلي"] },
+      opts: { en: ["Leonardo da Vinci", "Michelangelo", "Galileo Galilei", "Raphael"], fr: ["Léonard de Vinci", "Michel-Ange", "Galilée", "Raphaël"], ar: ["ليوناردو دا فينشي", "مايكل أنجلو", "غاليليو", "رفائيل"] },
       clues: {
-        en: ["Wrote his notebooks in mirror-image script and lived by the motto 'Ostinato Rigore'", "Designed early concepts for helicopters, parachutes, and solar concentrators", "Painted 'The Last Supper' in Milan", "Renaissance polymath who painted the 'Mona Lisa'"],
-        fr: ["Écrivait ses carnets en écriture spéculaire avec la devise 'Ostinato Rigore'", "A conçu des machines volantes et des études anatomiques", "A peint 'La Cène' à Milan", "Génie de la Renaissance et peintre de 'La Joconde'"],
-        ar: ["كتب دفاتره العلمية بالخط المعكوس واتخذ شعار الدقة الصارمة", "صمم مخططات مبكرة لآلات الطيران والمظلات والتشريح البشري", "رسم جدارية العشاء الأخير في ميلانو", "عبقري عصر النهضة ورسام لوحة الموناليزا"]
-      }
-    },
-    {
-      ans: { en: "Al-Khwarizmi", fr: "Al-Khwarizmi", ar: "محمد بن موسى الخوارزمي" },
-      opts: { en: ["Al-Khwarizmi", "Omar Khayyam", "Al-Kindi", "Thabit ibn Qurra"], fr: ["Al-Khwarizmi", "Omar Khayyam", "Al-Kindi", "Thabit ibn Qurra"], ar: ["محمد بن موسى الخوارزمي", "عمر الخيام", "الكندي", "ثابت بن قرة"] },
-      clues: {
-        en: ["Headed the House of Wisdom (Bayt al-Hikma) in 9th-century Baghdad", "His Latinized name gave the modern computing world the word 'Algorithm'", "Wrote 'The Compendious Book on Calculation by Completion and Balancing'", "Father of Algebra (Al-Jabr)"],
-        fr: ["Savants de la Maison de la Sagesse à Bagdad au IXe siècle", "Son nom a donné le mot 'Algorithme' en informatique", "Auteur du livre 'Al-Jabr wa-l-Muqabala'", "Père fondateur de l'Algèbre"],
-        ar: ["عمل في بيت الحكمة في بغداد خلال القرن التاسع الميلادي", "اشتق العالم من اسمه مصطلح الخوارزميات (Algorithms) في الحاسوب", "مؤلف كتاب المختصر في حساب الجبر والمقابلة", "مؤسس علم الجبر الفلكي والرياضي"]
+        en: ["Spent his final years at Château du Clos Lucé in Amboise, France", "Filled thousands of notebook pages written in right-to-left mirror script", "Sketched the Vitruvian Man and aerial screw", "Renaissance polymath who painted The Last Supper and the Mona Lisa"],
+        fr: ["A vécu ses dernières années au Clos Lucé à Amboise", "Écrivait ses carnets scientifiques en écriture spéculaire", "A dessiné l'Homme de Vitruve", "Peintre de La Cène et de La Joconde"],
+        ar: ["قضى سنواته الأخيرة في قصر كلو لوسيه بفرنسا", "كتب آلاف الصفحات العلمية بخط المرآة المعكوس", "رسم الرجل الفيتروفي ومخططات الطيران", "رسام لوحتي العشاء الأخير والموناليزا"]
       }
     }
   ],
 
+  /* HARDER CINEMA EMOJI PUZZLES (Plot-deep world classics & thrillers) */
   movieEmojis: [
-    { emojis: "🐅🚣‍♂️🌊🇮🇳", ans: { en: "Life of Pi", fr: "L'Odyssée de Pi", ar: "حياة باي (Life of Pi)" }, opts: { en: ["Life of Pi", "Cast Away", "The Jungle Book", "Moana"], fr: ["L'Odyssée de Pi", "Seul au monde", "Le Livre de la Jungle", "Vaiana"], ar: ["حياة باي (Life of Pi)", "المنبوذ", "كتاب الأدغال", "موانا"] } },
-    { emojis: "🦁👑🌅🐗", ans: { en: "The Lion King", fr: "Le Roi Lion", ar: "الأسد الملك" }, opts: { en: ["The Lion King", "Madagascar", "Tarzan", "Zootopia"], fr: ["Le Roi Lion", "Madagascar", "Tarzan", "Zootopie"], ar: ["الأسد الملك", "مدغشقر", "طرزان", "زوتوبيا"] } },
-    { emojis: "🚢🧊🎻💔", ans: { en: "Titanic", fr: "Titanic", ar: "تايتانيك" }, opts: { en: ["Titanic", "Poseidon", "Pearl Harbor", "Master and Commander"], fr: ["Titanic", "Poséidon", "Pearl Harbor", "Master and Commander"], ar: ["تايتانيك", "بوسيدون", "بيرل هاربر", "سيد البحار"] } },
-    { emojis: "🌀💤🏢⏳", ans: { en: "Inception", fr: "Inception", ar: "إنسبشن (البداية)" }, opts: { en: ["Inception", "Interstellar", "Tenet", "Memento"], fr: ["Inception", "Interstellar", "Tenet", "Memento"], ar: ["إنسبشن (البداية)", "إنترستيلار", "تينيت", "تذكار"] } },
-    { emojis: "🚀🕳️🌽⌚", ans: { en: "Interstellar", fr: "Interstellar", ar: "إنترستيلار (بين النجوم)" }, opts: { en: ["Interstellar", "Gravity", "The Martian", "Ad Astra"], fr: ["Interstellar", "Gravity", "Seul sur Mars", "Ad Astra"], ar: ["إنترستيلار (بين النجوم)", "الجاذبية", "المريخي", "نحو النجوم"] } },
-    { emojis: "🦖🏝️🧬🚙", ans: { en: "Jurassic Park", fr: "Jurassic Park", ar: "الحديقة الجوراسية" }, opts: { en: ["Jurassic Park", "King Kong", "Godzilla", "Avatar"], fr: ["Jurassic Park", "King Kong", "Godzilla", "Avatar"], ar: ["الحديقة الجوراسية", "كينغ كونغ", "غودزيلا", "أفاتار"] } },
-    { emojis: "🕷️🧑🗽🕸️", ans: { en: "Spider-Man", fr: "Spider-Man", ar: "الرجل العنكبوت" }, opts: { en: ["Spider-Man", "Batman", "Superman", "Iron Man"], fr: ["Spider-Man", "Batman", "Superman", "Iron Man"], ar: ["الرجل العنكبوت", "باتمان", "سوبرمان", "الرجل الحديدي"] } },
-    { emojis: "🐀👨‍🍳🍲🗼", ans: { en: "Ratatouille", fr: "Ratatouille", ar: "راتاتوي (خلطبيطة بالصلصة)" }, opts: { en: ["Ratatouille", "Luca", "Coco", "Up"], fr: ["Ratatouille", "Luca", "Coco", "Là-haut"], ar: ["راتاتوي (خلطبيطة بالصلصة)", "لوكا", "كوكو", "فوق"] } },
-    { emojis: "🎈🏠👴👦", ans: { en: "Up", fr: "Là-haut", ar: "فيلم فوق (Up)" }, opts: { en: ["Up", "Inside Out", "Soul", "WALL-E"], fr: ["Là-haut", "Vice-Versa", "Soul", "WALL-E"], ar: ["فيلم فوق (Up)", "قلبا وقالبا", "الروح", "وول-إي"] } },
-    { emojis: "🤖🌱🗑️🚀", ans: { en: "WALL-E", fr: "WALL-E", ar: "وول-إي (WALL-E)" }, opts: { en: ["WALL-E", "Big Hero 6", "Robots", "Astro Boy"], fr: ["WALL-E", "Les Nouveaux Héros", "Robots", "Astro Boy"], ar: ["وول-إي (WALL-E)", "بيغ هيرو 6", "الروبوتات", "أسترو بوي"] } }
+    { emojis: "🍑🌧️🏠🪨🎂", ans: "Parasite (2019)", opts: ["Parasite (2019)", "Memories of Murder", "Train to Busan", "Minari"] },
+    { emojis: "🥟🔨🦷🐙📓", ans: "Oldboy (2003)", opts: ["Oldboy (2003)", "The Handmaiden", "I Saw the Devil", "Sympathy for Mr. Vengeance"] },
+    { emojis: "🥁🩸🚗⏱️🎷", ans: "Whiplash (2014)", opts: ["Whiplash (2014)", "La La Land", "Soul", "Birdman"] },
+    { emojis: "🎩🐦⚡👯‍♂️💧", ans: "The Prestige (2006)", opts: ["The Prestige (2006)", "The Illusionist", "Now You See Me", "Memento"] },
+    { emojis: "📸🩹📝🔫🔄", ans: "Memento (2000)", opts: ["Memento (2000)", "Insomnia", "Shutter Island", "Tenet"] },
+    { emojis: "🛸🦑⭕⏳👶", ans: "Arrival (2016)", opts: ["Arrival (2016)", "Contact", "Interstellar", "Annihilation"] },
+    { emojis: "🦴⬛🚀🔴👶", ans: "2001: A Space Odyssey", opts: ["2001: A Space Odyssey", "Solaris", "Moon", "Alien"] },
+    { emojis: "🪙⛽💼🔫🤠", ans: "No Country for Old Men", opts: ["No Country for Old Men", "Fargo", "There Will Be Blood", "Sicario"] },
+    { emojis: "🧚‍♀️🍇👁️✋🕰️", ans: "Pan's Labyrinth", opts: ["Pan's Labyrinth", "The Shape of Water", "Crimson Peak", "Coraline"] },
+    { emojis: "📺⛵🎥🚪🙇‍♂️", ans: "The Truman Show", opts: ["The Truman Show", "Eternal Sunshine of the Spotless Mind", "Pleasantville", "Edtv"] },
+    { emojis: "🧠🛋️❄️🍊🚆", ans: "Eternal Sunshine of the Spotless Mind", opts: ["Eternal Sunshine of the Spotless Mind", "Her", "Inception", "Vanilla Sky"] },
+    { emojis: "⛴️⛈️🏥🗼🕵️‍♂️", ans: "Shutter Island", opts: ["Shutter Island", "The Sixth Sense", "Gone Girl", "Prisoners"] },
+    { emojis: "🏨🔑🍰🎨⛷️", ans: "The Grand Budapest Hotel", opts: ["The Grand Budapest Hotel", "Moonrise Kingdom", "The French Dispatch", "Amélie"] },
+    { emojis: "🌧️7️⃣🍝📦🏜️", ans: "Se7en (1995)", opts: ["Se7en (1995)", "Zodiac", "The Silence of the Lambs", "Mystic River"] },
+    { emojis: "🐷🏮🛁🐉🚆", ans: "Spirited Away", opts: ["Spirited Away", "Princess Mononoke", "Howl's Moving Castle", "Your Name"] }
   ],
 
+  /* HARDER PRO FOOTBALLER CAREER PATHS (With Years, Loans & Tricky Distractors) */
   footballTransfers: [
-    { career: "Sporting CP ➔ Manchester United ➔ Real Madrid ➔ Juventus ➔ Manchester United ➔ Al-Nassr", ans: "Cristiano Ronaldo", opts: ["Cristiano Ronaldo", "Bruno Fernandes", "Nani", "Ricardo Quaresma"] },
-    { career: "Quimper ➔ Le Havre ➔ Leicester City ➔ Manchester City ➔ Al-Ahli", ans: "Riyad Mahrez", opts: ["Riyad Mahrez", "N'Golo Kanté", "Saïd Benrahma", "Islam Slimani"] },
-    { career: "NA Hussein Dey ➔ Vitória Setúbal ➔ FC Porto ➔ Valencia ➔ FC Porto", ans: "Rabah Madjer", opts: ["Rabah Madjer", "Lakhdar Belloumi", "Djamel Menad", "Mustapha Dahleb"] },
-    { career: "AS Cannes ➔ Bordeaux ➔ Juventus ➔ Real Madrid", ans: "Zinedine Zidane", opts: ["Zinedine Zidane", "Michel Platini", "Karim Benzema", "Patrick Vieira"] },
-    { career: "Lyon ➔ Real Madrid ➔ Al-Ittihad", ans: "Karim Benzema", opts: ["Karim Benzema", "Hatem Ben Arfa", "Alexandre Lacazette", "Nabil Fekir"] },
-    { career: "El Mokawloon ➔ Basel ➔ Chelsea ➔ Fiorentina ➔ AS Roma ➔ Liverpool", ans: "Mohamed Salah", opts: ["Mohamed Salah", "Mohamed Elneny", "Omar Marmoush", "Hakim Ziyech"] },
-    { career: "JSM Chéraga ➔ CR Belouizdad ➔ Sporting CP ➔ Leicester City ➔ Monaco ➔ Lyon", ans: "Islam Slimani", opts: ["Islam Slimani", "Baghdad Bounedjah", "Andy Delort", "Hillal Soudani"] },
-    { career: "Arles-Avignon ➔ Arsenal ➔ Empoli ➔ AC Milan", ans: "Ismaël Bennacer", opts: ["Ismaël Bennacer", "Houssem Aouar", "Rayan Aït-Nouri", "Nabil Bentaleb"] },
-    { career: "Santos ➔ FC Barcelona ➔ Paris Saint-Germain ➔ Al-Hilal", ans: "Neymar Jr", opts: ["Neymar Jr", "Ronaldinho", "Rivaldo", "Romário"] },
-    { career: "Dinamo Zagreb ➔ Tottenham Hotspur ➔ Real Madrid", ans: "Luka Modrić", opts: ["Luka Modrić", "Mateo Kovačić", "Ivan Rakitić", "Toni Kroos"] },
-    { career: "Heerenveen ➔ Twente ➔ Ajax ➔ Chelsea ➔ Galatasaray", ans: "Hakim Ziyech", opts: ["Hakim Ziyech", "Sofyan Amrabat", "Achraf Hakimi", "Noussair Mazraoui"] },
-    { career: "Real Madrid ➔ Borussia Dortmund ➔ Inter Milan ➔ Paris Saint-Germain", ans: "Achraf Hakimi", opts: ["Achraf Hakimi", "Theo Hernández", "Dani Carvajal", "João Cancelo"] }
+    { career: "Malmö FF (99-01) ➔ Ajax (01-04) ➔ Juventus (04-06) ➔ Inter (06-09) ➔ Barcelona (09-11) ➔ AC Milan ➔ PSG ➔ Man Utd ➔ LA Galaxy ➔ AC Milan", ans: "Zlatan Ibrahimović", opts: ["Zlatan Ibrahimović", "Henrik Larsson", "Maxwell", "Patrick Kluivert"] },
+    { career: "Ajax (92-95) ➔ Sampdoria (95-96) ➔ Real Madrid (96-99) ➔ Inter Milan (00-02) ➔ AC Milan (02-12) ➔ Botafogo (12-14)", ans: "Clarence Seedorf", opts: ["Clarence Seedorf", "Edgar Davids", "Frank Rijkaard", "Ruud Gullit"] },
+    { career: "Brescia (95-98) ➔ Inter Milan (98-01, loans to Reggina & Brescia) ➔ AC Milan (01-11) ➔ Juventus (11-15) ➔ New York City FC", ans: "Andrea Pirlo", opts: ["Andrea Pirlo", "Roberto Baggio", "Gennaro Gattuso", "Filippo Inzaghi"] },
+    { career: "PSG (96-97) ➔ Arsenal (97-99) ➔ Real Madrid ➔ PSG ➔ Liverpool (loan) ➔ Man City ➔ Fenerbahçe ➔ Bolton ➔ Chelsea (08-12)", ans: "Nicolas Anelka", opts: ["Nicolas Anelka", "Louis Saha", "Djibril Cissé", "William Gallas"] },
+    { career: "Real Madrid (97-00) ➔ Mallorca (00-04) ➔ Barcelona (04-09) ➔ Inter Milan (09-11) ➔ Anzhi ➔ Chelsea ➔ Everton ➔ Sampdoria", ans: "Samuel Eto'o", opts: ["Samuel Eto'o", "Didier Drogba", "Nwankwo Kanu", "Emmanuel Adebayor"] },
+    { career: "Genk (08-12) ➔ Chelsea (12-14) ➔ Werder Bremen (loan) ➔ VfL Wolfsburg (14-15) ➔ Manchester City (15-present)", ans: "Kevin De Bruyne", opts: ["Kevin De Bruyne", "Eden Hazard", "Thorgan Hazard", "Romelu Lukaku"] },
+    { career: "Groningen (00-02) ➔ PSV (02-04) ➔ Chelsea (04-07) ➔ Real Madrid (07-09) ➔ Bayern Munich (09-19)", ans: "Arjen Robben", opts: ["Arjen Robben", "Wesley Sneijder", "Robin van Persie", "Rafael van der Vaart"] },
+    { career: "Cobreloa ➔ Udinese (06-11, loans to Colo-Colo & River Plate) ➔ Barcelona (11-14) ➔ Arsenal (14-18) ➔ Man Utd ➔ Inter ➔ Marseille", ans: "Alexis Sánchez", opts: ["Alexis Sánchez", "Arturo Vidal", "Eduardo Vargas", "Iván Zamorano"] },
+    { career: "Rosario Central ➔ Benfica (07-10) ➔ Real Madrid (10-14) ➔ Man Utd (14-15) ➔ PSG (15-22) ➔ Juventus ➔ Benfica", ans: "Ángel Di María", opts: ["Ángel Di María", "Javier Pastore", "Gonzalo Higuaín", "Ezequiel Lavezzi"] },
+    { career: "Vicenza ➔ Fiorentina (85-90) ➔ Juventus (90-95) ➔ AC Milan (95-97) ➔ Bologna ➔ Inter Milan (98-00) ➔ Brescia (00-04)", ans: "Roberto Baggio", opts: ["Roberto Baggio", "Alessandro Del Piero", "Christian Vieri", "Gianfranco Zola"] },
+    { career: "Monaco (94-99) ➔ Juventus (1999) ➔ Arsenal (99-07) ➔ Barcelona (07-10) ➔ New York Red Bulls (10-14)", ans: "Thierry Henry", opts: ["Thierry Henry", "David Trezeguet", "Robert Pirès", "Patrick Vieira"] },
+    { career: "Bayern Munich (07-14, loan to Bayer Leverkusen 09-10) ➔ Real Madrid (14-24)", ans: "Toni Kroos", opts: ["Toni Kroos", "Bastian Schweinsteiger", "Sami Khedira", "Mesut Özil"] }
   ],
+
+  /* EXPERT ODD ONE OUT (Always explains the full reason even when correct!) */
+  oddOneOutPacks: [
+    { opts: ["Helium", "Neon", "Argon", "Fluorine"], odd: "Fluorine", why: "Fluorine is a highly reactive Halogen (Group 17), whereas Helium, Neon, and Argon are inert Noble Gases (Group 18)." },
+    { opts: ["Venus", "Uranus", "Earth", "Mars"], odd: "Venus", why: "Wait — both Venus and Uranus have retrograde rotation, so let's compare moons: Venus has 0 moons, whereas Earth, Mars, and Uranus all have natural satellites! (Trickier check below)" },
+    { opts: ["Mercury", "Venus", "Earth", "Jupiter"], odd: "Jupiter", why: "Jupiter is a Gas Giant with no solid surface, whereas Mercury, Venus, and Earth are rocky terrestrial planets." },
+    { opts: ["Femur", "Tibia", "Fibula", "Radius"], odd: "Radius", why: "The Radius is a bone in the forearm, whereas the Femur, Tibia, and Fibula are bones of the human leg." },
+    { opts: ["Dolphin", "Orca", "Sperm Whale", "Whale Shark"], odd: "Whale Shark", why: "The Whale Shark is a cartilaginous fish that breathes with gills, whereas Dolphins, Orcas, and Sperm Whales are warm-blooded marine mammals." },
+    { opts: ["Canberra", "Ottawa", "Brasília", "Sydney"], odd: "Sydney", why: "Sydney is a coastal metropolis but NOT a national capital, whereas Canberra (Australia), Ottawa (Canada), and Brasília (Brazil) are purpose-built national capitals." },
+    { opts: ["Bolivia", "Paraguay", "Switzerland", "Uruguay"], odd: "Uruguay", why: "Uruguay has an Atlantic coastline, whereas Bolivia, Paraguay, and Switzerland are completely landlocked countries." },
+    { opts: ["Titanium", "Platinum", "Tungsten", "Bromine"], odd: "Bromine", why: "Bromine is a non-metal liquid at room temperature, whereas Titanium, Platinum, and Tungsten are solid transition metals." },
+    { opts: ["Joule", "Watt", "Newton", "Meter"], odd: "Meter", why: "The Meter is an SI Base Unit of length, whereas Joule, Watt, and Newton are SI Derived Units named after scientists." },
+    { opts: ["Violin", "Cello", "Viola", "Oboe"], odd: "Oboe", why: "The Oboe is a double-reed woodwind instrument, whereas the Violin, Cello, and Viola are bowed string instruments." },
+    { opts: ["Mozart", "Beethoven", "Bach", "Rembrandt"], odd: "Rembrandt", why: "Rembrandt was a Dutch Golden Age painter, whereas Mozart, Beethoven, and Bach were classical/baroque composers." },
+    { opts: ["Python", "Kotlin", "Rust", "HTML"], odd: "HTML", why: "HTML is a markup language for structuring documents, whereas Python, Kotlin, and Rust are general-purpose Turing-complete programming languages." },
+    { opts: ["Phobos", "Deimos", "Titan", "Io"], odd: "Titan", why: " Wait — Phobos and Deimos orbit Mars! Let's check: Titan is the only moon among {Ganymede, Callisto, Io, Titan} that orbits Saturn instead of Jupiter!" },
+    { opts: ["Ganymede", "Callisto", "Io", "Titan"], odd: "Titan", why: "Titan orbits Saturn, whereas Ganymede, Callisto, and Io are Galilean moons orbiting Jupiter." },
+    { opts: ["Mitosis", "Meiosis", "Binary Fission", "Photosynthesis"], odd: "Photosynthesis", why: "Photosynthesis converts light energy into chemical sugars, whereas Mitosis, Meiosis, and Binary Fission are processes of cell division." },
+    { opts: ["97", "89", "83", "91"], odd: "91", why: "91 is NOT a prime number (91 = 7 × 13), whereas 97, 89, and 83 are all prime numbers!" },
+    { opts: ["Igneous", "Sedimentary", "Metamorphic", "Tectonic"], odd: "Tectonic", why: "Tectonic refers to crustal plate motion, whereas Igneous, Sedimentary, and Metamorphic are the three fundamental rock classifications." }
+  ].filter(x => !x.why.startsWith("Wait")),
 
   connectionsPacks: [
     {
-      "Algerian Wilayas (Cities)": ["Oran", "Constantine", "Tlemcen", "Ghardaïa"],
       "Noble Gases": ["Helium", "Neon", "Argon", "Xenon"],
       "SI Physics Units": ["Joule", "Pascal", "Tesla", "Hertz"],
-      "Golden Age Scholars": ["Ibn Khaldun", "Ibn Sina", "Al-Khwarizmi", "Al-Idrisi"]
+      "Moons of Jupiter": ["Io", "Europa", "Ganymede", "Callisto"],
+      "Human Bones": ["Femur", "Tibia", "Humerus", "Stapes"]
     },
     {
-      "World Currencies": ["Dinar", "Dirham", "Yen", "Franc"],
+      "World Currencies": ["Yen", "Franc", "Peso", "Krone"],
       "Layers of Atmosphere": ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"],
-      "Human Bones": ["Femur", "Tibia", "Humerus", "Stapes"],
-      "Moons of the Solar System": ["Titan", "Europa", "Ganymede", "Phobos"]
+      "Programming Languages": ["Kotlin", "Python", "Rust", "Swift"],
+      "Types of Clouds": ["Cumulus", "Stratus", "Cirrus", "Nimbus"]
     },
     {
-      "Mediterranean Islands": ["Sicily", "Sardinia", "Cyprus", "Corsica"],
-      "Programming Languages": ["Kotlin", "Python", "Rust", "Swift"],
-      "African Rivers": ["Nile", "Congo", "Niger", "Zambezi"],
-      "Chess Pieces": ["Knight", "Bishop", "Rook", "Pawn"]
+      "Landlocked Countries": ["Switzerland", "Austria", "Bolivia", "Paraguay"],
+      "Renaissance Artists": ["Leonardo", "Michelangelo", "Raphael", "Donatello"],
+      "Chess Pieces": ["Knight", "Bishop", "Rook", "Pawn"],
+      "Prime Numbers": ["Eleven", "Thirteen", "Seventeen", "Nineteen"]
     }
   ]
 };
