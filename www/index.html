@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>ZenQuiz Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-light">
+  <div id="app">
+    <header class="top-bar">
+      <div class="brand" id="btnHomeLogo">
+        <span class="brand-icon">🌿</span>
+        <div>
+          <h1 id="appTitle">ZenQuiz</h1>
+          <span id="appSubtitle" class="subtitle">Calm Mind &amp; Mini-Games</span>
+        </div>
+      </div>
+      <div class="stats-pills">
+        <div class="pill" title="Level &amp; XP">⭐ <span id="statLevel">Lv 1</span> · <span id="statXP">0</span> XP</div>
+        <div class="pill" title="Streak">🔥 <span id="statStreak">0</span></div>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <!-- TAB 1: GAMES HUB (41 MODES) -->
+      <section id="viewHub" class="view active">
+        <div class="hero-card">
+          <div class="hero-text">
+            <h2 id="heroWelcome">Breathe &amp; Play</h2>
+            <p id="heroDesc">41 relaxing offline mini-games &amp; 32 quiz categories</p>
+          </div>
+          <button class="btn-primary" id="btnQuickPlay">✨ Quick Calm Quiz</button>
+        </div>
+
+        <div class="controls-bar">
+          <input type="search" id="searchModes" class="search-input" placeholder="Search 41 games..." />
+          <div class="filter-chips" id="hubFilterBar">
+            <button class="chip active" data-filter="all" id="chipAll">All (41)</button>
+            <button class="chip" data-filter="fav_first" id="chipFavFirst">♥ Favorites First</button>
+            <button class="chip" data-filter="fav_only" id="chipFavOnly">♥ Only Favorites</button>
+            <button class="chip" data-filter="speed" id="chipSpeed">⏱️ Speed</button>
+            <button class="chip" data-filter="word" id="chipWord">🔤 Word</button>
+            <button class="chip" data-filter="guess" id="chipGuess">🕵️ Guess</button>
+            <button class="chip" data-filter="geo" id="chipGeo">🌍 Geo</button>
+            <button class="chip" data-filter="logic" id="chipLogic">🧩 Logic</button>
+            <button class="chip" data-filter="adventure" id="chipAdv">🗺️ Adventure</button>
+          </div>
+        </div>
+
+        <div id="modesGrid" class="cards-grid"></div>
+      </section>
+
+      <!-- TAB 2: 32 CATEGORIES & 7 QUESTION TYPES -->
+      <section id="viewCategories" class="view">
+        <div class="section-header">
+          <h2 id="catHeaderTitle">32 Categories &amp; 7 Formats</h2>
+          <p id="catHeaderSub">Choose difficulty and question style, then tap any topic</p>
+        </div>
+
+        <div class="selector-group">
+          <label id="lblDiff">Difficulty Tier:</label>
+          <div class="segmented" id="diffSelector">
+            <button class="seg-btn active" data-diff="easy" id="btnEasy">🌱 Easy</button>
+            <button class="seg-btn" data-diff="medium" id="btnMedium">🌿 Medium</button>
+            <button class="seg-btn" data-diff="hard" id="btnHard">🌳 Hard</button>
+          </div>
+        </div>
+
+        <div class="selector-group">
+          <label id="lblQType">Question Type:</label>
+          <div class="filter-chips" id="qTypeSelector">
+            <button class="chip active" data-qtype="mix" id="qtMix">🎲 All Mixed</button>
+            <button class="chip" data-qtype="mcq" id="qtMcq">🔘 Multiple Choice</button>
+            <button class="chip" data-qtype="tf" id="qtTf">⚖️ True / False</button>
+            <button class="chip" data-qtype="blank" id="qtBlank">✏️ Fill Blank</button>
+            <button class="chip" data-qtype="typed" id="qtTyped">⌨️ Typed</button>
+            <button class="chip" data-qtype="match" id="qtMatch">🔗 Matching</button>
+            <button class="chip" data-qtype="order" id="qtOrder">🔢 Ordering</button>
+            <button class="chip" data-qtype="odd" id="qtOdd">🔍 Odd One Out</button>
+          </div>
+        </div>
+
+        <div id="categoriesGrid" class="cards-grid"></div>
+      </section>
+
+      <!-- TAB 3: PROGRESS & HIGH SCORES -->
+      <section id="viewStats" class="view">
+        <div class="section-header">
+          <h2 id="statsTitle">Your Calm Journey</h2>
+          <p id="statsSub">All progress is saved offline on your phone</p>
+        </div>
+        <div id="statsOverview" class="stats-overview"></div>
+        <h3 id="highScoresTitle" class="sub-heading">Mode High Scores</h3>
+        <div id="highScoresList" class="scores-list"></div>
+      </section>
+
+      <!-- TAB 4: SETTINGS -->
+      <section id="viewSettings" class="view">
+        <div class="section-header">
+          <h2 id="settingsTitle">Settings</h2>
+          <p id="settingsSub">Customize language, theme, and calm audio</p>
+        </div>
+
+        <div class="settings-card">
+          <div class="setting-row">
+            <div>
+              <strong id="setLangTitle">Language / اللغة / Langue</strong>
+              <p id="setLangSub" class="muted">Full UI &amp; question bank translation</p>
+            </div>
+            <div class="segmented">
+              <button class="seg-btn active" data-lang="en">English</button>
+              <button class="seg-btn" data-lang="fr">Français</button>
+              <button class="seg-btn" data-lang="ar">العربية</button>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong id="setThemeTitle">Pastel Theme</strong>
+              <p id="setThemeSub" class="muted">Soft daylight or calm twilight</p>
+            </div>
+            <button id="btnToggleTheme" class="btn-secondary">🌙 Dark / Light</button>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong id="setSoundTitle">Calm Chime Sounds</strong>
+              <p id="setSoundSub" class="muted">Gentle synthesizer tones on answers</p>
+            </div>
+            <button id="btnToggleSound" class="btn-secondary">🔊 Sound: ON</button>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong id="setResetTitle">Reset Local Progress</strong>
+              <p id="setResetSub" class="muted">Clear scores, XP, and favorites</p>
+            </div>
+            <button id="btnResetData" class="btn-secondary">♻️ Reset</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTIVE GAME STAGE OVERLAY -->
+      <section id="viewStage" class="view">
+        <div class="stage-topbar">
+          <button id="btnExitStage" class="btn-back">← <span id="lblBack">Back</span></button>
+          <div class="stage-meta">
+            <span id="stageTitle">Game Mode</span>
+            <span id="stageScore" class="pill">Score: 0</span>
+          </div>
+          <span id="stageTimer" class="pill timer-pill">∞</span>
+        </div>
+        <div id="stageBody" class="stage-body"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-tab="viewHub">
+        <span class="nav-icon">🎮</span>
+        <span class="nav-label" id="navHub">Games (41)</span>
+      </button>
+      <button class="nav-btn" data-tab="viewCategories">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label" id="navCats">Topics (32)</span>
+      </button>
+      <button class="nav-btn" data-tab="viewStats">
+        <span class="nav-icon">🏆</span>
+        <span class="nav-label" id="navStats">Progress</span>
+      </button>
+      <button class="nav-btn" data-tab="viewSettings">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label" id="navSettings">Settings</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
