@@ -1,5 +1,6 @@
 /* ============================================================================
-   ZENQUIZ PRO - NON-REPEATING DECK ENGINE & UPGRADED 41 MINI-GAMES
+   ZENQUIZ PRO - UPGRADED ENGINE (34 MODES, REAL MAPS, WORDLE KB, UNDO/REDO,
+   BOT MEMORY DUEL, SUDDEN-DEATH MILLIONAIRE, SIZE IT UP & WEIGHT IT UP)
    ============================================================================ */
 
 const State = {
@@ -35,15 +36,15 @@ function playCalmTone(type) {
     } else if (type === "tap") {
       osc.frequency.setValueAtTime(440, now);
     } else {
-      osc.frequency.setValueAtTime(320, now);
-      osc.frequency.exponentialRampToValueAtTime(270, now + 0.2);
+      osc.frequency.setValueAtTime(310, now);
+      osc.frequency.exponentialRampToValueAtTime(250, now + 0.22);
     }
     gain.gain.setValueAtTime(0.08, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
     osc.connect(gain);
     gain.connect(ctx.destination);
     osc.start();
-    osc.stop(now + 0.25);
+    osc.stop(now + 0.26);
   } catch (e) {}
 }
 
@@ -89,9 +90,7 @@ function updateHeaderStats() {
   document.getElementById("statStreak").textContent = State.streak;
 }
 
-/* ============================================================================
-   SMART NON-REPEATING DECK DRAW (Tracks seenIds across all 1,500+ questions)
-   ============================================================================ */
+/* SMART NON-REPEATING QUESTION DRAW */
 function drawUniqueQuestion(catId, diff) {
   const seenSet = new Set(State.seenIds);
   let pool = window.QUESTION_BANK.filter(q =>
@@ -99,20 +98,15 @@ function drawUniqueQuestion(catId, diff) {
     (!diff || q.diff === diff) &&
     !seenSet.has(q.id)
   );
+  if (pool.length === 0) pool = window.QUESTION_BANK.filter(q => (!catId || q.cat === catId) && !seenSet.has(q.id));
+  if (pool.length === 0) pool = window.QUESTION_BANK.filter(q => !seenSet.has(q.id));
   if (pool.length === 0) {
-    pool = window.QUESTION_BANK.filter(q => (!catId || q.cat === catId) && !seenSet.has(q.id));
-  }
-  if (pool.length === 0) {
-    pool = window.QUESTION_BANK.filter(q => !seenSet.has(q.id));
-  }
-  if (pool.length === 0) {
-    // Player has finished all 1,500+ questions! Reset deck cleanly.
     State.seenIds = [];
     pool = window.QUESTION_BANK;
   }
   const chosen = pool[Math.floor(Math.random() * pool.length)];
   State.seenIds.push(chosen.id);
-  if (State.seenIds.length > 2000) State.seenIds.shift();
+  if (State.seenIds.length > 5000) State.seenIds.shift();
   saveState();
   return chosen;
 }
@@ -228,11 +222,10 @@ function renderStats() {
   if (!ov || !list) return;
   const lv = Math.floor(State.xp / 100) + 1;
   ov.innerHTML = `
-    <div class="score-row"><strong>📚 Total Question Bank</strong><span>${window.QUESTION_BANK.length} Unique Qs</span></div>
-    <div class="score-row"><strong>✅ Unique Questions Seen</strong><span>${State.seenIds.length} / ${window.QUESTION_BANK.length}</span></div>
+    <div class="score-row"><strong>📚 Total Offline Questions</strong><span>${window.QUESTION_BANK.length.toLocaleString()} Unique Qs</span></div>
+    <div class="score-row"><strong>✅ Unique Questions Answered</strong><span>${State.seenIds.length} / ${window.QUESTION_BANK.length}</span></div>
     <div class="score-row"><strong>⭐ Player Level</strong><span>Lv ${lv} (${State.xp} XP)</span></div>
     <div class="score-row"><strong>🔥 Current Streak</strong><span>${State.streak}</span></div>
-    <div class="score-row"><strong>❤️ Favorite Modes</strong><span>${State.favorites.length}</span></div>
   `;
   list.innerHTML = "";
   window.GAME_MODES.forEach(m => {
@@ -280,7 +273,7 @@ function openStage(id, titleText) {
 }
 
 /* ============================================================================
-   7 QUESTION TYPES ENGINE (NO REPEATS)
+   7 QUESTION TYPES ENGINE (MCQ, TF, BLANK, TYPED, MATCH, ORDER, ODD ONE OUT)
    ============================================================================ */
 function startCategoryQuiz(catId, catName) {
   openStage("cat_" + catId, catName);
@@ -346,7 +339,7 @@ function renderNextCategoryQuestion(catId) {
     });
   } else if (chosenType === "typed") {
     stage.innerHTML = `
-      <div class="q-sub">#${item.id.replace("q_","")} · ${t("qtTyped")} (Hint: ${ansText.slice(0, 2)}...)</div>
+      <div class="q-sub">#${item.id.replace("q_","")} · ${t("qtTyped")} (Starts with: ${ansText.slice(0, 2)}...)</div>
       <div class="q-prompt">${qText}</div>
       <input type="text" id="typedIn" class="search-input" placeholder="..." />
       <button class="btn-primary" id="btnSubTyped" style="width:100%">${t("checkBtn")}</button>
@@ -366,7 +359,7 @@ function renderNextCategoryQuestion(catId) {
   }
 }
 
-function handleAnswerResult(isCorrect, correctText, nextCallback, btnEl) {
+function handleAnswerResult(isCorrect, detailText, nextCallback, btnEl, extraExplanation) {
   if (btnEl) btnEl.classList.add(isCorrect ? "correct" : "wrong");
   if (isCorrect) {
     playCalmTone("good");
@@ -380,7 +373,8 @@ function handleAnswerResult(isCorrect, correctText, nextCallback, btnEl) {
   if (fb) {
     fb.innerHTML = `
       <div class="feedback-banner">
-        <div>${isCorrect ? t("correctMsg") : t("wrongMsg") + correctText}</div>
+        <div>${isCorrect ? t("correctMsg") : t("wrongMsg") + detailText}</div>
+        ${extraExplanation ? `<div style="margin-top:8px;font-size:13px;font-weight:500;opacity:0.92">💡 ${extraExplanation}</div>` : ""}
         <button class="btn-primary" style="margin-top:10px" id="btnNextQ">${t("nextBtn")}</button>
       </div>
     `;
@@ -389,7 +383,7 @@ function handleAnswerResult(isCorrect, correctText, nextCallback, btnEl) {
 }
 
 /* ============================================================================
-   ALL 41 GAME MODES DISPATCHER (RANDOMIZED & HARDER)
+   34 GAME MODES DISPATCHER
    ============================================================================ */
 function startMode(modeId, titleText) {
   openStage(modeId, titleText);
@@ -399,41 +393,34 @@ function startMode(modeId, titleText) {
     case "timed_blitz": return runTimedBlitz(stage);
     case "unscramble_geo": return runUnscramble(stage, true);
     case "tf_rush": return runTfRush(stage);
-    case "speed_tap": return runSpeedTap(stage);
     case "category_blitz": return runCategoryBlitz(stage);
     case "spelling_bee": return runSpellingBee(stage);
     case "unscramble_words": return runUnscramble(stage, false);
     case "wordle_theme": return runWordle(stage);
     case "hangman": return runHangman(stage);
-    case "missing_letters": return runMissingLetters(stage);
-    case "word_search": return runWordSearch(stage);
     case "mini_crossword": return runMiniCrossword(stage);
-    case "anagram_chain": return runAnagramChain(stage);
     case "guess_person": return runGuessPerson(stage, false);
     case "guess_vs_bot": return runGuessPerson(stage, true);
-    case "guess_zoom": return runGuessZoom(stage);
     case "guess_movie_emoji": return runMovieEmoji(stage);
-    case "guess_silhouette": return runSilhouette(stage);
     case "guess_footballer": return runFootballer(stage);
-    case "pixel_clear": return runPixelClear(stage);
     case "color_guess": return runColorGuess(stage);
     case "who_am_i": return runWhoAmI(stage);
     case "map_click": return runMapClick(stage);
     case "border_guess": return runBorderGuess(stage);
     case "capital_match": return renderCapitalMatchMode(stage, () => startMode(modeId, titleText));
-    case "geo_higher_lower": return runHigherLower(stage, true);
+    case "geo_higher_lower": return runHigherLower(stage);
     case "distance_guess": return runDistanceGuess(stage);
+    case "size_it_up": return runSizeOrWeight(stage, "size");
+    case "weight_it_up": return runSizeOrWeight(stage, "weight");
     case "stat_higher_lower": return runHistoryHigherLower(stage);
     case "compare_two": return runElementCompare(stage);
     case "odd_one_out": return renderOddOneOutMode(stage, () => startMode(modeId, titleText));
     case "timeline_sort": return renderTimelineSortMode(stage, () => startMode(modeId, titleText));
-    case "match_pairs": return runMatchPairs(stage);
+    case "match_pairs": return runMatchPairsVsBot(stage);
     case "connections": return runConnections(stage);
     case "number_puzzles": return runNumberPuzzles(stage);
     case "time_travel": return runTimeTravel(stage);
     case "escape_room": return runEscapeRoom(stage);
-    case "treasure_hunt": return runTreasureHunt(stage);
-    case "spot_difference": return runSpotDifference(stage);
     case "millionaire": return runMillionaire(stage);
     case "jeopardy": return runJeopardy(stage);
     case "true_or_fake": return runTrueOrFake(stage);
@@ -465,35 +452,65 @@ function runTimedBlitz(stage) {
   nextQ();
 }
 
-/* 2 & 7. UNSCRAMBLE (60+ PLACES & HARD SCIENTIFIC WORDS) */
+/* 2 & 6. UNSCRAMBLE WITH FULL UNDO / REDO / CLEAR STACK */
 function runUnscramble(stage, isTimedGeo) {
   const pool = isTimedGeo ? window.SPECIAL_DATA.unscrambleGeoPool : window.SPECIAL_DATA.unscrambleWordsPool;
   const target = pool[Math.floor(Math.random() * pool.length)];
-  const scrambled = target.split("").sort(() => Math.random() - 0.5);
-  let picked = [];
-  if (isTimedGeo) startCountdown(10, () => runUnscramble(stage, true));
+  const initialScrambled = target.split("").sort(() => Math.random() - 0.5);
+
+  let history = [{ picked: [], scrambled: initialScrambled.slice() }];
+  let hIdx = 0;
+
+  if (isTimedGeo) startCountdown(15, () => runUnscramble(stage, true));
 
   const render = () => {
+    const curr = history[hIdx];
     stage.innerHTML = `
-      <div class="q-sub">${isTimedGeo ? "⏱️ 10s Geo Unscramble" : "🔤 Scientific & Master Word Unscramble"} (${target.length} letters)</div>
-      <div class="q-prompt" style="letter-spacing:3px">${picked.join("") || "_ ".repeat(target.length)}</div>
+      <div class="q-sub">${isTimedGeo ? "⏱️ 15s World City/Country Unscramble" : "🔤 Master Scientific Unscramble"} (${target.length} letters)</div>
+      <div class="q-prompt" style="letter-spacing:3px;min-height:36px">${curr.picked.join("") || "_ ".repeat(target.length)}</div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px">
+        <button class="btn-secondary" id="btnUndo" ${hIdx === 0 ? "disabled style='opacity:0.4'" : ""}>↩️ Undo</button>
+        <button class="btn-secondary" id="btnRedo" ${hIdx >= history.length - 1 ? "disabled style='opacity:0.4'" : ""}>↪️ Redo</button>
+        <button class="btn-secondary" id="btnClear" ${curr.picked.length === 0 ? "disabled style='opacity:0.4'" : ""}>🗑️ Clear</button>
+      </div>
       <div class="tile-row" id="scrTiles"></div>
       <div id="fbBox"></div>
     `;
+
+    document.getElementById("btnUndo").onclick = () => {
+      if (hIdx > 0) { hIdx--; playCalmTone("tap"); render(); }
+    };
+    document.getElementById("btnRedo").onclick = () => {
+      if (hIdx < history.length - 1) { hIdx++; playCalmTone("tap"); render(); }
+    };
+    document.getElementById("btnClear").onclick = () => {
+      if (curr.picked.length > 0) {
+        history = history.slice(0, hIdx + 1);
+        history.push({ picked: [], scrambled: initialScrambled.slice() });
+        hIdx++;
+        playCalmTone("tap");
+        render();
+      }
+    };
+
     const row = document.getElementById("scrTiles");
-    scrambled.forEach((ch, idx) => {
+    curr.scrambled.forEach((ch, idx) => {
       if (ch === null) return;
       const b = document.createElement("button");
       b.className = "letter-tile";
       b.textContent = ch;
       b.onclick = () => {
-        picked.push(ch);
-        scrambled[idx] = null;
+        const nextPicked = curr.picked.concat(ch);
+        const nextScrambled = curr.scrambled.slice();
+        nextScrambled[idx] = null;
+        history = history.slice(0, hIdx + 1);
+        history.push({ picked: nextPicked, scrambled: nextScrambled });
+        hIdx++;
         playCalmTone("tap");
         render();
-        if (picked.length === target.length) {
+        if (nextPicked.length === target.length) {
           clearStageTimer();
-          handleAnswerResult(picked.join("") === target, target, () => runUnscramble(stage, isTimedGeo));
+          handleAnswerResult(nextPicked.join("") === target, target, () => runUnscramble(stage, isTimedGeo));
         }
       };
       row.appendChild(b);
@@ -540,46 +557,7 @@ function runTfRush(stage) {
   nextCard();
 }
 
-/* 4. SPEED TAP BUBBLES (DYNAMIC CHALLENGES) */
-function runSpeedTap(stage) {
-  const modes = [
-    { prompt: "Tap ONLY World Capitals! Avoid Country Names!", good: window.SPECIAL_DATA.rawCountries.slice(0, 15).map(c => c[4]), bad: window.SPECIAL_DATA.rawCountries.slice(15, 30).map(c => c[1]) },
-    { prompt: "Tap ONLY Chemical Elements! Avoid Planets/Cities!", good: window.SPECIAL_DATA.rawElements.slice(0, 15).map(e => e[2]), bad: ["Jupiter","Saturn","Algiers","Paris","Tokyo","Madrid","Oslo","Cairo"] }
-  ];
-  const m = modes[Math.floor(Math.random() * modes.length)];
-  stage.innerHTML = `
-    <div class="q-sub">${m.prompt}</div>
-    <div class="falling-arena" id="arena"></div>
-    <button class="btn-primary" id="btnRestartFall" style="width:100%">🔄 Next Wave</button>
-  `;
-  const arena = document.getElementById("arena");
-  const gPick = m.good.sort(() => Math.random() - 0.5).slice(0, 4);
-  const bPick = m.bad.sort(() => Math.random() - 0.5).slice(0, 4);
-  [...gPick, ...bPick].sort(() => Math.random() - 0.5).forEach((label, i) => {
-    const el = document.createElement("div");
-    el.className = "falling-item";
-    el.textContent = label;
-    el.style.left = `${6 + (i % 4) * 23}%`;
-    let top = -15 - (i * 28);
-    el.style.top = `${top}px`;
-    const iv = setInterval(() => {
-      top += 3.5;
-      el.style.top = `${top}px`;
-      if (top > 245) clearInterval(iv);
-    }, 70);
-    el.onclick = () => {
-      clearInterval(iv);
-      const ok = m.good.includes(label);
-      if (ok) { playCalmTone("good"); addPoints(15); el.style.background = "var(--accent-mint)"; }
-      else { playCalmTone("miss"); el.style.background = "var(--accent-peach)"; }
-      setTimeout(() => el.remove(), 180);
-    };
-    arena.appendChild(el);
-  });
-  document.getElementById("btnRestartFall").onclick = () => runSpeedTap(stage);
-}
-
-/* 5. CATEGORY BLITZ (30s) */
+/* 4. CATEGORY BLITZ (30s) */
 function runCategoryBlitz(stage) {
   startCountdown(30, () => {
     stage.innerHTML = `<div class="q-prompt">🗂️ 30s Complete! ${State.score} pts</div>`;
@@ -608,7 +586,7 @@ function runCategoryBlitz(stage) {
   });
 }
 
-/* 6. MASTER SPELLING BEE */
+/* 5. MASTER SPELLING BEE */
 function runSpellingBee(stage) {
   const sets = [
     { good: "Mediterranean", opts: ["Mediterranean", "Mediteranean", "Meditterranean", "Mediteranian"] },
@@ -631,22 +609,71 @@ function runSpellingBee(stage) {
   });
 }
 
-/* 8. THEMED WORDLE (28+ WORDS) */
+/* 7. THEMED WORDLE WITH FULL INTERACTIVE ON-SCREEN KEYBOARD */
 function runWordle(stage) {
   const entry = window.SPECIAL_DATA.words5[Math.floor(Math.random() * window.SPECIAL_DATA.words5.length)];
   const target = entry.word;
   let guesses = [];
+  let currentGuess = "";
+  let gameOver = false;
+
+  const kbRows = [
+    ["Q","W","E","R","T","Y","U","I","O","P"],
+    ["A","S","D","F","G","H","J","K","L"],
+    ["ENTER","Z","X","C","V","B","N","M","⌫"]
+  ];
+
+  const getKeyStatus = (letter) => {
+    let status = "";
+    guesses.forEach(g => {
+      for (let i = 0; i < 5; i++) {
+        if (g[i] === letter) {
+          if (target[i] === letter) status = "hit";
+          else if (target.includes(letter) && status !== "hit") status = "near";
+          else if (!status) status = "miss";
+        }
+      }
+    });
+    return status;
+  };
+
+  const handleKey = (key) => {
+    if (gameOver) return;
+    if (key === "⌫") {
+      currentGuess = currentGuess.slice(0, -1);
+      playCalmTone("tap");
+      render();
+    } else if (key === "ENTER") {
+      if (currentGuess.length !== 5) return;
+      guesses.push(currentGuess);
+      const won = currentGuess === target;
+      currentGuess = "";
+      if (won || guesses.length >= 6) {
+        gameOver = true;
+        render();
+        handleAnswerResult(won, target, () => runWordle(stage));
+      } else {
+        playCalmTone("tap");
+        render();
+      }
+    } else if (currentGuess.length < 5 && /^[A-Z]$/.test(key)) {
+      currentGuess += key;
+      playCalmTone("tap");
+      render();
+    }
+  };
+
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">Theme: ${entry.theme} — ${tr(entry.clue)}</div>
+      <div class="q-sub">Theme: <strong>${entry.theme}</strong> — ${tr(entry.clue)}</div>
       <div class="wordle-grid" id="wGrid"></div>
-      <input type="text" id="wInput" maxlength="5" class="search-input" placeholder="5 letters..." style="text-transform:uppercase;text-align:center" />
-      <button class="btn-primary" id="wSub" style="width:100%">${t("checkBtn")}</button>
+      <div id="wKeyboard" style="display:flex;flex-direction:column;gap:6px;margin-top:12px"></div>
       <div id="fbBox"></div>
     `;
     const g = document.getElementById("wGrid");
     for (let r = 0; r < 6; r++) {
-      const word = guesses[r] || "     ";
+      const isCurrentRow = r === guesses.length && !gameOver;
+      const word = guesses[r] || (isCurrentRow ? currentGuess.padEnd(5, " ") : "     ");
       for (let c = 0; c < 5; c++) {
         const cell = document.createElement("div");
         cell.className = "wordle-cell";
@@ -656,24 +683,33 @@ function runWordle(stage) {
           if (ch === target[c]) cell.classList.add("hit");
           else if (target.includes(ch)) cell.classList.add("near");
           else cell.classList.add("miss");
+        } else if (isCurrentRow && ch !== " ") {
+          cell.style.borderColor = "var(--primary)";
         }
         g.appendChild(cell);
       }
     }
-    document.getElementById("wSub").onclick = () => {
-      const val = document.getElementById("wInput").value.trim().toUpperCase();
-      if (val.length !== 5) return;
-      guesses.push(val);
-      render();
-      if (val === target || guesses.length >= 6) {
-        handleAnswerResult(val === target, target, () => runWordle(stage));
-      }
-    };
+
+    const kbContainer = document.getElementById("wKeyboard");
+    kbRows.forEach(row => {
+      const rDiv = document.createElement("div");
+      rDiv.style.cssText = "display:flex;justify-content:center;gap:4px;";
+      row.forEach(k => {
+        const btn = document.createElement("button");
+        const st = k.length === 1 ? getKeyStatus(k) : "";
+        btn.className = "letter-tile " + (st ? "wordle-cell " + st : "");
+        btn.style.cssText = `min-width:${k.length > 1 ? "58px" : "31px"};height:42px;padding:0 6px;font-size:${k.length > 1 ? "12px" : "15px"};border-radius:8px;`;
+        btn.textContent = k;
+        btn.onclick = () => handleKey(k);
+        rDiv.appendChild(btn);
+      });
+      kbContainer.appendChild(rDiv);
+    });
   };
   render();
 }
 
-/* 9. HANGMAN (50+ WORDS) */
+/* 8. HANGMAN */
 function runHangman(stage) {
   const pool = [...window.SPECIAL_DATA.unscrambleGeoPool, ...window.SPECIAL_DATA.unscrambleWordsPool];
   const target = pool[Math.floor(Math.random() * pool.length)];
@@ -720,72 +756,12 @@ function runHangman(stage) {
   render();
 }
 
-/* 10. MISSING LETTERS (DYNAMICALLY BUILT FROM 65 CAPITALS) */
-function runMissingLetters(stage) {
-  const c = window.SPECIAL_DATA.rawCountries[Math.floor(Math.random() * window.SPECIAL_DATA.rawCountries.length)];
-  const ans = c[4].toUpperCase();
-  const masked = ans.split("").map((ch, i) => ("AEIOU".includes(ch) && i > 0 ? "_" : ch)).join(" ");
-  const decoys = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5).slice(0, 3).map(x => x[4].toUpperCase());
-  const opts = Array.from(new Set([ans, ...decoys])).slice(0, 4).sort(() => Math.random() - 0.5);
-  stage.innerHTML = `
-    <div class="q-sub">Fill the missing vowels (${c[1]})</div>
-    <div class="q-prompt" style="letter-spacing:4px">${masked}</div>
-    <div class="options-list" id="mlOpts"></div>
-    <div id="fbBox"></div>
-  `;
-  opts.forEach(o => {
-    const b = document.createElement("button");
-    b.className = "opt-btn";
-    b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === ans, ans, () => runMissingLetters(stage), b);
-    document.getElementById("mlOpts").appendChild(b);
-  });
-}
-
-/* 11. THEMED WORD SEARCH */
-function runWordSearch(stage) {
-  const packs = [
-    { theme: "Algerian Cities", words: ["ORAN", "ALGIERS", "BLIDA", "ANNABA", "SETIF"] },
-    { theme: "Planets", words: ["MARS", "VENUS", "EARTH", "SATURN", "PLUTO"] },
-    { theme: "Precious Elements", words: ["GOLD", "SILVER", "NEON", "IRON", "ZINC"] }
-  ];
-  const p = packs[Math.floor(Math.random() * packs.length)];
-  let found = [];
-  const render = () => {
-    stage.innerHTML = `
-      <div class="q-sub">Theme: ${p.theme} — Tap each hidden word row (${found.length}/${p.words.length})</div>
-      <div class="options-list" id="wsGrid"></div>
-      <div id="fbBox"></div>
-    `;
-    const g = document.getElementById("wsGrid");
-    p.words.forEach(word => {
-      const pad = "XZQWKJBV".slice(0, 9 - word.length);
-      const b = document.createElement("button");
-      b.className = "opt-btn " + (found.includes(word) ? "correct" : "");
-      b.style.letterSpacing = "6px";
-      b.style.textAlign = "center";
-      b.textContent = pad.slice(0, 2) + word + pad.slice(2);
-      b.onclick = () => {
-        if (!found.includes(word)) {
-          found.push(word);
-          playCalmTone("good");
-          addPoints(15);
-          render();
-          if (found.length === p.words.length) handleAnswerResult(true, p.words.join(", "), () => runWordSearch(stage));
-        }
-      };
-      g.appendChild(b);
-    });
-  };
-  render();
-}
-
-/* 12. MULTI-PACK MINI CROSSWORD */
+/* 9. MULTI-PACK CROSSWORD */
 function runMiniCrossword(stage) {
   const packs = [
-    { c1: "1-Across: Capital of Algeria (7 letters)", a1: "ALGIERS", c2: "2-Across: Chemical symbol for Gold (2 letters)", a2: "AU" },
-    { c1: "1-Across: Author of Muqaddimah: Ibn ___ (7 letters)", a1: "KHALDUN", c2: "2-Across: Longest river in Africa (4 letters)", a2: "NILE" },
-    { c1: "1-Across: Largest planet in solar system (7 letters)", a1: "JUPITER", c2: "2-Across: Unit of frequency (5 letters)", a2: "HERTZ" }
+    { c1: "1-Across: Capital of Japan (5 letters)", a1: "TOKYO", c2: "2-Across: Chemical symbol for Gold (2 letters)", a2: "AU" },
+    { c1: "1-Across: Planet famous for rings (6 letters)", a1: "SATURN", c2: "2-Across: Unit of frequency (5 letters)", a2: "HERTZ" },
+    { c1: "1-Across: Largest planet in solar system (7 letters)", a1: "JUPITER", c2: "2-Across: Smallest bone in human ear (6 letters)", a2: "STAPES" }
   ];
   const p = packs[Math.floor(Math.random() * packs.length)];
   stage.innerHTML = `
@@ -802,27 +778,7 @@ function runMiniCrossword(stage) {
   };
 }
 
-/* 13. ANAGRAM LETTER CHAIN */
-function runAnagramChain(stage) {
-  const c = window.SPECIAL_DATA.rawCountries[Math.floor(Math.random() * 20)];
-  const prev = c[1].toUpperCase();
-  const lastChar = prev.slice(-1);
-  const nextCountry = window.SPECIAL_DATA.rawCountries.find(x => x[1].toUpperCase().startsWith(lastChar)) || window.SPECIAL_DATA.rawCountries[0];
-  const ans = nextCountry[1].toUpperCase();
-  stage.innerHTML = `
-    <div class="q-sub">Previous Word: <strong>${prev}</strong> (Ends with <strong>${lastChar}</strong>)</div>
-    <div class="q-prompt">Name the Country starting with "${lastChar}" whose capital is ${nextCountry[4]}:</div>
-    <input id="acIn" class="search-input" placeholder="Starts with ${lastChar}..." />
-    <button class="btn-primary" id="acSub" style="width:100%">${t("checkBtn")}</button>
-    <div id="fbBox"></div>
-  `;
-  document.getElementById("acSub").onclick = () => {
-    const val = document.getElementById("acIn").value.trim().toUpperCase();
-    handleAnswerResult(val === ans, ans, () => runAnagramChain(stage));
-  };
-}
-
-/* 14 & 15. GUESS THE HISTORICAL ICON (PROGRESSIVE CLUES & VS BOT) */
+/* 10 & 11. GUESS THE GLOBAL ICON (PROGRESSIVE CLUES & VS BOT) */
 function runGuessPerson(stage, vsBot) {
   const p = window.SPECIAL_DATA.peopleClues[Math.floor(Math.random() * window.SPECIAL_DATA.peopleClues.length)];
   const clues = p.clues[State.lang] || p.clues.en;
@@ -854,86 +810,30 @@ function runGuessPerson(stage, vsBot) {
   render();
 }
 
-/* 16. GUESS ZOOM / BLUR REVEAL */
-function runGuessZoom(stage) {
-  const items = [
-    { icon: "🕌", ans: "Sacred Mosque / Architecture", opts: ["Sacred Mosque / Architecture", "Observatory", "Suspension Bridge", "Windmill"] },
-    { icon: "🪐", ans: "Ringed Gas Giant (Saturn)", opts: ["Ringed Gas Giant (Saturn)", "Red Planet (Mars)", "Comet Nucleus", "Asteroid Belt"] },
-    { icon: "🧭", ans: "Magnetic Navigation Compass", opts: ["Magnetic Navigation Compass", "Aneroid Barometer", "Astrolabe", "Seismograph"] },
-    { icon: "🧬", ans: "DNA Double Helix", opts: ["DNA Double Helix", "Mitochondria", "Neuron Synapse", "Chloroplast"] }
-  ];
-  const it = items[Math.floor(Math.random() * items.length)];
-  let blur = 14;
-  const render = () => {
-    stage.innerHTML = `
-      <div style="height:120px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--surface-alt);border-radius:16px;margin-bottom:10px">
-        <span style="font-size:76px;filter:blur(${blur}px);transform:scale(${1 + blur / 5});transition:all 0.25s ease">${it.icon}</span>
-      </div>
-      <button class="btn-secondary" id="btnSharpen" style="width:100%;margin-bottom:10px">🔍 Reduce Blur</button>
-      <div class="options-list" id="gzOpts"></div>
-      <div id="fbBox"></div>
-    `;
-    document.getElementById("btnSharpen").onclick = () => { blur = Math.max(0, blur - 4); render(); };
-    it.opts.forEach(o => {
-      const b = document.createElement("button");
-      b.className = "opt-btn";
-      b.textContent = o;
-      b.onclick = () => { blur = 0; handleAnswerResult(o === it.ans, it.ans, () => runGuessZoom(stage), b); };
-      document.getElementById("gzOpts").appendChild(b);
-    });
-  };
-  render();
-}
-
-/* 17. GUESS THE MOVIE FROM EMOJIS */
+/* 12. HARD CINEMA EMOJI */
 function runMovieEmoji(stage) {
   const m = window.SPECIAL_DATA.movieEmojis[Math.floor(Math.random() * window.SPECIAL_DATA.movieEmojis.length)];
-  const ans = tr(m.ans);
-  const opts = m.opts[State.lang] || m.opts.en;
   stage.innerHTML = `
-    <div class="q-prompt" style="font-size:42px">${m.emojis}</div>
+    <div class="q-sub">🎬 Decode the film plot from these 5 emojis:</div>
+    <div class="q-prompt" style="font-size:40px;letter-spacing:6px">${m.emojis}</div>
     <div class="options-list" id="meOpts"></div>
     <div id="fbBox"></div>
   `;
-  opts.forEach(o => {
+  m.opts.slice().sort(() => Math.random() - 0.5).forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === ans, ans, () => runMovieEmoji(stage), b);
+    b.onclick = () => handleAnswerResult(o === m.ans, m.ans, () => runMovieEmoji(stage), b);
     document.getElementById("meOpts").appendChild(b);
   });
 }
 
-/* 18. GUESS THE SILHOUETTE */
-function runSilhouette(stage) {
-  const sils = [
-    { icon: "🐪", ans: "Arabian Dromedary", opts: ["Arabian Dromedary", "African Elephant", "Giraffe", "Moose"] },
-    { icon: "🦅", ans: "Golden Eagle / Falcon", opts: ["Golden Eagle / Falcon", "Ostrich", "Pelican", "Albatross"] },
-    { icon: "🐋", ans: "Humpback / Blue Whale", opts: ["Humpback / Blue Whale", "Great White Shark", "Manta Ray", "Narwhal"] },
-    { icon: "🦂", ans: "Sahara Scorpion", opts: ["Sahara Scorpion", "Stag Beetle", "Tarantula", "Hermit Crab"] }
-  ];
-  const s = sils[Math.floor(Math.random() * sils.length)];
-  stage.innerHTML = `
-    <div class="q-sub">Identify this dark silhouette</div>
-    <div style="text-align:center;font-size:78px;filter:brightness(0);margin:10px 0">${s.icon}</div>
-    <div class="options-list" id="silOpts"></div>
-    <div id="fbBox"></div>
-  `;
-  s.opts.forEach(o => {
-    const b = document.createElement("button");
-    b.className = "opt-btn";
-    b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === s.ans, s.ans, () => runSilhouette(stage), b);
-    document.getElementById("silOpts").appendChild(b);
-  });
-}
-
-/* 19. GUESS THE FOOTBALLER (12+ LEGENDS) */
+/* 13. PRO FOOTBALLER CAREER PATH */
 function runFootballer(stage) {
   const f = window.SPECIAL_DATA.footballTransfers[Math.floor(Math.random() * window.SPECIAL_DATA.footballTransfers.length)];
   stage.innerHTML = `
-    <div class="q-sub">⚽ Club Transfer Career Path:</div>
-    <div class="q-prompt">${f.career}</div>
+    <div class="q-sub">⚽ Senior Club &amp; Loan Transfer History:</div>
+    <div class="q-prompt" style="font-size:16px;line-height:1.6">${f.career}</div>
     <div class="options-list" id="fbOpts"></div>
     <div id="fbBox"></div>
   `;
@@ -946,36 +846,15 @@ function runFootballer(stage) {
   });
 }
 
-/* 20. PIXELATED MONUMENT REVEAL */
-function runPixelClear(stage) {
-  const mons = [
-    { svg: '<polygon points="40,12 12,62 68,62" fill="#e9c46a"/>', ans: "Pyramids of Giza (Egypt)", opts: ["Pyramids of Giza (Egypt)", "Colosseum (Rome)", "Parthenon (Athens)", "Petra (Jordan)"] },
-    { svg: '<polygon points="40,8 33,65 47,65" fill="#729ea1"/><rect x="24" y="60" width="32" height="8" fill="#729ea1"/>', ans: "Maqam Echahid / Eiffel Tower", opts: ["Maqam Echahid / Eiffel Tower", "Taj Mahal", "Brandenburg Gate", "Sydney Opera"] }
-  ];
-  const m = mons[Math.floor(Math.random() * mons.length)];
-  stage.innerHTML = `
-    <div class="q-sub">Identify the geometric monument silhouette</div>
-    <svg viewBox="0 0 80 80" class="svg-stage" style="height:130px">${m.svg}</svg>
-    <div class="options-list" id="pxOpts"></div>
-    <div id="fbBox"></div>
-  `;
-  m.opts.forEach(o => {
-    const b = document.createElement("button");
-    b.className = "opt-btn";
-    b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === m.ans, m.ans, () => runPixelClear(stage), b);
-    document.getElementById("pxOpts").appendChild(b);
-  });
-}
-
-/* 21. FLAG PALETTE GUESS (MULTI-FLAG) */
+/* 14. FLAG PALETTE GUESS */
 function runColorGuess(stage) {
   const flags = [
-    { colors: ["#006233","#ffffff","#d21034"], ans: "Algeria 🇩🇿", opts: ["Algeria 🇩🇿","France 🇫🇷","Brazil 🇧🇷","Sweden 🇸🇪"] },
-    { colors: ["#002395","#ffffff","#ed2939"], ans: "France 🇫🇷", opts: ["France 🇫🇷","Germany 🇩🇪","Algeria 🇩🇿","Brazil 🇧🇷"] },
-    { colors: ["#000000","#dd0000","#ffce00"], ans: "Germany 🇩🇪", opts: ["Germany 🇩🇪","Italy 🇮🇹","Japan 🇯🇵","Argentina 🇦🇷"] },
-    { colors: ["#009c3b","#ffdf00","#002776"], ans: "Brazil 🇧🇷", opts: ["Brazil 🇧🇷","Spain 🇪🇸","Canada 🇨🇦","Morocco 🇲🇦"] },
-    { colors: ["#c1272d","#006233","#c1272d"], ans: "Morocco 🇲🇦", opts: ["Morocco 🇲🇦","Japan 🇯🇵","Sweden 🇸🇪","Greece 🇬🇷"] }
+    { colors: ["#002395","#ffffff","#ed2939"], ans: "France 🇫🇷", opts: ["France 🇫🇷","Germany 🇩🇪","Netherlands 🇳🇱","Italy 🇮🇹"] },
+    { colors: ["#000000","#dd0000","#ffce00"], ans: "Germany 🇩🇪", opts: ["Germany 🇩🇪","Belgium 🇧🇪","Spain 🇪🇸","Sweden 🇸🇪"] },
+    { colors: ["#009246","#ffffff","#ce2b37"], ans: "Italy 🇮🇹", opts: ["Italy 🇮🇹","Mexico 🇲🇽","Ireland 🇮🇪","Hungary 🇭🇺"] },
+    { colors: ["#009c3b","#ffdf00","#002776"], ans: "Brazil 🇧🇷", opts: ["Brazil 🇧🇷","Argentina 🇦🇷","Colombia 🇨🇴","Australia 🇦🇺"] },
+    { colors: ["#005293","#fecb00","#005293"], ans: "Sweden 🇸🇪", opts: ["Sweden 🇸🇪","Ukraine 🇺🇦","Finland 🇫🇮","Greece 🇬🇷"] },
+    { colors: ["#ae1c28","#ffffff","#21468b"], ans: "Netherlands 🇳🇱", opts: ["Netherlands 🇳🇱","France 🇫🇷","Russia 🇷🇺","Thailand 🇹🇭"] }
   ];
   const f = flags[Math.floor(Math.random() * flags.length)];
   stage.innerHTML = `
@@ -995,7 +874,7 @@ function runColorGuess(stage) {
   });
 }
 
-/* 22. WHO AM I? (DEDUCTION) */
+/* 15. WHO AM I? */
 function runWhoAmI(stage) {
   const el = window.SPECIAL_DATA.rawElements[Math.floor(Math.random() * window.SPECIAL_DATA.rawElements.length)];
   const decoys = window.SPECIAL_DATA.rawElements.slice().sort(() => Math.random() - 0.5).slice(0, 3).map(x => x[2]);
@@ -1004,7 +883,7 @@ function runWhoAmI(stage) {
     <div class="q-sub">20-Questions Deduction Log:</div>
     <div class="options-list" style="margin-bottom:12px">
       <div class="pill">Q1: Is it a pure chemical element? ➔ YES</div>
-      <div class="pill">Q2: Is its atomic number exactly ${el[1]}? ➔ YES</div>
+      <div class="pill">Q2: Is its atomic number ${el[1]}? ➔ YES</div>
       <div class="pill">Q3: Is its periodic symbol "${el[0]}"? ➔ YES</div>
     </div>
     <div class="options-list" id="waiOpts"></div>
@@ -1019,59 +898,77 @@ function runWhoAmI(stage) {
   });
 }
 
-/* 23. WORLD ATLAS MAP TAP (65 COUNTRIES) */
+/* HELPER: Convert Real (Latitude, Longitude) to 1000x500 Equirectangular SVG Map */
+function latLonToSvg(lat, lon) {
+  const x = ((lon + 180) / 360) * 1000;
+  const y = ((90 - lat) / 180) * 500;
+  return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+}
+
+function renderWorldMapBackdrop() {
+  // Uses high-resolution GeoJSON paths injected by build-apk.yml if available, else multi-polygon REAL_WORLD_MAP_PATHS
+  const paths = (window.REAL_GEOJSON_WORLD && window.REAL_GEOJSON_WORLD.length > 0)
+    ? window.REAL_GEOJSON_WORLD
+    : window.REAL_WORLD_MAP_PATHS;
+  const gridLines = [100,200,300,400].map(y => `<line x1="0" y1="${y}" x2="1000" y2="${y}" stroke="var(--border)" stroke-width="1" stroke-dasharray="4,4"/>`).join("") +
+                    [200,400,600,800].map(x => `<line x1="${x}" y1="0" x2="${x}" y2="500" stroke="var(--border)" stroke-width="1" stroke-dasharray="4,4"/>`).join("");
+  return `
+    <rect width="1000" height="500" fill="var(--surface-alt)"/>
+    ${gridLines}
+    ${paths.map(p => `<path d="${p.d}" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="1.5"/>`).join("")}
+  `;
+}
+
+/* 16. REAL WORLD ATLAS MAP TAP */
 function runMapClick(stage) {
-  const locs = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5).slice(0, 10);
+  const locs = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5).slice(0, 12);
   const target = locs[0];
   const tName = State.lang === "ar" ? target[3] : State.lang === "fr" ? target[2] : target[1];
   stage.innerHTML = `
-    <div class="q-prompt">🗺️ Tap the circle located at <strong>${tName} (${target[4]})</strong></div>
+    <div class="q-prompt">🗺️ Tap <strong>${tName} (${target[4]})</strong> on the World Atlas</div>
     <svg viewBox="0 0 1000 500" class="svg-stage">
-      <rect width="1000" height="500" fill="var(--surface-alt)"/>
-      <path d="M150,80 L320,90 L360,220 L260,240 Z" fill="var(--primary-soft)"/>
-      <path d="M270,250 L370,270 L340,430 L280,410 Z" fill="var(--primary-soft)"/>
-      <path d="M440,70 L600,70 L590,155 L440,155 Z" fill="var(--primary-soft)"/>
-      <path d="M430,165 L610,165 L580,380 L470,360 Z" fill="var(--primary-soft)"/>
-      <path d="M610,75 L890,85 L860,260 L620,240 Z" fill="var(--primary-soft)"/>
-      <path d="M760,310 L890,310 L880,410 L760,410 Z" fill="var(--primary-soft)"/>
-      ${locs.map(l => `<circle cx="${l[12]}" cy="${l[13]}" r="18" fill="var(--primary)" stroke="#fff" stroke-width="3" data-id="${l[0]}" style="cursor:pointer"/>`).join("")}
+      ${renderWorldMapBackdrop()}
+      ${locs.map(l => {
+        const pt = latLonToSvg(l[12], l[13]);
+        return `<circle cx="${pt.x}" cy="${pt.y}" r="14" fill="var(--primary)" stroke="#fff" stroke-width="2.5" data-id="${l[0]}" style="cursor:pointer"/>`;
+      }).join("")}
     </svg>
     <div id="fbBox"></div>
   `;
   stage.querySelectorAll("circle").forEach(c => {
     c.onclick = () => {
       const hit = c.getAttribute("data-id") === target[0];
-      handleAnswerResult(hit, tName, () => runMapClick(stage));
+      handleAnswerResult(hit, `${tName} (${target[4]})`, () => runMapClick(stage));
     };
   });
 }
 
-/* 24. COUNTRY BORDER OUTLINE */
+/* 17. REAL COUNTRY BORDER OUTLINE */
 function runBorderGuess(stage) {
-  const shapes = [
-    { pts: "75,25 135,25 165,85 110,175 45,120 55,55", ans: "Algeria", opts: ["Algeria","Italy","Chile","Japan"] },
-    { pts: "90,20 115,30 140,140 155,165 130,180 105,90", ans: "Italy", opts: ["Italy","Algeria","Brazil","Egypt"] },
-    { pts: "45,45 155,45 155,155 45,155", ans: "Egypt", opts: ["Egypt","Norway","Cuba","Vietnam"] }
-  ];
-  const s = shapes[Math.floor(Math.random() * shapes.length)];
+  const pool = (window.REAL_GEOJSON_OUTLINES && window.REAL_GEOJSON_OUTLINES.length > 0)
+    ? window.REAL_GEOJSON_OUTLINES
+    : window.REAL_COUNTRY_OUTLINES;
+  const s = pool[Math.floor(Math.random() * pool.length)];
   stage.innerHTML = `
-    <div class="q-sub">Identify this Sovereign Border Polygon</div>
-    <svg viewBox="0 0 200 200" class="svg-stage" style="height:150px">
-      <polygon points="${s.pts}" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="4"/>
+    <div class="q-sub">🗾 Identify this country from its geographic border outline</div>
+    <svg viewBox="0 0 240 210" class="svg-stage" style="height:175px">
+      <line x1="0" y1="105" x2="240" y2="105" stroke="var(--border)" stroke-dasharray="4,4"/>
+      <line x1="120" y1="0" x2="120" y2="210" stroke="var(--border)" stroke-dasharray="4,4"/>
+      <path d="${s.path}" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="3.5" stroke-linejoin="round"/>
     </svg>
     <div class="options-list" id="bgOpts"></div>
     <div id="fbBox"></div>
   `;
-  s.opts.forEach(o => {
+  s.opts.slice().sort(() => Math.random() - 0.5).forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === s.ans, s.ans, () => runBorderGuess(stage), b);
+    b.onclick = () => handleAnswerResult(o === s.ans, s.ans, () => runBorderGuess(stage), b, s.hint);
     document.getElementById("bgOpts").appendChild(b);
   });
 }
 
-/* 25. 65-NATION CAPITAL MATCH (ENDLESS RANDOM PAIRS) */
+/* 18. WORLD CAPITAL MATCH */
 function renderCapitalMatchMode(stage, nextFn) {
   const pairs = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5).slice(0, 5);
   const shuffledCaps = pairs.slice().sort(() => Math.random() - 0.5);
@@ -1115,7 +1012,7 @@ function renderCapitalMatchMode(stage, nextFn) {
   render();
 }
 
-/* 26. GEO HIGHER OR LOWER (4,000+ COMBINATIONS) */
+/* 19. GEO HIGHER OR LOWER */
 function runHigherLower(stage) {
   const locs = window.SPECIAL_DATA.rawCountries.slice().sort(() => Math.random() - 0.5);
   const a = locs[0];
@@ -1139,17 +1036,17 @@ function runHigherLower(stage) {
   document.getElementById("hlLow").onclick = (e) => handleAnswerResult(valB <= valA, `${nB} = ${valB.toLocaleString()}`, () => runHigherLower(stage), e.target);
 }
 
-/* 27. DISTANCE GUESS (PIN DROP ON 65 CAPITALS) */
+/* 20. GEO PIN DROP PRECISION (REAL HAVERSINE GREAT-CIRCLE DISTANCE IN KM) */
 function runDistanceGuess(stage) {
   const locs = window.SPECIAL_DATA.rawCountries;
   const target = locs[Math.floor(Math.random() * locs.length)];
-  const tName = State.lang === "ar" ? `${target[6]} (${target[3]})` : `${target[4]} (${target[1]})`;
+  const tName = State.lang === "ar" ? `${target[6]} (${target[3]})` : `${target[4]}, ${target[1]}`;
+  const targetPt = latLonToSvg(target[12], target[13]);
+
   stage.innerHTML = `
-    <div class="q-prompt">📍 Drop your pin within 950 km of <strong>${tName}</strong></div>
+    <div class="q-prompt">📍 Drop your pin within 1,200 km of <strong>${tName}</strong></div>
     <svg viewBox="0 0 1000 500" class="svg-stage" id="pinMap" style="cursor:crosshair">
-      <rect width="1000" height="500" fill="var(--surface-alt)"/>
-      <path d="M150,80 L350,100 L350,410 L200,390 Z" fill="var(--primary-soft)"/>
-      <path d="M430,70 L890,85 L860,390 L440,370 Z" fill="var(--primary-soft)"/>
+      ${renderWorldMapBackdrop()}
     </svg>
     <div id="fbBox"></div>
   `;
@@ -1158,17 +1055,63 @@ function runDistanceGuess(stage) {
     const rect = svg.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 1000;
     const y = ((e.clientY - rect.top) / rect.height) * 500;
-    const dist = Math.round(Math.hypot(x - target[12], y - target[13]) * 11);
+    const userLon = (x / 1000) * 360 - 180;
+    const userLat = 90 - (y / 500) * 180;
+
+    // Haversine Great-Circle Distance Formula (km)
+    const toRad = deg => (deg * Math.PI) / 180;
+    const dLat = toRad(target[12] - userLat);
+    const dLon = toRad(target[13] - userLon);
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(userLat)) * Math.cos(toRad(target[12])) * Math.sin(dLon / 2) ** 2;
+    const km = Math.round(6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+
     svg.innerHTML += `
-      <line x1="${x}" y1="${y}" x2="${target[12]}" y2="${target[13]}" stroke="var(--primary)" stroke-width="4" stroke-dasharray="8,8"/>
-      <circle cx="${x}" cy="${y}" r="14" fill="#e76f51"/>
-      <circle cx="${target[12]}" cy="${target[13]}" r="14" fill="#2a9d8f"/>
+      <line x1="${x}" y1="${y}" x2="${targetPt.x}" y2="${targetPt.y}" stroke="var(--primary)" stroke-width="3.5" stroke-dasharray="7,7"/>
+      <circle cx="${x}" cy="${y}" r="11" fill="#e76f51" stroke="#fff" stroke-width="2"/>
+      <circle cx="${targetPt.x}" cy="${targetPt.y}" r="11" fill="#2a9d8f" stroke="#fff" stroke-width="2"/>
     `;
-    handleAnswerResult(dist <= 950, `Distance error: ~${dist} km`, () => runDistanceGuess(stage));
+    handleAnswerResult(km <= 1200, `Great-Circle Distance: ${km.toLocaleString()} km`, () => runDistanceGuess(stage));
   };
 }
 
-/* 28. HISTORY YEAR HIGHER OR LOWER */
+/* 21 & 22. SIZE IT UP! & WEIGHT IT UP! (Compare Anything Across Heights, Areas, Lengths & Weights) */
+function runSizeOrWeight(stage, modeType) {
+  const groups = modeType === "size" ? ["height_m", "area_km2", "length_km"] : ["weight_kg", "weight_tons"];
+  const chosenGroup = groups[Math.floor(Math.random() * groups.length)];
+  const pool = window.COMPARE_METRICS_POOL.filter(x => x.group === chosenGroup).sort(() => Math.random() - 0.5);
+  const itemA = pool[0];
+  const itemB = pool[1];
+
+  const questionTitle = modeType === "size"
+    ? (chosenGroup === "height_m" ? "📏 Which one is TALLER / HIGHER?" : chosenGroup === "area_km2" ? "📐 Which one covers a LARGER AREA?" : "📏 Which one is LONGER / WIDER?")
+    : "🏋️ Which one is HEAVIER?";
+
+  stage.innerHTML = `
+    <div class="q-sub">${modeType === "size" ? "📏 Size It Up!" : "🏋️ Weight It Up!"} · (${itemA.unit})</div>
+    <div class="q-prompt">${questionTitle}</div>
+    <div class="options-list">
+      <button class="opt-btn" id="cmpA" style="display:flex;justify-content:space-between;align-items:center;padding:18px">
+        <span>${itemA.icon} ${itemA.name}</span>
+        <span class="pill">Tap</span>
+      </button>
+      <button class="opt-btn" id="cmpB" style="display:flex;justify-content:space-between;align-items:center;padding:18px">
+        <span>${itemB.icon} ${itemB.name}</span>
+        <span class="pill">Tap</span>
+      </button>
+    </div>
+    <div id="fbBox"></div>
+  `;
+
+  const explain = `${itemA.name}: ${itemA.val.toLocaleString()} ${itemA.unit} vs ${itemB.name}: ${itemB.val.toLocaleString()} ${itemB.unit}`;
+  document.getElementById("cmpA").onclick = (e) => {
+    handleAnswerResult(itemA.val >= itemB.val, itemB.name, () => runSizeOrWeight(stage, modeType), e.currentTarget, explain);
+  };
+  document.getElementById("cmpB").onclick = (e) => {
+    handleAnswerResult(itemB.val >= itemA.val, itemA.name, () => runSizeOrWeight(stage, modeType), e.currentTarget, explain);
+  };
+}
+
+/* 23. HISTORY YEAR HIGHER OR LOWER */
 function runHistoryHigherLower(stage) {
   const h = window.SPECIAL_DATA.rawHistory.slice().sort(() => Math.random() - 0.5);
   const a = h[0];
@@ -1188,7 +1131,7 @@ function runHistoryHigherLower(stage) {
   document.getElementById("hhLow").onclick = (e) => handleAnswerResult(b[0] <= a[0], `Year ${b[0]}`, () => runHistoryHigherLower(stage), e.target);
 }
 
-/* 29. ELEMENT ATOMIC NUMBER DUEL */
+/* 24. ELEMENT ATOMIC NUMBER DUEL */
 function runElementCompare(stage) {
   const els = window.SPECIAL_DATA.rawElements.slice().sort(() => Math.random() - 0.5);
   const a = els[0];
@@ -1201,38 +1144,32 @@ function runElementCompare(stage) {
     </div>
     <div id="fbBox"></div>
   `;
-  document.getElementById("elA").onclick = (e) => handleAnswerResult(a[1] > b[1], `${a[2]}=${a[1]}, ${b[2]}=${b[1]}`, () => runElementCompare(stage), e.target);
-  document.getElementById("elB").onclick = (e) => handleAnswerResult(b[1] > a[1], `${a[2]}=${a[1]}, ${b[2]}=${b[1]}`, () => runElementCompare(stage), e.target);
+  const exp = `${a[2]} = Atomic #${a[1]} | ${b[2]} = Atomic #${b[1]}`;
+  document.getElementById("elA").onclick = (e) => handleAnswerResult(a[1] > b[1], b[2], () => runElementCompare(stage), e.target, exp);
+  document.getElementById("elB").onclick = (e) => handleAnswerResult(b[1] > a[1], a[2], () => runElementCompare(stage), e.target, exp);
 }
 
-/* 30. EXPERT ODD ONE OUT */
+/* 25. EXPERT ODD ONE OUT (ALWAYS EXPLAINS RESULT EVEN WHEN RIGHT!) */
 function renderOddOneOutMode(stage, nextFn) {
-  const sets = [
-    { opts: ["Algiers", "Tunis", "Rabat", "Casablanca"], odd: "Casablanca", why: "Casablanca is not a national capital." },
-    { opts: ["Helium", "Neon", "Argon", "Nitrogen"], odd: "Nitrogen", why: "Nitrogen is not a Noble Gas." },
-    { opts: ["Ibn Sina", "Al-Razi", "Ibn al-Nafis", "Vasco da Gama"], odd: "Vasco da Gama", why: "Vasco da Gama was a Portuguese navigator, not a Golden Age physician." },
-    { opts: ["Femur", "Tibia", "Fibula", "Cerebellum"], odd: "Cerebellum", why: "Cerebellum is part of the brain, not a leg bone." },
-    { opts: ["Joule", "Watt", "Pascal", "Kelvin"], odd: "Kelvin", why: "Kelvin is a base SI unit; the others are derived units named after European physicists." },
-    { opts: ["Oran", "Constantine", "Annaba", "Marrakech"], odd: "Marrakech", why: "Marrakech is in Morocco; the others are Algerian wilayas." }
-  ];
+  const sets = window.SPECIAL_DATA.oddOneOutPacks;
   const s = sets[Math.floor(Math.random() * sets.length)];
   stage.innerHTML = `<div class="q-prompt">🧐 Tap the Odd One Out:</div><div class="options-list" id="oddOpts"></div><div id="fbBox"></div>`;
   s.opts.slice().sort(() => Math.random() - 0.5).forEach(o => {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = o;
-    b.onclick = () => handleAnswerResult(o === s.odd, `${s.odd} — ${s.why}`, nextFn, b);
+    b.onclick = () => handleAnswerResult(o === s.odd, s.odd, nextFn, b, s.why);
     document.getElementById("oddOpts").appendChild(b);
   });
 }
 
-/* 31. DYNAMIC TIMELINE SORT (PULLS 4 RANDOM MILESTONES FROM 55 EVENTS) */
+/* 26. DYNAMIC TIMELINE SORT */
 function renderTimelineSortMode(stage, nextFn) {
   const sample = window.SPECIAL_DATA.rawHistory.slice().sort(() => Math.random() - 0.5).slice(0, 4);
   let picked = [];
   const render = () => {
     stage.innerHTML = `
-      <div class="q-sub">⏳ Tap historical milestones from EARLIEST to LATEST</div>
+      <div class="q-sub">📜 Tap historical milestones from EARLIEST to LATEST</div>
       <div class="options-list" id="tlList"></div>
       <div id="fbBox"></div>
     `;
@@ -1250,7 +1187,7 @@ function renderTimelineSortMode(stage, nextFn) {
         render();
         if (picked.length === 4) {
           const ok = picked.every((x, i) => i === 0 || x[0] >= picked[i - 1][0]);
-          const correctOrder = sample.slice().sort((a, b) => a[0] - b[0]).map(x => x[0]).join(" ➔ ");
+          const correctOrder = sample.slice().sort((a, b) => a[0] - b[0]).map(x => `${x[0]}`).join(" ➔ ");
           handleAnswerResult(ok, correctOrder, nextFn);
         }
       };
@@ -1260,39 +1197,125 @@ function renderTimelineSortMode(stage, nextFn) {
   render();
 }
 
-/* 32. ELEMENT & SYMBOL MEMORY MATCH */
-function runMatchPairs(stage) {
-  const els = window.SPECIAL_DATA.rawElements.slice().sort(() => Math.random() - 0.5).slice(0, 4);
+/* 27. MEMORY MATCH DUEL VS SMART BOT */
+function runMatchPairsVsBot(stage) {
+  const els = window.SPECIAL_DATA.rawElements.slice().sort(() => Math.random() - 0.5).slice(0, 8);
   const cards = [];
   els.forEach(e => {
-    cards.push({ id: e[0], label: e[0] });
-    cards.push({ id: e[0], label: e[2] });
+    cards.push({ id: e[0], label: `${e[0]}` });
+    cards.push({ id: e[0], label: `${e[2]}` });
   });
   const deck = cards.sort(() => Math.random() - 0.5);
+
   let open = [];
   let solved = [];
+  let turn = "player"; // "player" or "bot"
+  let pScore = 0;
+  let bScore = 0;
+  let botMemory = {}; // index -> card.id
+
+  const checkFinish = () => {
+    if (solved.length === deck.length) {
+      const won = pScore >= bScore;
+      handleAnswerResult(won, `Final Score — You: ${pScore} | SmartBot: ${bScore}`, () => runMatchPairsVsBot(stage), null, won ? "You outsmarted SmartBot's memory!" : "SmartBot won this round!");
+      return true;
+    }
+    return false;
+  };
+
+  const botTakeTurn = () => {
+    if (checkFinish() || turn !== "bot") return;
+    const avail = deck.map((_, i) => i).filter(i => !solved.includes(i));
+    if (avail.length < 2) return;
+
+    // Bot checks if it knows any matching pair in botMemory
+    let pick1 = null, pick2 = null;
+    const seenIndices = Object.keys(botMemory).map(Number).filter(i => !solved.includes(i));
+    for (let i = 0; i < seenIndices.length; i++) {
+      for (let j = i + 1; j < seenIndices.length; j++) {
+        if (botMemory[seenIndices[i]] === botMemory[seenIndices[j]] && Math.random() < 0.75) {
+          pick1 = seenIndices[i];
+          pick2 = seenIndices[j];
+          break;
+        }
+      }
+    }
+    if (pick1 === null) {
+      const unknown = avail.filter(i => !(i in botMemory));
+      pick1 = unknown.length > 0 ? unknown[Math.floor(Math.random() * unknown.length)] : avail[0];
+      botMemory[pick1] = deck[pick1].id;
+      const mate = seenIndices.find(i => i !== pick1 && botMemory[i] === deck[pick1].id);
+      if (mate !== undefined && Math.random() < 0.75) {
+        pick2 = mate;
+      } else {
+        const rem = avail.filter(i => i !== pick1);
+        pick2 = rem[Math.floor(Math.random() * rem.length)];
+      }
+      botMemory[pick2] = deck[pick2].id;
+    }
+
+    open = [pick1];
+    render();
+    setTimeout(() => {
+      open = [pick1, pick2];
+      render();
+      setTimeout(() => {
+        if (deck[pick1].id === deck[pick2].id) {
+          solved.push(pick1, pick2);
+          bScore++;
+          open = [];
+          playCalmTone("miss");
+          render();
+          if (!checkFinish()) setTimeout(botTakeTurn, 650);
+        } else {
+          open = [];
+          turn = "player";
+          render();
+        }
+      }, 850);
+    }, 550);
+  };
+
   const render = () => {
-    stage.innerHTML = `<div class="q-sub">🃏 Match each Element with its Chemical Symbol</div><div class="grid-4x4" id="memGrid"></div><div id="fbBox"></div>`;
+    stage.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <span class="pill" style="background:${turn === 'player' ? 'var(--accent-mint)' : 'var(--surface-alt)'}">🧑 You: ${pScore}</span>
+        <span class="q-sub" style="margin:0">${turn === "player" ? "Your Turn!" : "🤖 SmartBot is flipping..."}</span>
+        <span class="pill" style="background:${turn === 'bot' ? 'var(--accent-peach)' : 'var(--surface-alt)'}">🤖 Bot: ${bScore}</span>
+      </div>
+      <div class="grid-4x4" id="memGrid"></div>
+      <div id="fbBox"></div>
+    `;
     const g = document.getElementById("memGrid");
     deck.forEach((card, idx) => {
       const isUp = open.includes(idx) || solved.includes(idx);
       const b = document.createElement("button");
-      b.className = "grid-cell-btn " + (solved.includes(idx) ? "solved" : "");
+      b.className = "grid-cell-btn " + (solved.includes(idx) ? "solved" : open.includes(idx) ? "selected" : "");
+      b.style.minHeight = "54px";
       b.textContent = isUp ? card.label : "❓";
       b.onclick = () => {
-        if (isUp || open.length >= 2) return;
+        if (turn !== "player" || isUp || open.length >= 2) return;
         open.push(idx);
+        botMemory[idx] = deck[idx].id;
         playCalmTone("tap");
         render();
         if (open.length === 2) {
-          if (deck[open[0]].id === deck[open[1]].id) {
-            solved.push(open[0], open[1]);
+          const [c1, c2] = open;
+          if (deck[c1].id === deck[c2].id) {
+            solved.push(c1, c2);
+            pScore++;
             open = [];
+            playCalmTone("good");
             addPoints(20);
             render();
-            if (solved.length === deck.length) handleAnswerResult(true, "All Elements Paired!", () => runMatchPairs(stage));
+            checkFinish();
           } else {
-            setTimeout(() => { open = []; render(); }, 650);
+            setTimeout(() => {
+              open = [];
+              turn = "bot";
+              render();
+              setTimeout(botTakeTurn, 600);
+            }, 800);
           }
         }
       };
@@ -1302,7 +1325,7 @@ function runMatchPairs(stage) {
   render();
 }
 
-/* 33. CONNECTIONS (MULTI-BOARD) */
+/* 28. CONNECTIONS (16 WORDS) */
 function runConnections(stage) {
   const groups = window.SPECIAL_DATA.connectionsPacks[Math.floor(Math.random() * window.SPECIAL_DATA.connectionsPacks.length)];
   let all = Object.values(groups).flat().sort(() => Math.random() - 0.5);
@@ -1348,7 +1371,7 @@ function runConnections(stage) {
   render();
 }
 
-/* 34. HARD NUMBER PUZZLES */
+/* 29. HARD NUMBER PUZZLES */
 function runNumberPuzzles(stage) {
   const item = drawUniqueQuestion("math", "hard");
   const ans = tr(item.a);
@@ -1363,7 +1386,7 @@ function runNumberPuzzles(stage) {
   });
 }
 
-/* 35. TIME TRAVEL ODYSSEY */
+/* 30. TIME TRAVEL ODYSSEY */
 function runTimeTravel(stage) {
   let eraIdx = 1;
   const step = () => {
@@ -1389,7 +1412,7 @@ function runTimeTravel(stage) {
   step();
 }
 
-/* 36. 5-LOCK VAULT ESCAPE ROOM */
+/* 31. 5-LOCK VAULT ESCAPE ROOM */
 function runEscapeRoom(stage) {
   let lock = 1;
   const render = () => {
@@ -1418,86 +1441,32 @@ function runEscapeRoom(stage) {
   render();
 }
 
-/* 37. 9-TILE TREASURE HUNT */
-function runTreasureHunt(stage) {
-  let revealed = 0;
-  const render = () => {
-    const item = drawUniqueQuestion(null, revealed < 3 ? "easy" : revealed < 6 ? "medium" : "hard");
-    const ans = tr(item.a);
-    stage.innerHTML = `
-      <div class="q-sub">🏝️ Treasure Map Sectors Unlocked: ${revealed} / 8</div>
-      <div class="grid-4x4" style="margin-bottom:12px">
-        ${[0,1,2,3,4,5,6,7].map(i => `<div class="grid-cell-btn ${i < revealed ? 'solved' : ''}">${i < revealed ? '🗺️💎' : '🌫️'}</div>`).join("")}
-      </div>
-      <div class="q-prompt">${tr(item.q)}</div>
-      <div class="options-list" id="thOpts"></div>
-      <div id="fbBox"></div>
-    `;
-    (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5).forEach(o => {
-      const b = document.createElement("button");
-      b.className = "opt-btn";
-      b.textContent = o;
-      b.onclick = () => {
-        if (o === ans) revealed = Math.min(8, revealed + 1);
-        handleAnswerResult(o === ans, ans, render, b);
-      };
-      document.getElementById("thOpts").appendChild(b);
-    });
-  };
-  render();
-}
-
-/* 38. 5-POINT SPOT THE DIFFERENCE */
-function runSpotDifference(stage) {
-  let found = [];
-  const render = () => {
-    stage.innerHTML = `
-      <div class="q-sub">Tap all 5 differences on the lower canvas (${found.length}/5 found)</div>
-      <svg viewBox="0 0 320 100" class="svg-stage">
-        <circle cx="40" cy="35" r="14" fill="#e9c46a"/>
-        <rect x="95" y="30" width="32" height="45" fill="#729ea1"/>
-        <polygon points="175,20 155,75 195,75" fill="#2a9d8f"/>
-        <circle cx="240" cy="50" r="18" fill="#8ab8bc"/>
-        <rect x="280" y="25" width="22" height="50" fill="#d4a373"/>
-      </svg>
-      <svg viewBox="0 0 320 100" class="svg-stage" id="diffSvg">
-        <circle cx="40" cy="35" r="22" fill="#e76f51" data-d="1" style="cursor:pointer"/>
-        <rect x="95" y="15" width="32" height="60" fill="#264653" data-d="2" style="cursor:pointer"/>
-        <polygon points="175,35 155,75 195,75" fill="#e9c46a" data-d="3" style="cursor:pointer"/>
-        <circle cx="240" cy="50" r="18" fill="#e63946" data-d="4" style="cursor:pointer"/>
-        <rect x="280" y="45" width="22" height="30" fill="#68b684" data-d="5" style="cursor:pointer"/>
-      </svg>
-      <div id="fbBox"></div>
-    `;
-    document.getElementById("diffSvg").querySelectorAll("[data-d]").forEach(el => {
-      el.onclick = () => {
-        const id = el.getAttribute("data-d");
-        if (!found.includes(id)) {
-          found.push(id);
-          playCalmTone("good");
-          addPoints(15);
-          if (found.length === 5) handleAnswerResult(true, "5/5 Differences Spotted!", () => runSpotDifference(stage));
-          else render();
-        }
-      };
-    });
-  };
-  render();
-}
-
-/* 39. MILLIONAIRE 15 LADDER (SCALES EASY -> MEDIUM -> HARD) */
+/* 32. MILLIONAIRE 15 LADDER (SUDDEN DEATH — 1 WRONG ANSWER AND YOU'RE OUT!) */
 function runMillionaire(stage) {
+  const prizes = [
+    "$100","$200","$300","$500","$1,000",
+    "$2,000","$4,000","$8,000","$16,000","$32,000",
+    "$64,000","$125,000","$250,000","$500,000","$1,000,000"
+  ];
   let step = 1;
+  let used5050 = false;
+  let usedSkip = false;
+
   const render = () => {
     const tier = step <= 5 ? "easy" : step <= 10 ? "medium" : "hard";
     const item = drawUniqueQuestion(null, tier);
     const ans = tr(item.a);
     const opts = (item.opts[State.lang] || item.opts.en).slice().sort(() => Math.random() - 0.5);
+
     stage.innerHTML = `
-      <div class="stage-topbar">
-        <span class="pill">💎 Step ${step}/15 · ${t(tier)}</span>
-        <button class="btn-secondary" id="btn5050">50:50 Lifeline</button>
+      <div class="stage-topbar" style="flex-wrap:wrap;gap:6px">
+        <span class="pill">💎 Step ${step}/15 · <strong>${prizes[step - 1]}</strong></span>
+        <div style="display:flex;gap:6px">
+          <button class="btn-secondary" id="btn5050" ${used5050 ? "disabled style='opacity:0.4'" : ""}>50:50</button>
+          <button class="btn-secondary" id="btnSkip" ${usedSkip ? "disabled style='opacity:0.4'" : ""}>🔄 Swap Q</button>
+        </div>
       </div>
+      <div class="q-sub">Sudden Death Mode (${t(tier)}) — 1 Wrong Answer = Eliminated!</div>
       <div class="q-prompt">${tr(item.q)}</div>
       <div class="options-list" id="milOpts"></div>
       <div id="fbBox"></div>
@@ -1508,14 +1477,49 @@ function runMillionaire(stage) {
       b.className = "opt-btn";
       b.textContent = o;
       b.onclick = () => {
-        const ok = o === ans;
-        if (ok) step = Math.min(15, step + 1);
-        else step = step > 10 ? 10 : step > 5 ? 5 : 1;
-        handleAnswerResult(ok, ans, render, b);
+        if (o === ans) {
+          b.classList.add("correct");
+          playCalmTone("good");
+          addPoints(step * 15);
+          if (step === 15) {
+            stage.innerHTML = `
+              <div class="q-prompt">🏆 $1,000,000 CHAMPION!</div>
+              <div class="feedback-banner">
+                You conquered all 15 steps without a single mistake!
+                <button class="btn-primary" style="margin-top:12px;width:100%" id="btnNewMil">🔄 Play Again</button>
+              </div>
+            `;
+            document.getElementById("btnNewMil").onclick = () => runMillionaire(stage);
+          } else {
+            step++;
+            setTimeout(render, 550);
+          }
+        } else {
+          // SUDDEN DEATH ELIMINATION
+          b.classList.add("wrong");
+          playCalmTone("miss");
+          State.streak = 0;
+          saveState();
+          const fb = document.getElementById("fbBox");
+          fb.innerHTML = `
+            <div class="feedback-banner" style="background:var(--accent-peach)">
+              <div style="font-size:18px;font-weight:800">💥 YOU'RE OUT AT STEP ${step} (${prizes[step - 1]})!</div>
+              <div style="margin-top:6px">Correct Answer: <strong>${ans}</strong></div>
+              <button class="btn-primary" style="margin-top:12px;width:100%" id="btnRestartMil">🔄 Start New Run from Step 1 ($100)</button>
+            </div>
+          `;
+          Array.from(box.children).forEach(btn => { btn.disabled = true; });
+          document.getElementById("btnRestartMil").onclick = () => runMillionaire(stage);
+        }
       };
       box.appendChild(b);
     });
+
     document.getElementById("btn5050").onclick = () => {
+      if (used5050) return;
+      used5050 = true;
+      document.getElementById("btn5050").disabled = true;
+      document.getElementById("btn5050").style.opacity = "0.4";
       let removed = 0;
       Array.from(box.children).forEach(btn => {
         if (btn.textContent !== ans && removed < 2) {
@@ -1524,16 +1528,22 @@ function runMillionaire(stage) {
         }
       });
     };
+
+    document.getElementById("btnSkip").onclick = () => {
+      if (usedSkip) return;
+      usedSkip = true;
+      render();
+    };
   };
   render();
 }
 
-/* 40. PRO JEOPARDY BOARD (100=EASY, 300=MEDIUM, 500=HARD) */
+/* 33. PRO JEOPARDY BOARD */
 function runJeopardy(stage) {
   const cats = ["science", "history", "geography", "math"];
   let used = [];
   const renderBoard = () => {
-    stage.innerHTML = `<div class="q-sub">🎛️ Pick Category &amp; Difficulty Value</div><div class="grid-4x4" id="jpBoard"></div><div id="fbBox"></div>`;
+    stage.innerHTML = `<div class="q-sub">🎛️ Pick Category &amp; Point Difficulty</div><div class="grid-4x4" id="jpBoard"></div><div id="fbBox"></div>`;
     const g = document.getElementById("jpBoard");
     cats.forEach(c => {
       const h = document.createElement("div");
@@ -1569,11 +1579,11 @@ function runJeopardy(stage) {
   renderBoard();
 }
 
-/* 41. SPOT THE FAKE FACT (DYNAMICALLY GENERATED FROM REAL + ALTERED ENCYCLOPEDIA FACTS) */
+/* 34. SPOT THE FAKE FACT */
 function runTrueOrFake(stage) {
   const c1 = window.SPECIAL_DATA.rawCountries[Math.floor(Math.random() * 30)];
   const c2 = window.SPECIAL_DATA.rawCountries[Math.floor(Math.random() * 30) + 30];
-  const fakeCap = window.SPECIAL_DATA.rawCountries[10][4];
+  const fakeCap = window.SPECIAL_DATA.rawCountries[12][4];
   const statements = [
     { text: `The official capital city of ${c1[1]} is ${c1[4]}.`, fake: false },
     { text: `The official currency of ${c2[1]} is the ${c2[7]}.`, fake: false },
@@ -1585,7 +1595,7 @@ function runTrueOrFake(stage) {
     const b = document.createElement("button");
     b.className = "opt-btn";
     b.textContent = s.text;
-    b.onclick = () => handleAnswerResult(s.fake === true, `${c2[1]}'s capital is ${c2[4]}`, () => runTrueOrFake(stage), b);
+    b.onclick = () => handleAnswerResult(s.fake === true, `${c2[1]}'s capital is ${c2[4]} (${c2[7]})`, () => runTrueOrFake(stage), b);
     document.getElementById("tfkOpts").appendChild(b);
   });
 }
