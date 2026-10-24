@@ -1,0 +1,14 @@
+{
+  "name": "zenquiz-offline-hub",
+  "version": "1.0.0",
+  "description": "Relaxing offline multilingual quiz and 41 mini-games app",
+  "main": "www/index.html",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2"
+  }
+}
